@@ -2,14 +2,13 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Net;
-using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using Domain;
 using Newtonsoft.Json;
 using RestSharp;
 
-namespace Program {
+namespace Service {
     public static class Web {
         private static readonly RestClient Client = new RestClient( "https://www.pathofexile.com");
         public static string SessId { private get; set; }

@@ -1,12 +1,8 @@
 using System;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Security.Principal;
-using System.Text;
 
-namespace Program {
+namespace Service {
     internal static class Utility {
         /// <summary>
         /// Xp array. If level is 2, then the value at position 2 is the total amount of xp required for lvl 3

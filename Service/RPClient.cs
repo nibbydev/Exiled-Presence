@@ -6,7 +6,7 @@ using DiscordRPC.Logging;
 using DiscordRPC.Message;
 using Domain;
 
-namespace Program {
+namespace Service {
     public class RpClient {
         private const int CharacterUpdateDelay = 60 * 1000;
         private const int PollDelay = 1000;

@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Domain;
 
-namespace Program {
+namespace Service {
     /// <summary>
     /// Class for parsing the game's log file and calling actions based on matches
     /// </summary>

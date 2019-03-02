@@ -1,11 +1,9 @@
 using System;
-using System.IO;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 using Domain;
 
-namespace Program {
+namespace Service {
     public static class Service {
         private const string WindowTitle = "Path of Exile";
         private const string SessId = "";

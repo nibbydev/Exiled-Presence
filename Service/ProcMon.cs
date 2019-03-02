@@ -2,7 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Program {
+namespace Service {
     /// <summary>
     /// A process monitor that executes actions when the process is started/stopped. Process is found based on window
     /// title.
