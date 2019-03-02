@@ -7,9 +7,6 @@ using Domain;
 namespace Service {
     public static class Service {
         private const string WindowTitle = "Path of Exile";
-        public static string SessId { private get; set; }
-        public static string AccountName { private get; set; }
-        
         private static LogParser _parser;
         private static ProcMon _procMon;
         private static RpClient _rpClient;
@@ -20,7 +17,7 @@ namespace Service {
         public static void Init() {
             Console.WriteLine("Starting rich presence service");
             
-            if (string.IsNullOrEmpty(SessId) || string.IsNullOrEmpty(AccountName)) {
+            if (string.IsNullOrEmpty(Config.Settings.PoeSessionId) || string.IsNullOrEmpty(Config.Settings.AccountName)) {
                 Console.WriteLine("No sessid or accoutname set");
             }
             
@@ -29,7 +26,6 @@ namespace Service {
             LogRegExps.RegExpList.First(t => t.Type == LogType.StatusChange).ParseAction = ActionStatusChange;
             LogRegExps.RegExpList.First(t => t.Type == LogType.CharacterSelect).ParseAction = ActionCharacterSelect;
             LogRegExps.RegExpList.First(t => t.Type == LogType.LoginScreen).ParseAction = ActionLoginScreen;
-            Web.SessId = SessId;
 
             // Create a process monitor (and run it as a task) that reacts to the game client being launched and closed
             _procMon = new ProcMon(WindowTitle) {
@@ -58,8 +54,10 @@ namespace Service {
             if (input.Length < 3) {
                 return "ERROR. Invalid account name passed!";
             }
+            
+            Config.Settings.AccountName = input;
+            Config.SaveConfig();
 
-            AccountName = input;
             return "OK. Account name set.";
         }
 
@@ -72,7 +70,9 @@ namespace Service {
                 return "ERROR. Invalid POESESSID passed!";
             }
             
-            SessId = input;
+            Config.Settings.PoeSessionId = input;
+            Config.SaveConfig();
+            
             return "OK. POESESSID set.";
         }
         
@@ -95,7 +95,7 @@ namespace Service {
             if (_rpClient != null) throw new Exception("Last rich presence client was not disposed of!");
             
             // Create a rich presence client and run it as a task
-            _rpClient = new RpClient(AccountName).RunAsTask(); 
+            _rpClient = new RpClient().RunAsTask(); 
 
             // Create a new parser and run it as a task
             _parser = new LogParser(logPath) {

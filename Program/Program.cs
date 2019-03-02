@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Text.RegularExpressions;
+using Service;
 
 namespace Program {
     internal static class Program {
@@ -11,6 +12,9 @@ namespace Program {
             MenuSystem.Menus.SessIdInputMenu.InputPropagateFunc = Service.Service.SessIdInputPropagate;
             MenuSystem.Menus.AccountNameInputMenu.InputPropagateFunc = Service.Service.AccountNameInputPropagate;
             MenuSystem.Menus.MainMenu.MenuItems.First().ActionToExecute = Service.Service.Init;
+            
+            // Load settings
+            Config.LoadConfig();
             
             // Run main menu
             MenuSystem.Menus.MainMenu.RunMenu();

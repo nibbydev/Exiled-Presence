@@ -11,23 +11,22 @@ using RestSharp;
 namespace Service {
     public static class Web {
         private static readonly RestClient Client = new RestClient( "https://www.pathofexile.com");
-        public static string SessId { private get; set; }
 
-        public static async Task<Character> GetLastActiveChar(string account) {
-            if (string.IsNullOrEmpty(account)) {
+        public static async Task<Character> GetLastActiveChar() {
+            if (string.IsNullOrEmpty(Config.Settings.AccountName)) {
                 Console.WriteLine("No accountname set!");
                 return null;
             }
             
             var request = new RestRequest("character-window/get-characters", Method.GET);
-            request.AddParameter("accountName", account);
-            request.AddCookie("POESESSID", SessId);
+            request.AddParameter("accountName", Config.Settings.AccountName);
+            request.AddCookie("POESESSID", Config.Settings.PoeSessionId);
             
             var cancellationTokenSource = new CancellationTokenSource();
             var response = await Client.ExecuteTaskAsync(request, cancellationTokenSource.Token);
 
             if (response.StatusCode == HttpStatusCode.Forbidden) {
-                if (string.IsNullOrEmpty(SessId)) {
+                if (string.IsNullOrEmpty(Config.Settings.PoeSessionId)) {
                     Console.WriteLine("Profile is private and POESESSID is not set!");
                     return null;
                 }
@@ -36,13 +35,8 @@ namespace Service {
                 return null;
             }
             
-            var characters = Deserialize<Character[]>(response.Content);
+            var characters = Utility.Deserialize<Character[]>(response.Content);
             return characters.FirstOrDefault(t => t.LastActive != null);
-        }
-
-        private static T Deserialize<T>(string json) {
-            var s = new JsonSerializer();
-            return s.Deserialize<T>(new JsonTextReader(new StringReader(json)));
         }
     }
 }

@@ -13,7 +13,6 @@ namespace Service {
         private const string ClientId = "551089446460850176";
         private static readonly ConsoleLogger Logger = new ConsoleLogger {Level = LogLevel.Warning, Coloured = true};
 
-        private readonly string _accountName;
         private DiscordRpcClient _client;
         private Character _character;
         private Timer _charUpdateTimer;
@@ -26,9 +25,7 @@ namespace Service {
         /// <summary>
         /// Constructor
         /// </summary>
-        public RpClient(string accountName) {
-            _accountName = accountName;
-
+        public RpClient() {
             _presence = new RichPresence {
                 Assets = new Assets {
                     LargeImageKey = "misc_logo"
@@ -94,7 +91,7 @@ namespace Service {
             // todo: if character is not in an area that does not grant xp
             // todo: disable character updates when xp is off?
 
-            _character = await Web.GetLastActiveChar(_accountName);
+            _character = await Web.GetLastActiveChar();
             if (_character == null) {
                 return;
             }

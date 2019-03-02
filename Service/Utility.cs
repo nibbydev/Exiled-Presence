@@ -1,9 +1,15 @@
 using System;
 using System.IO;
 using System.Linq;
+using Newtonsoft.Json;
+using RestSharp.Serialization.Json;
+using JsonSerializer = Newtonsoft.Json.JsonSerializer;
 
 namespace Service {
-    internal static class Utility {
+    public static class Utility {
+        private static readonly JsonSerializer JsonSerializer = new JsonSerializer();
+        private static readonly JsonDeserializer JsonDeserializer = new JsonDeserializer();
+        
         /// <summary>
         /// Xp array. If level is 2, then the value at position 2 is the total amount of xp required for lvl 3
         /// </summary>
@@ -129,6 +135,14 @@ namespace Service {
 
             var currentLvlXp = Xp[lvl - 1];
             return (int) (100 - (xp - currentLvlXp) / (Xp[lvl] - currentLvlXp) * 100);
+        }
+        
+        public static T Deserialize<T>(string json) {
+            return JsonSerializer.Deserialize<T>(new JsonTextReader(new StringReader(json)));
+        }
+        
+        public static string Serialize<T>(T @object) {
+            return JsonDeserializer.Serialize(@object);
         }
     }
 }
