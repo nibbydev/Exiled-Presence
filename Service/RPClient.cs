@@ -35,7 +35,7 @@ namespace Service {
                 }
             };
 
-            _client = new DiscordRpcClient(ClientId, true, 0, Logger);
+            _client = new DiscordRpcClient(ClientId, true, -1, Logger);
 
             _client.OnReady += OnReady;
             _client.OnClose += OnClose;
@@ -95,6 +95,10 @@ namespace Service {
             // todo: disable character updates when xp is off?
 
             _character = await Web.GetLastActiveChar(_accountName);
+            if (_character == null) {
+                return;
+            }
+            
             UpdateCharacterData();
 
             Console.ForegroundColor = ConsoleColor.Green;
@@ -123,15 +127,13 @@ namespace Service {
         /// Updates the presence area
         /// </summary>
         public void UpdateArea(string area) {
-            //if (_isAfkOrDnd) ResetAfkDndState();
-
             // First character login, get initial info
             if (_character == null) {
                 UpdateCharacter();
 
+                // Disabled currently
                 // Create a timer that runs every x MS and updates character stats
-                _charUpdateTimer = new Timer(state => UpdateCharacter(), null, CharacterUpdateDelay,
-                    CharacterUpdateDelay);
+                // _charUpdateTimer = new Timer(state => UpdateCharacter(), null, CharacterUpdateDelay, CharacterUpdateDelay);
             }
 
             _presence.Timestamps = Timestamps.Now;

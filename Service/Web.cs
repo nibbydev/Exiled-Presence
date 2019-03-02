@@ -15,7 +15,8 @@ namespace Service {
 
         public static async Task<Character> GetLastActiveChar(string account) {
             if (string.IsNullOrEmpty(account)) {
-                throw new ArgumentException();
+                Console.WriteLine("No accountname set!");
+                return null;
             }
             
             var request = new RestRequest("character-window/get-characters", Method.GET);
@@ -27,10 +28,12 @@ namespace Service {
 
             if (response.StatusCode == HttpStatusCode.Forbidden) {
                 if (string.IsNullOrEmpty(SessId)) {
-                    throw new Exception("Profile is private and POESESSID is not set!");
+                    Console.WriteLine("Profile is private and POESESSID is not set!");
+                    return null;
                 }
                 
-                throw new Exception("Profile is private and POESESSID is invalid!");
+                Console.WriteLine("Profile is private and POESESSID is invalid!");
+                return null;
             }
             
             var characters = Deserialize<Character[]>(response.Content);

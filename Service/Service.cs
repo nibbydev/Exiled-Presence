@@ -6,8 +6,8 @@ using Domain;
 namespace Service {
     public static class Service {
         private const string WindowTitle = "Path of Exile";
-        private const string SessId = "";
-        private const string AccountName = "";
+        public static string SessId { private get; set; }
+        public static string AccountName { private get; set; }
         
         private static LogParser _parser;
         private static ProcMon _procMon;
@@ -18,7 +18,7 @@ namespace Service {
         /// </summary>
         public static void Init() {
             if (string.IsNullOrEmpty(SessId) || string.IsNullOrEmpty(AccountName)) {
-                throw new ArgumentException("No sessid or accoutname set");
+                Console.WriteLine("No sessid or accoutname set");
             }
             
             // Register actions
