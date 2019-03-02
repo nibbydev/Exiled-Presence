@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading;
 using Domain;
 
@@ -14,7 +15,7 @@ namespace Service {
         private static RpClient _rpClient;
 
         /// <summary>
-        /// Entry point
+        /// Service initializer
         /// </summary>
         public static void Init() {
             Console.WriteLine("Starting rich presence service");
@@ -50,6 +51,32 @@ namespace Service {
             }
         }
 
+        /// <summary>
+        /// Setter and validator for account name
+        /// </summary>
+        public static string AccountNameInputPropagate(string input) {
+            if (input.Length < 3) {
+                return "ERROR. Invalid account name passed!";
+            }
+
+            AccountName = input;
+            return "OK. Account name set.";
+        }
+
+        /// <summary>
+        /// Setter and validator for session id
+        /// </summary>
+        public static string SessIdInputPropagate(string input) {
+            var regex = new Regex(@"^[0-9a-fA-F]{32}$");
+            if (!regex.Match(input).Success) {
+                return "ERROR. Invalid POESESSID passed!";
+            }
+            
+            SessId = input;
+            return "OK. POESESSID set.";
+        }
+        
+        
         #region Process Actions
 
         /// <summary>
