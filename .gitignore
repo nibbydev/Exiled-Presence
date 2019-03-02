@@ -1,0 +1,6 @@
+.idea/
+obj/
+bin/
+Properties/
+packages/
+Migrations/
