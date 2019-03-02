@@ -34,7 +34,7 @@ namespace Service {
                     LargeImageKey = "misc_logo"
                 }
             };
-
+            
             _client = new DiscordRpcClient(ClientId, true, -1, Logger);
 
             _client.OnReady += OnReady;
@@ -152,8 +152,8 @@ namespace Service {
 
             _presence.Assets.LargeImageKey = Utility.GetArtKey();
             _presence.Assets.LargeImageText = "Nothing particularly noteworthy going on right now";
-            _presence.Details = "In login screen";
-            _presence.State = null;
+            _presence.State = "In login screen";
+            _presence.Details = null;
             _presence.Timestamps = Timestamps.Now;
             _hasUpdate = true;
         }
@@ -166,8 +166,8 @@ namespace Service {
 
             _presence.Assets.LargeImageKey = Utility.GetArtKey();
             _presence.Assets.LargeImageText = "Nothing particularly noteworthy going on right now";
-            _presence.Details = "In character select";
-            _presence.State = null;
+            _presence.State = "In character select";
+            _presence.Details = null;
             _presence.Timestamps = Timestamps.Now;
             _hasUpdate = true;
         }

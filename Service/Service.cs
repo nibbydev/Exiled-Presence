@@ -17,6 +17,8 @@ namespace Service {
         /// Entry point
         /// </summary>
         public static void Init() {
+            Console.WriteLine("Starting rich presence service");
+            
             if (string.IsNullOrEmpty(SessId) || string.IsNullOrEmpty(AccountName)) {
                 Console.WriteLine("No sessid or accoutname set");
             }
