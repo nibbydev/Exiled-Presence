@@ -2,17 +2,20 @@ namespace MenuSystem {
     public static class Menus {
         public static readonly Menu AppStartFeedbackMenu = new Menu {
             Title = "Exiled Presence",
-            Description = new[] {"Starting rich presence client..."}
+            Description = new[] {
+                "Rich presence client has been started and will continue to run",
+                "in the background."
+            }
         };
 
         public static readonly Menu AppStopFeedbackMenu = new Menu {
             Title = "Exiled Presence",
-            Description = new[] {"Stopping rich presence client..."}
+            Description = new[] {"Rich presence client has been stopped"}
         };
 
         public static readonly Menu ConfigClearedFeedbackMenu = new Menu {
             Title = "Config Menu",
-            Description = new[] {"Config cleared"}
+            Description = new[] {"Config deleted"}
         };
 
         public static readonly Menu SessIdInputMenu = new Menu {
@@ -63,7 +66,7 @@ namespace MenuSystem {
                     ValueDelegate = null
                 },
                 new MenuItem {
-                    Description = "Clear config",
+                    Description = "Delete config",
                     Shortcut = "3",
                     MenuToRun = ConfigClearedFeedbackMenu,
                     ActionToExecute = null
