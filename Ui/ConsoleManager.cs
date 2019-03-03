@@ -10,7 +10,7 @@ namespace Ui {
     public static class ConsoleManager {
         private const int MF_BYCOMMAND = 0x00000000;
         private const int SC_CLOSE = 0xF060;
-        
+
         [DllImport("User32.dll")]
         private static extern int ShowWindow(IntPtr intPtr, int nShow);
 
@@ -31,6 +31,7 @@ namespace Ui {
 
 
         public static bool HasConsole => GetConsoleWindow() != IntPtr.Zero;
+        public static bool IsConsoleVisible;
 
         /// <summary>
         /// Creates a new console instance if the process is not attached to a console already
@@ -39,6 +40,7 @@ namespace Ui {
             if (!HasConsole) {
                 AllocConsole();
                 InvalidateOutAndError();
+                IsConsoleVisible = true;
             }
         }
 
@@ -49,14 +51,16 @@ namespace Ui {
             if (HasConsole) {
                 SetOutAndErrorNull();
                 FreeConsole();
+                IsConsoleVisible = false;
             }
         }
-        
+
         public static void Show(object sender = null, EventArgs e = null) {
             if (!HasConsole) Allocate();
 
             var intPtr = GetConsoleWindow();
             ShowWindow(intPtr, 5);
+            IsConsoleVisible = true;
         }
 
         public static void Hide(object sender = null, EventArgs e = null) {
@@ -64,8 +68,8 @@ namespace Ui {
 
             var intPtr = GetConsoleWindow();
             ShowWindow(intPtr, 0);
+            IsConsoleVisible = false;
         }
-
 
         private static void InvalidateOutAndError() {
             DeleteMenu(GetSystemMenu(GetConsoleWindow(), false), SC_CLOSE, MF_BYCOMMAND);
@@ -77,15 +81,10 @@ namespace Ui {
             var error = type.GetField("_error", bindings);
             var initializeStdOutError = type.GetMethod("InitializeStdOutError", bindings);
 
-            Debug.Assert(@out != null);
-            Debug.Assert(error != null);
+            @out?.SetValue(null, null);
+            error?.SetValue(null, null);
 
-            Debug.Assert(initializeStdOutError != null);
-
-            @out.SetValue(null, null);
-            error.SetValue(null, null);
-
-            initializeStdOutError.Invoke(null, new object[] {true});
+            initializeStdOutError?.Invoke(null, new object[] {true});
         }
 
         private static void SetOutAndErrorNull() {

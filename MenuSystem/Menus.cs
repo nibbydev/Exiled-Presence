@@ -101,7 +101,7 @@ namespace MenuSystem {
 
         public static readonly MenuItem ExitProgramItem = new MenuItem {
             Shortcut = "X",
-            Description = "Close console"
+            Description = "Hide console"
         };
     }
 }

@@ -5,36 +5,52 @@ using System.Windows.Forms;
 
 namespace Ui {
     internal class TrayAppContext : ApplicationContext {
-        private readonly NotifyIcon _notifyIcon;
+        private const string WindowTitle = "Exiled Presence";
+        private readonly NotifyIcon _trayItem;
+        private bool _isBalloonExpired;
 
         public TrayAppContext() {
-            // Create a taskbar icon
-            _notifyIcon = new NotifyIcon {
-                Text = @"Exiled Presence",
+            // Create a tray item
+            _trayItem = new NotifyIcon {
+                Text = WindowTitle,
                 Icon = Properties.Resources.AppIcon,
                 ContextMenu = new ContextMenu(new[] {
-                    new MenuItem("Show console", ShowConsole), 
+                    new MenuItem("Show console", RunConsoleAsTask), 
                     new MenuItem("Exit", Exit)
                 }),
-                Visible = true
+                Visible = true,
+                BalloonTipIcon = ToolTipIcon.None,
+                BalloonTipTitle = WindowTitle,
+                BalloonTipText = $@"{WindowTitle} will continue to run in the tray. Right click to open console again."
             };
             
-            // Allocate and display a console
-            ConsoleManager.Allocate();
-            // Run the main menu
-            MenuSystem.Menus.MainMenu.RunMenu();
-            // Hide the console after user has exited menu
-            ConsoleManager.Hide();
+            // Run as task to not hold up the main process
+            RunConsoleAsTask();
         }
 
-        private void ShowConsole(object sender, EventArgs e) {
+        private void RunConsoleAsTask(object sender = null, EventArgs e = null) {
+            if (ConsoleManager.IsConsoleVisible) {
+                return;
+            }
+            
+            new Task(() => {
+                RunConsoleMenu();
+                
+                // Show info balloon once
+                if (_isBalloonExpired) return;
+                _trayItem.ShowBalloonTip(0);
+                _isBalloonExpired = true;
+            }).Start();
+        }
+
+        private static void RunConsoleMenu() {
             ConsoleManager.Show();
             MenuSystem.Menus.MainMenu.RunMenu();
             ConsoleManager.Hide();
         }
 
-        private void Exit(object sender, EventArgs e) {
-            _notifyIcon.Visible = false;
+        private void Exit(object sender = null, EventArgs e = null) {
+            _trayItem.Visible = false;
             Service.Service.Stop();
             Application.Exit();
         }
