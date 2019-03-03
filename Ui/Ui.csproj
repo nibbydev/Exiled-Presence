@@ -11,7 +11,7 @@
     <ProjectGuid>{4638C4DE-A421-405B-BC37-0F850ED39A52}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Ui</RootNamespace>
-    <AssemblyName>Ui</AssemblyName>
+    <AssemblyName>Exiled Presence</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -35,6 +35,9 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Ui.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Costura, Version=3.3.2.0, Culture=neutral, PublicKeyToken=9919ef960d84173d">
