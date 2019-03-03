@@ -37,7 +37,7 @@ namespace MenuSystem {
                     if (menuItem.IsDefaultChoice) {
                         hasDefaultChoice = true;
                         
-                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
                         Console.WriteLine(menuItem);
                         Console.ResetColor();
                         continue;
@@ -52,7 +52,7 @@ namespace MenuSystem {
             if (!DisableGoBack) {
                 // There was no default choice and this is not the root level menu, go back item will be default
                 if (!hasDefaultChoice && !Menus.MainMenu.Equals(this)) {
-                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.ForegroundColor = ConsoleColor.DarkYellow;
                 }
 
                 Console.WriteLine(Menus.MainMenu.Equals(this) ? Menus.ExitProgramItem : Menus.GoBackItem);
@@ -77,7 +77,7 @@ namespace MenuSystem {
                 Console.Write($"{hr} ");
                 Console.ResetColor();
 
-                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.ForegroundColor = ConsoleColor.DarkYellow;
                 Console.Write(title);
                 Console.ResetColor();
 

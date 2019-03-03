@@ -23,7 +23,7 @@ namespace Service {
         public Action<LogMatch> ActionLoginScreen { private get; set; }
         public Action<LogMatch> ActionAreaChange { private get; set; }
         public Action<LogMatch> ActionStatusChange { private get; set; }
-        public static Action<string> ActionSendWarningMsg { private get; set; }
+        public static Action<string, string> TooltipMsg { private get; set; }
 
         /// <summary>
         /// Constructor
@@ -41,14 +41,23 @@ namespace Service {
             CheckLogSize(path);
         }
 
+        /// <summary>
+        /// Issues a warning to the user if log file is too big
+        /// </summary>
         private static void CheckLogSize(string path) {
+            // Get log file size
             var sizeInBytes = new FileInfo(path).Length;
-            var sizeInMb = Math.Round(sizeInBytes / 1024f / 1024f);
+            // Convert to bytes
+            var sizeInMb = (int) (sizeInBytes / 1024f / 1024f);
             
-            if (sizeInMb < 15) return;
+            if (sizeInMb < 15) {
+                return;
+            }
             
-            var msg = $"The client log file is {sizeInMb}MB. This slows the program down considerably. Delete it or trim it to ~10MB";
-            ActionSendWarningMsg?.Invoke(msg);
+            var msg = $"The client log file is {sizeInMb}MB. " +
+                      "This slows the program down considerably. " +
+                      "Delete it or trim it to ~10MB";
+            TooltipMsg?.Invoke(msg, "warning");
         }
 
         /// <summary>

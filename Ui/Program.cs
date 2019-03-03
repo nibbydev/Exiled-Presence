@@ -5,7 +5,7 @@ using Service;
 
 namespace Ui {
     public static class Program {
-        private static TrayAppContext TrayAppContext;
+        private static readonly TrayAppContext TrayAppContext = new TrayAppContext();
         
         /// <summary>
         /// The main entry point for the UI application.
@@ -31,12 +31,9 @@ namespace Ui {
 
             // Load settings
             Config.LoadConfig();
-            
-            // Create a tray context
-            TrayAppContext = new TrayAppContext();
 
             // Give LogParser access to show warning messages. Bit spaghetti but it'll do for now.
-            LogParser.ActionSendWarningMsg = TrayAppContext.DisplayToolTipWarnMsg;
+            LogParser.TooltipMsg = TrayAppContext.TooltipMsg;
             
             // Run the tray app
             try {

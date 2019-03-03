@@ -8,7 +8,6 @@ namespace Ui {
     internal class TrayAppContext : ApplicationContext {
         private const string WindowTitle = "Exiled Presence";
         private readonly NotifyIcon _trayItem;
-        private bool _isBalloonExpired;
 
         public TrayAppContext() {
             // Create a tray item
@@ -16,38 +15,31 @@ namespace Ui {
                 Text = WindowTitle,
                 Icon = Properties.Resources.AppIcon,
                 ContextMenu = new ContextMenu(new[] {
-                    new MenuItem("Show console", RunConsoleAsTask), 
+                    new MenuItem("Open menu", RunConsoleAsTask),
                     new MenuItem("Exit", Exit)
                 }),
                 Visible = true,
                 BalloonTipIcon = ToolTipIcon.None,
                 BalloonTipTitle = WindowTitle,
-                BalloonTipText = $@"{WindowTitle} will continue to run in the tray. Right click to open console again."
+                BalloonTipText = $@"Right click the {WindowTitle} tray icon to access settings."
             };
             
-            // Run as task to not hold up the main process
-            RunConsoleAsTask();
+            _trayItem.ShowBalloonTip(0);
+            
+            // Start the service
+            Service.Service.Init();
         }
 
-        private void RunConsoleAsTask(object sender = null, EventArgs e = null) {
+        private static void RunConsoleAsTask(object sender = null, EventArgs e = null) {
             if (ConsoleManager.IsConsoleVisible) {
                 return;
             }
-            
-            new Task(() => {
-                RunConsoleMenu();
-                
-                // Show info balloon once
-                if (_isBalloonExpired) return;
-                _trayItem.ShowBalloonTip(0);
-                _isBalloonExpired = true;
-            }).Start();
-        }
 
-        private static void RunConsoleMenu() {
-            ConsoleManager.Show();
-            MenuSystem.Menus.MainMenu.RunMenu();
-            ConsoleManager.Hide();
+            new Task(() => {
+                ConsoleManager.Show();
+                MenuSystem.Menus.MainMenu.RunMenu();
+                ConsoleManager.Hide();
+            }).Start();
         }
 
         private void Exit(object sender = null, EventArgs e = null) {
@@ -55,18 +47,22 @@ namespace Ui {
             Service.Service.Stop();
             Application.Exit();
         }
+        
+        public void TooltipMsg(string ttMsg, string ttIcon = "none") {
+            // Don't display empty messages
+            if (string.IsNullOrEmpty(ttMsg)) {
+                return;
+            }
 
-        public void DisplayToolTipWarnMsg(string ttMsg) {
-            var lastTtIcon = _trayItem.BalloonTipIcon;
-            var lastTtMsg = _trayItem.BalloonTipText;
+            // Attempt to map the string representation of ttIcon to its enum counterpart
+            if (!Enum.TryParse(ttIcon, true, out ToolTipIcon ttIconEnum)) {
+                return;
+            }
 
-            _trayItem.BalloonTipIcon = ToolTipIcon.Warning;
+            // Set values as display the tooltip
+            _trayItem.BalloonTipIcon = ttIconEnum;
             _trayItem.BalloonTipText = ttMsg;
-            
             _trayItem.ShowBalloonTip(0);
-            
-            _trayItem.BalloonTipIcon = lastTtIcon;
-            _trayItem.BalloonTipText = lastTtMsg;
         }
     }
 }

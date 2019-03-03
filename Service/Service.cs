@@ -12,34 +12,31 @@ namespace Service {
         private static RpClient _rpClient;
         public static bool IsRunning { get; private set; }
 
-        /// <summary>
-        /// Service initializer
-        /// </summary>
-        public static void Init() {
-            // Prevent multiple instances
-            if (IsRunning) return;
-            
-            Console.WriteLine("Starting rich presence service");
-            
-            if (string.IsNullOrEmpty(Config.Settings.PoeSessionId) || string.IsNullOrEmpty(Config.Settings.AccountName)) {
-                Console.WriteLine("No sessid or accoutname set");
-            }
-            
+        static Service() {
             // Register actions
             LogRegExps.RegExpList.First(t => t.Type == LogType.AreaChange).ParseAction = ActionAreaChange;
             LogRegExps.RegExpList.First(t => t.Type == LogType.StatusChange).ParseAction = ActionStatusChange;
             LogRegExps.RegExpList.First(t => t.Type == LogType.CharacterSelect).ParseAction = ActionCharacterSelect;
             LogRegExps.RegExpList.First(t => t.Type == LogType.LoginScreen).ParseAction = ActionLoginScreen;
+        }
+        
+        /// <summary>
+        /// Service initializer
+        /// </summary>
+        public static void Init() {
+            if (IsRunning) return;
+            IsRunning = true;
+            
+            Console.WriteLine("Starting rich presence service");
+            
+            if (string.IsNullOrEmpty(Config.Settings.PoeSessionId)) Console.WriteLine("No POESESSID set");
+            if (string.IsNullOrEmpty(Config.Settings.AccountName)) Console.WriteLine("No accout name set");
 
             // Create a process monitor (and run it as a task) that reacts to the game client being launched and closed
             _procMon = new ProcMon(WindowTitle) {
-                // If the game was already running, then start action will be called
                 ActionProcessStart = ActionProcessStart,
-                // If the game was not running then the stop action will not be called
                 ActionProcessStop = ActionProcessStop
             }.RunAsTask();
-
-            IsRunning = true;
         }
 
         /// <summary>

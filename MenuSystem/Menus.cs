@@ -49,8 +49,7 @@ namespace MenuSystem {
             Title = "Config Menu",
             Description = new[] {
                 "Settings are saved to a config file and persist restarts.",
-                "While the service is running, it must be restarted to apply",
-                "any changes made."
+                "Restart the service to apply changes."
             },
             MenuItems = new[] {
                 new MenuItem {
@@ -76,6 +75,11 @@ namespace MenuSystem {
 
         public static readonly Menu MainMenu = new Menu {
             Title = "Exiled Presence",
+            Description = new [] {
+                "Exiled Presence will continue to run in the background after",
+                "you close the console. Right click the tray icon to open it",
+                "again."
+            },
             ClearConsole = true,
             MenuItems = new[] {
                 new MenuItem {
