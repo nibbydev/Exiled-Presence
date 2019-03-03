@@ -4,7 +4,7 @@ using Domain;
 
 namespace Service {
     public static class Config {
-        private const Environment.SpecialFolder AppDataFolder = Environment.SpecialFolder.ApplicationData;
+        private const Environment.SpecialFolder AppDataFolder = Environment.SpecialFolder.LocalApplicationData;
         private const string FolderName = "Exiled Presence";
         private const string ConfigName = "config.json";
         
@@ -13,6 +13,22 @@ namespace Service {
         private static readonly string CfgFilePath = Path.Combine(CfgFolderPath, ConfigName);
         public static Settings Settings { get; } = new Settings();
 
+        /// <summary>
+        /// Removes config file from disk and resets settings
+        /// </summary>
+        public static void ResetConfig() {
+            if (!Directory.Exists(CfgFolderPath)) {
+                return;
+            }
+
+            if (!File.Exists(CfgFilePath)) {
+                return;
+            } 
+            
+            File.Delete(CfgFilePath);
+            Settings.Update(new Settings());
+        }
+        
         /// <summary>
         /// Loads config into static context on program start
         /// </summary>

@@ -10,11 +10,15 @@ namespace Service {
         private static LogParser _parser;
         private static ProcMon _procMon;
         private static RpClient _rpClient;
+        public static bool IsRunning { get; private set; }
 
         /// <summary>
         /// Service initializer
         /// </summary>
         public static void Init() {
+            // Prevent multiple instances
+            if (IsRunning) return;
+            
             Console.WriteLine("Starting rich presence service");
             
             if (string.IsNullOrEmpty(Config.Settings.PoeSessionId) || string.IsNullOrEmpty(Config.Settings.AccountName)) {
@@ -35,16 +39,18 @@ namespace Service {
                 ActionProcessStop = ActionProcessStop
             }.RunAsTask();
 
-            // Currently the GUI/CLI is not implemented so our main loop is just a continuous sleep statement
-            try {
-                while (true) {
-                    Thread.Sleep(1000);
-                }
-            } finally {
-                _parser?.Stop();
-                _procMon?.Stop();
-                _rpClient?.Stop();
-            }
+            IsRunning = true;
+        }
+
+        /// <summary>
+        /// Stops the service and releases resources
+        /// </summary>
+        public static void Stop() {
+            _parser?.Stop();
+            _procMon?.Stop();
+            _rpClient?.Stop();
+
+            IsRunning = false;
         }
 
         /// <summary>

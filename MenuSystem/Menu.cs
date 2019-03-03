@@ -160,11 +160,11 @@ namespace MenuSystem {
                 if (item.ClearConsole) {
                     Console.Clear();
                 }
-
-                // If the selected menu item had an action, execute it
-                item.ActionToExecute?.Invoke();
+                
                 // If the selected menu item had a menu, run it
                 input = item.MenuToRun?.RunMenu();
+                // If the selected menu item had an action, execute it
+                item.ActionToExecute?.Invoke();
 
                 if (input == null) {
                     continue;

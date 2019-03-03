@@ -1,5 +1,5 @@
 ﻿using System.Linq;
-using System.Text.RegularExpressions;
+using MenuSystem;
 using Service;
 
 namespace Program {
@@ -9,15 +9,31 @@ namespace Program {
         /// </summary>
         public static void Main(string[] args) {
             // Hook service to menus
-            MenuSystem.Menus.SessIdInputMenu.InputPropagateFunc = Service.Service.SessIdInputPropagate;
-            MenuSystem.Menus.AccountNameInputMenu.InputPropagateFunc = Service.Service.AccountNameInputPropagate;
-            MenuSystem.Menus.MainMenu.MenuItems.First().ActionToExecute = Service.Service.Init;
-            
+            Menus.SessIdInputMenu.InputPropagateFunc = Service.Service.SessIdInputPropagate;
+            Menus.AccountNameInputMenu.InputPropagateFunc = Service.Service.AccountNameInputPropagate;
+            Menus.MainMenu.MenuItems.First(t => t.MenuToRun.Equals(Menus.AppStartFeedbackMenu)).ActionToExecute =
+                Service.Service.Init;
+            Menus.ConfigMenu.MenuItems.First(t => t.MenuToRun.Equals(Menus.ConfigClearedFeedbackMenu)).ActionToExecute =
+                Config.ResetConfig;
+            Menus.MainMenu.MenuItems.First(t => t.MenuToRun.Equals(Menus.AppStopFeedbackMenu)).ActionToExecute =
+                Service.Service.Stop;
+
+            // Hook config values to menus
+            Menus.ConfigMenu.MenuItems.First(t => t.MenuToRun.Equals(Menus.AccountNameInputMenu)).ValueDelegate =
+                () => Config.Settings.AccountName;
+            Menus.ConfigMenu.MenuItems.First(t => t.MenuToRun.Equals(Menus.SessIdInputMenu)).ValueDelegate =
+                Config.Settings.GetObfuscatedSessId;
+            Menus.MainMenu.MenuItems.First(t => t.MenuToRun.Equals(Menus.AppStartFeedbackMenu)).ValueDelegate =
+                () => Service.Service.IsRunning ? "Running" : null;
+
             // Load settings
             Config.LoadConfig();
-            
-            // Run main menu
-            MenuSystem.Menus.MainMenu.RunMenu();
+
+            try {
+                Menus.MainMenu.RunMenu();
+            } finally {
+                Service.Service.Stop();
+            }
         }
     }
 }

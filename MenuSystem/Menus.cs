@@ -1,5 +1,20 @@
 namespace MenuSystem {
     public static class Menus {
+        public static readonly Menu AppStartFeedbackMenu = new Menu {
+            Title = "Exiled Presence",
+            Description = new[] {"Starting rich presence client..."}
+        };
+
+        public static readonly Menu AppStopFeedbackMenu = new Menu {
+            Title = "Exiled Presence",
+            Description = new[] {"Stopping rich presence client..."}
+        };
+
+        public static readonly Menu ConfigClearedFeedbackMenu = new Menu {
+            Title = "Config Menu",
+            Description = new[] {"Config cleared"}
+        };
+
         public static readonly Menu SessIdInputMenu = new Menu {
             Title = "POESESSID Input",
             Description = new[] {
@@ -20,25 +35,38 @@ namespace MenuSystem {
             },
             IsInput = true
         };
-        
+
         public static readonly Menu AccountNameInputMenu = new Menu {
             Title = "Account Name Input",
             Description = new[] {"Please enter your account name below"},
             IsInput = true
         };
 
-        private static readonly Menu ConfigMenu = new Menu {
+        public static readonly Menu ConfigMenu = new Menu {
             Title = "Config Menu",
+            Description = new[] {
+                "Settings are saved to a config file and persist restarts.",
+                "While the service is running, it must be restarted to apply",
+                "any changes made."
+            },
             MenuItems = new[] {
                 new MenuItem {
                     Description = "Set account name",
                     Shortcut = "1",
-                    MenuToRun = AccountNameInputMenu
+                    MenuToRun = AccountNameInputMenu,
+                    ValueDelegate = null
                 },
                 new MenuItem {
                     Description = "Set POESESSID",
                     Shortcut = "2",
-                    MenuToRun = SessIdInputMenu
+                    MenuToRun = SessIdInputMenu,
+                    ValueDelegate = null
+                },
+                new MenuItem {
+                    Description = "Clear config",
+                    Shortcut = "3",
+                    MenuToRun = ConfigClearedFeedbackMenu,
+                    ActionToExecute = null
                 }
             }
         };
@@ -49,12 +77,17 @@ namespace MenuSystem {
                 new MenuItem {
                     Description = "Run",
                     Shortcut = "1",
-                    IsDefaultChoice = true,
-                    ClearConsole = true
+                    MenuToRun = AppStartFeedbackMenu,
+                    ValueDelegate = null
+                },
+                new MenuItem {
+                    Description = "Stop",
+                    Shortcut = "2",
+                    MenuToRun = AppStopFeedbackMenu
                 },
                 new MenuItem {
                     Description = "Config",
-                    Shortcut = "2",
+                    Shortcut = "3",
                     MenuToRun = ConfigMenu
                 }
             }
