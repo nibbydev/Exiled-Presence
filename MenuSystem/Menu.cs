@@ -50,8 +50,8 @@ namespace MenuSystem {
             }
 
             if (!DisableGoBack) {
-                // There was no default choice, go back item will be default
-                if (!hasDefaultChoice) {
+                // There was no default choice and this is not the root level menu, go back item will be default
+                if (!hasDefaultChoice && !Menus.MainMenu.Equals(this)) {
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                 }
 
@@ -113,7 +113,8 @@ namespace MenuSystem {
                 if (string.IsNullOrEmpty(input)) {
                     // If there are no menus or no default choices
                     if (MenuItems == null || !MenuItems.Any(t => t.IsDefaultChoice)) {
-                        return null;
+                        // This is not the root menu
+                        if (!Menus.MainMenu.Equals(this)) return null;
                     }
                 }
 
