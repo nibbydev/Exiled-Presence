@@ -73,6 +73,7 @@ namespace MenuSystem {
 
         public static readonly Menu MainMenu = new Menu {
             Title = "Exiled Presence",
+            ClearConsole = true,
             MenuItems = new[] {
                 new MenuItem {
                     Description = "Run",
@@ -100,7 +101,7 @@ namespace MenuSystem {
 
         public static readonly MenuItem ExitProgramItem = new MenuItem {
             Shortcut = "X",
-            Description = "Exit program"
+            Description = "Close console"
         };
     }
 }
