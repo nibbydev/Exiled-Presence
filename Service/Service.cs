@@ -50,6 +50,10 @@ namespace Service {
             _procMon?.Stop();
             _rpClient?.Stop();
 
+            _parser = null;
+            _procMon = null;
+            _rpClient = null;
+            
             IsRunning = false;
         }
 
