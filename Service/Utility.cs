@@ -134,7 +134,8 @@ namespace Service {
             }
 
             var currentLvlXp = Xp[lvl - 1];
-            return (int) (100 - (xp - currentLvlXp) / (Xp[lvl] - currentLvlXp) * 100);
+            var nextLvlXp = Xp[lvl > 99 ? 99 : lvl];
+            return (int) (100 - (xp - currentLvlXp) / (nextLvlXp - currentLvlXp) * 100);
         }
         
         public static T Deserialize<T>(string json) {
