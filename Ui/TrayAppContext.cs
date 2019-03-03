@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -53,6 +54,19 @@ namespace Ui {
             _trayItem.Visible = false;
             Service.Service.Stop();
             Application.Exit();
+        }
+
+        public void DisplayToolTipWarnMsg(string ttMsg) {
+            var lastTtIcon = _trayItem.BalloonTipIcon;
+            var lastTtMsg = _trayItem.BalloonTipText;
+
+            _trayItem.BalloonTipIcon = ToolTipIcon.Warning;
+            _trayItem.BalloonTipText = ttMsg;
+            
+            _trayItem.ShowBalloonTip(0);
+            
+            _trayItem.BalloonTipIcon = lastTtIcon;
+            _trayItem.BalloonTipText = lastTtMsg;
         }
     }
 }

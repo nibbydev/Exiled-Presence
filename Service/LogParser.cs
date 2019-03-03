@@ -17,12 +17,13 @@ namespace Service {
 
         private LogMatch _lastAreaMatch;
         private LogMatch _lastMatch;
-        
+
         public Action UpdateCharacter { private get; set; }
         public Action<LogMatch> ActionCharacterSelect { private get; set; }
         public Action<LogMatch> ActionLoginScreen { private get; set; }
         public Action<LogMatch> ActionAreaChange { private get; set; }
         public Action<LogMatch> ActionStatusChange { private get; set; }
+        public static Action<string> ActionSendWarningMsg { private get; set; }
 
         /// <summary>
         /// Constructor
@@ -37,8 +38,19 @@ namespace Service {
             }
 
             _path = path;
+            CheckLogSize(path);
         }
-        
+
+        private static void CheckLogSize(string path) {
+            var sizeInBytes = new FileInfo(path).Length;
+            var sizeInMb = Math.Round(sizeInBytes / 1024f / 1024f);
+            
+            if (sizeInMb < 15) return;
+            
+            var msg = $"The client log file is {sizeInMb}MB. This slows the program down considerably. Delete it or trim it to ~10MB";
+            ActionSendWarningMsg?.Invoke(msg);
+        }
+
         /// <summary>
         /// Stops the main loop
         /// </summary>
@@ -46,7 +58,7 @@ namespace Service {
             _run = false;
             // todo: wh.Close();
         }
-        
+
         /// <summary>
         /// Runs the main loop as a Task
         /// </summary>
@@ -54,7 +66,7 @@ namespace Service {
             new Task(Run).Start();
             return this;
         }
-        
+
         /// <summary>
         /// Main loop of the class
         /// </summary>
@@ -66,24 +78,27 @@ namespace Service {
                 Filter = _path,
                 EnableRaisingEvents = true
             };
-            
+
             // Subscribe the event to the file watcher
             fsw.Changed += (s, e) => wh.Set();
-            
+
             // Both need to be disposed
-            using (var fs = new FileStream(_path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite)) 
+            using (var fs = new FileStream(_path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             using (var sr = new StreamReader(fs, Encoding.UTF8)) {
+                Console.WriteLine("Parsing log file...");
+                
                 // Main loop
                 while (_run) {
                     var s = sr.ReadLine();
-                    
+
                     if (s == null) {
                         // This is ran the first time EOF is reached
                         if (!_eof) {
                             _eof = true;
+                            Console.WriteLine("Finished parsing log file");
                             CheckEof();
                         }
-                        
+
                         // Wait for next signal
                         wh.WaitOne(ReadDelayMs);
                     } else {
@@ -103,39 +118,39 @@ namespace Service {
             if (_lastMatch == null) {
                 return;
             }
-            
+
             // todo: remove
             Console.WriteLine($"Found last event from log: {_lastMatch.Type}");
 
             if (_lastAreaMatch != null) {
                 Console.WriteLine($"Found last area event from log: {_lastAreaMatch.Match.Groups[2].Value}");
             }
-            
+
             // Set initial presence
             switch (_lastMatch.Type) {
                 case LogType.AreaChange:
                     //UpdateCharacter?.Invoke(); // AreaChange already calls UpdateCharacter
                     ActionAreaChange?.Invoke(_lastMatch);
                     return;
-                
+
                 case LogType.StatusChange:
                     if (_lastAreaMatch != null) {
                         ActionAreaChange?.Invoke(_lastAreaMatch);
                     } else {
                         UpdateCharacter?.Invoke();
                     }
-                    
+
                     ActionStatusChange?.Invoke(_lastMatch);
                     return;
-                
+
                 case LogType.CharacterSelect:
                     ActionCharacterSelect?.Invoke(null);
                     return;
-                
+
                 case LogType.LoginScreen:
                     ActionLoginScreen?.Invoke(null);
                     return;
-                
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -157,15 +172,15 @@ namespace Service {
                         Match = match,
                         Msg = s
                     };
-                    
+
                     _lastMatch = logMatch;
                     if (logRegExp.Type == LogType.AreaChange) {
                         _lastAreaMatch = logMatch;
                     }
-                    
+
                     // Program is still parsing log after launch. EOF is not yet reached. These log entries might be
                     // from weeks ago.
-                    if (!_eof) return; 
+                    if (!_eof) return;
 
                     // Now that we're at the EOF. If there was a match, invoke its action
                     logRegExp.ParseAction?.Invoke(logMatch);
