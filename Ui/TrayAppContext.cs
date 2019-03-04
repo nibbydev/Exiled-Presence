@@ -3,29 +3,28 @@ using System.Drawing;
 using System.IO;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Service;
 
 namespace Ui {
     internal class TrayAppContext : ApplicationContext {
-        private const string WindowTitle = "Exiled Presence";
         private readonly NotifyIcon _trayItem;
 
         public TrayAppContext() {
             // Create a tray item
             _trayItem = new NotifyIcon {
-                Text = WindowTitle,
+                Text = Settings.ProgramName,
                 Icon = Properties.Resources.AppIcon,
+                BalloonTipTitle = Settings.ProgramName,
                 ContextMenu = new ContextMenu(new[] {
                     new MenuItem("Open menu", RunConsoleAsTask),
                     new MenuItem("Exit", Exit)
                 }),
-                Visible = true,
-                BalloonTipIcon = ToolTipIcon.None,
-                BalloonTipTitle = WindowTitle,
-                BalloonTipText = $@"Right click the {WindowTitle} tray icon to access settings."
+                Visible = true
             };
-            
-            _trayItem.ShowBalloonTip(0);
-            
+
+            // Display a tooltip
+            TooltipMsg($@"Right click the {Settings.ProgramName} tray icon to access settings.");
+
             // Start the service
             Service.Service.Init();
         }
@@ -45,9 +44,10 @@ namespace Ui {
         private void Exit(object sender = null, EventArgs e = null) {
             _trayItem.Visible = false;
             Service.Service.Stop();
+            ConsoleManager.Deallocate();
             Application.Exit();
         }
-        
+
         public void TooltipMsg(string ttMsg, string ttIcon = "none") {
             // Don't display empty messages
             if (string.IsNullOrEmpty(ttMsg)) {

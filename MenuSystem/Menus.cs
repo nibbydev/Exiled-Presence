@@ -1,7 +1,9 @@
+using Service;
+
 namespace MenuSystem {
     public static class Menus {
         public static readonly Menu AppStartFeedbackMenu = new Menu {
-            Title = "Exiled Presence",
+            Title = Settings.ProgramName,
             Description = new[] {
                 "Rich presence client has been started and will continue to run",
                 "in the background."
@@ -9,7 +11,7 @@ namespace MenuSystem {
         };
 
         public static readonly Menu AppStopFeedbackMenu = new Menu {
-            Title = "Exiled Presence",
+            Title = Settings.ProgramName,
             Description = new[] {"Rich presence client has been stopped"}
         };
 
@@ -74,8 +76,8 @@ namespace MenuSystem {
         };
 
         public static readonly Menu MainMenu = new Menu {
-            Title = "Exiled Presence",
-            Description = new [] {
+            Title = Settings.ProgramName,
+            Description = new[] {
                 "Exiled Presence will continue to run in the background after",
                 "you close the console. Right click the tray icon to open it",
                 "again."

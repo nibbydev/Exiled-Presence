@@ -7,9 +7,6 @@ using JsonSerializer = Newtonsoft.Json.JsonSerializer;
 
 namespace Service {
     public static class Utility {
-        private static readonly JsonSerializer JsonSerializer = new JsonSerializer();
-        private static readonly JsonDeserializer JsonDeserializer = new JsonDeserializer();
-        
         /// <summary>
         /// Xp array. If level is 2, then the value at position 2 is the total amount of xp required for lvl 3
         /// </summary>
@@ -31,39 +28,39 @@ namespace Service {
         /// </summary>
         public static string GetArtKey(string @class = null) {
             switch (@class) {
-                case "Duelist": 
-                case "Templar": 
-                case "Shadow": 
-                case "Scion": 
-                case "Ranger": 
-                case "Marauder": 
-                case "Witch": 
+                case "Duelist":
+                case "Templar":
+                case "Shadow":
+                case "Scion":
+                case "Ranger":
+                case "Marauder":
+                case "Witch":
                     return "class_" + @class.ToLower();
                 case "Champion":
                 case "Gladiator":
-                case "Slayer": 
+                case "Slayer":
                 case "Berserker":
                 case "Chieftain":
-                case "Juggernaut": 
-                case "Deadeye": 
-                case "Pathfinder": 
-                case "Raider": 
-                case "Ascendant": 
-                case "Assassin": 
-                case "Saboteur": 
+                case "Juggernaut":
+                case "Deadeye":
+                case "Pathfinder":
+                case "Raider":
+                case "Ascendant":
+                case "Assassin":
+                case "Saboteur":
                 case "Trickster":
-                case "Guardian": 
-                case "Hierophant": 
+                case "Guardian":
+                case "Hierophant":
                 case "Inquisitor":
                 case "Elementalist":
-                case "Necromancer": 
-                case "Occultist": 
+                case "Necromancer":
+                case "Occultist":
                     return "ascendancy_" + @class.ToLower();
                 default:
                     return "misc_logo";
             }
         }
-        
+
         /// <summary>
         /// Returns the base class associated with the specified ascendancy class
         /// </summary>
@@ -71,58 +68,40 @@ namespace Service {
             switch (@class) {
                 case "Champion":
                 case "Gladiator":
-                case "Slayer": 
+                case "Slayer":
                     return "Duelist";
-                
+
                 case "Berserker":
                 case "Chieftain":
-                case "Juggernaut": 
+                case "Juggernaut":
                     return "Marauder";
 
-                case "Deadeye": 
-                case "Pathfinder": 
-                case "Raider": 
+                case "Deadeye":
+                case "Pathfinder":
+                case "Raider":
                     return "Ranger";
 
-                case "Ascendant": 
+                case "Ascendant":
                     return "Scion";
 
-                case "Assassin": 
-                case "Saboteur": 
+                case "Assassin":
+                case "Saboteur":
                 case "Trickster":
                     return "Shadow";
 
-                case "Guardian": 
-                case "Hierophant": 
+                case "Guardian":
+                case "Hierophant":
                 case "Inquisitor":
                     return "Templar";
 
                 case "Elementalist":
-                case "Necromancer": 
-                case "Occultist": 
+                case "Necromancer":
+                case "Occultist":
                     return "Witch";
-                
+
                 default:
                     return @class;
             }
-        }
-
-        /// <summary>
-        /// Finds the game log file's full path based on process name
-        /// </summary>
-        public static string GetLogFilePath(string windowTitle) {
-            var exePath = Win32.FindProcessPath(windowTitle);
-            if (string.IsNullOrEmpty(exePath)) {
-                return null;
-            }
-
-            var gameDir = Path.GetDirectoryName(exePath);
-            if (gameDir == null) {
-                return null;
-            }
-
-            var logFile = Path.Combine(gameDir, "logs", "Client.txt");
-            return File.Exists(logFile) ? logFile : null;
         }
 
         /// <summary>
@@ -137,11 +116,22 @@ namespace Service {
             var nextLvlXp = Xp[lvl > 99 ? 99 : lvl];
             return (int) (100 - (xp - currentLvlXp) / (nextLvlXp - currentLvlXp) * 100);
         }
-        
+    }
+
+    public static class JsonUtility {
+        private static readonly JsonSerializer JsonSerializer = new JsonSerializer();
+        private static readonly JsonDeserializer JsonDeserializer = new JsonDeserializer();
+
+        /// <summary>
+        /// Json deserializer for generic types
+        /// </summary>
         public static T Deserialize<T>(string json) {
             return JsonSerializer.Deserialize<T>(new JsonTextReader(new StringReader(json)));
         }
-        
+
+        /// <summary>
+        /// Json serializer for generic types
+        /// </summary>
         public static string Serialize<T>(T @object) {
             return JsonDeserializer.Serialize(@object);
         }

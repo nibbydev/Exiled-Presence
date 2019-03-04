@@ -11,9 +11,23 @@ namespace Ui {
         /// The main entry point for the UI application.
         /// </summary>
         public static void Main() {
-            // Hook service to menus
-            Menus.SessIdInputMenu.InputPropagateFunc = Service.Service.SessIdInputPropagate;
-            Menus.AccountNameInputMenu.InputPropagateFunc = Service.Service.AccountNameInputPropagate;
+            HookMenuSystem();
+            Config.LoadConfig();
+
+            try {
+                Application.Run(TrayAppContext);
+            } finally {
+                Service.Service.Stop();
+                ConsoleManager.Deallocate();
+            }
+        }
+
+        /// <summary>
+        /// Hook functionality to the menu system
+        /// </summary>
+        private static void HookMenuSystem() {
+            Menus.SessIdInputMenu.InputPropagateFunc = Config.SessIdInputPropagate;
+            Menus.AccountNameInputMenu.InputPropagateFunc = Config.AccountNameInputPropagate;
             Menus.MainMenu.MenuItems.First(t => t.MenuToRun.Equals(Menus.AppStartFeedbackMenu)).ActionToExecute =
                 Service.Service.Init;
             Menus.ConfigMenu.MenuItems.First(t => t.MenuToRun.Equals(Menus.ConfigClearedFeedbackMenu)).ActionToExecute =
@@ -28,20 +42,9 @@ namespace Ui {
                 Config.Settings.GetObfuscatedSessId;
             Menus.MainMenu.MenuItems.First(t => t.MenuToRun.Equals(Menus.AppStartFeedbackMenu)).ValueDelegate =
                 () => Service.Service.IsRunning ? "Running" : null;
-
-            // Load settings
-            Config.LoadConfig();
-
+            
             // Give LogParser access to show warning messages. Bit spaghetti but it'll do for now.
             LogParser.TooltipMsg = TrayAppContext.TooltipMsg;
-            
-            // Run the tray app
-            try {
-                Application.Run(TrayAppContext);
-            } finally {
-                Service.Service.Stop();
-                ConsoleManager.Deallocate();
-            }
         }
     }
 }

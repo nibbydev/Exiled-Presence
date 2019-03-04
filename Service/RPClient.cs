@@ -31,7 +31,7 @@ namespace Service {
                     LargeImageKey = "misc_logo"
                 }
             };
-            
+
             _client = new DiscordRpcClient(ClientId, true, -1, Logger);
 
             _client.OnReady += OnReady;
@@ -95,7 +95,7 @@ namespace Service {
             if (_character == null) {
                 return;
             }
-            
+
             UpdateCharacterData();
 
             Console.ForegroundColor = ConsoleColor.Green;
@@ -179,9 +179,7 @@ namespace Service {
 
             _presence.Assets.LargeImageKey = largeAssetKey;
             _presence.Details = $"Lvl {_character.Level} {_character.Class} ({_character.League})";
-            _presence.Assets.LargeImageText = baseClass.Equals(_character.Class)
-                ? baseClass
-                : $"{baseClass} ascended as {_character.Class}";
+            _presence.Assets.LargeImageText = $"{_character.Name} ({_character.Class}) - {xpPercent}% xp to next level";
 
             //Presence.State = $"{xpPercent}% xp to next level";
             _hasUpdate = true;

@@ -55,15 +55,12 @@
     <Compile Include="ProcMon.cs" />
     <Compile Include="RPClient.cs" />
     <Compile Include="Service.cs" />
+    <Compile Include="Settings.cs" />
     <Compile Include="Utility.cs" />
     <Compile Include="Web.cs" />
     <Compile Include="Win32.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DiscordRPC\DiscordRPC.csproj">
-      <Project>{819d20d6-8d88-45c1-a4d2-aa21f10abd19}</Project>
-      <Name>DiscordRPC</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{e3002305-05ce-40e3-9df7-13a0ce7e3731}</Project>
       <Name>Domain</Name>

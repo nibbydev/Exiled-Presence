@@ -6,7 +6,6 @@ using Domain;
 
 namespace Service {
     public static class Service {
-        private const string WindowTitle = "Path of Exile";
         private static LogParser _parser;
         private static ProcMon _procMon;
         private static RpClient _rpClient;
@@ -18,29 +17,37 @@ namespace Service {
             LogRegExps.RegExpList.First(t => t.Type == LogType.StatusChange).ParseAction = ActionStatusChange;
             LogRegExps.RegExpList.First(t => t.Type == LogType.CharacterSelect).ParseAction = ActionCharacterSelect;
             LogRegExps.RegExpList.First(t => t.Type == LogType.LoginScreen).ParseAction = ActionLoginScreen;
+
+            // Check if any were left without an action
+            if (LogRegExps.RegExpList.Any(t => t.ParseAction == null)) {
+                throw new Exception("Not all log regexes have an action assigned!");
+            }
         }
-        
+
         /// <summary>
         /// Service initializer
         /// </summary>
         public static void Init() {
-            if (IsRunning) return;
-            IsRunning = true;
-            
+            // Don't allow running twice
+            if (IsRunning) {
+                IsRunning = true;
+                return;
+            }
+
             Console.WriteLine("Starting rich presence service");
-            
+
             if (string.IsNullOrEmpty(Config.Settings.PoeSessionId)) Console.WriteLine("No POESESSID set");
             if (string.IsNullOrEmpty(Config.Settings.AccountName)) Console.WriteLine("No accout name set");
 
-            // Create a process monitor (and run it as a task) that reacts to the game client being launched and closed
-            _procMon = new ProcMon(WindowTitle) {
+            // Create a process monitor as a task that reacts to the game client being launched and closed
+            _procMon = new ProcMon(Settings.GameWindowTitle) {
                 ActionProcessStart = ActionProcessStart,
                 ActionProcessStop = ActionProcessStop
             }.RunAsTask();
         }
 
         /// <summary>
-        /// Stops the service and releases resources
+        /// Stops the service and related utilities
         /// </summary>
         public static void Stop() {
             _parser?.Stop();
@@ -50,40 +57,10 @@ namespace Service {
             _parser = null;
             _procMon = null;
             _rpClient = null;
-            
+
             IsRunning = false;
         }
 
-        /// <summary>
-        /// Setter and validator for account name
-        /// </summary>
-        public static string AccountNameInputPropagate(string input) {
-            if (input.Length < 3) {
-                return "ERROR. Invalid account name passed!";
-            }
-            
-            Config.Settings.AccountName = input;
-            Config.SaveConfig();
-
-            return "OK. Account name set.";
-        }
-
-        /// <summary>
-        /// Setter and validator for session id
-        /// </summary>
-        public static string SessIdInputPropagate(string input) {
-            var regex = new Regex(@"^[0-9a-fA-F]{32}$");
-            if (!regex.Match(input).Success) {
-                return "ERROR. Invalid POESESSID passed!";
-            }
-            
-            Config.Settings.PoeSessionId = input;
-            Config.SaveConfig();
-            
-            return "OK. POESESSID set.";
-        }
-        
-        
         #region Process Actions
 
         /// <summary>
@@ -93,16 +70,17 @@ namespace Service {
             Console.ForegroundColor = ConsoleColor.Blue;
             Console.WriteLine("[EVENT] Game start");
             Console.ResetColor();
-            
-            // Get the expected log path or null by traversing using the game executable location
-            var logPath = Utility.GetLogFilePath(WindowTitle);
+
+            // Get the expected log path or null by using the game executable location
+            var exePath = Win32.FindProcessPath(Settings.GameWindowTitle);
+            var logPath = LogParser.GetLogFilePath(exePath);
 
             // Make sure the the last instances were disposed of
             if (_parser != null) throw new Exception("Last log parser was not disposed of!");
             if (_rpClient != null) throw new Exception("Last rich presence client was not disposed of!");
-            
+
             // Create a rich presence client and run it as a task
-            _rpClient = new RpClient().RunAsTask(); 
+            _rpClient = new RpClient().RunAsTask();
 
             // Create a new parser and run it as a task
             _parser = new LogParser(logPath) {
@@ -130,9 +108,9 @@ namespace Service {
             _parser?.Stop();
             _parser = null;
         }
-        
+
         #endregion
-        
+
         #region Log Actions
 
         /// <summary>
@@ -166,11 +144,11 @@ namespace Service {
             }
 
             var areaName = logMatch.Match.Groups[2].Value;
-            
+
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine($"[EVENT] Player switched areas to {areaName}");
             Console.ResetColor();
-            
+
             _rpClient?.UpdateArea(areaName);
         }
 

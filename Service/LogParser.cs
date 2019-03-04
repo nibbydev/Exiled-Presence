@@ -49,11 +49,11 @@ namespace Service {
             var sizeInBytes = new FileInfo(path).Length;
             // Convert to bytes
             var sizeInMb = (int) (sizeInBytes / 1024f / 1024f);
-            
+
             if (sizeInMb < 15) {
                 return;
             }
-            
+
             var msg = $"The client log file is {sizeInMb}MB. " +
                       "This slows the program down considerably. " +
                       "Delete it or trim it to ~10MB";
@@ -95,7 +95,7 @@ namespace Service {
             using (var fs = new FileStream(_path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             using (var sr = new StreamReader(fs, Encoding.UTF8)) {
                 Console.WriteLine("Parsing log file...");
-                
+
                 // Main loop
                 while (_run) {
                     var s = sr.ReadLine();
@@ -196,6 +196,23 @@ namespace Service {
                     return;
                 }
             }
+        }
+
+        /// <summary>
+        /// Finds the game log file's full path based on process path
+        /// </summary>
+        public static string GetLogFilePath(string exePath) {
+            if (string.IsNullOrEmpty(exePath)) {
+                return null;
+            }
+
+            var gameDir = Path.GetDirectoryName(exePath);
+            if (gameDir == null) {
+                return null;
+            }
+
+            var logFile = Path.Combine(gameDir, "logs", "Client.txt");
+            return File.Exists(logFile) ? logFile : null;
         }
     }
 }
