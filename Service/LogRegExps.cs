@@ -1,6 +1,7 @@
 using System.Text.RegularExpressions;
+using Domain;
 
-namespace Domain {
+namespace Service {
     public static class LogRegExps {
         /// <summary>
         /// I stole some of these from https://github.com/klayveR/poe-log-monitor

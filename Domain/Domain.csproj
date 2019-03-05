@@ -43,12 +43,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Area.cs" />
-    <Compile Include="Areas.cs" />
-    <Compile Include="AreaType.cs" />
     <Compile Include="Character.cs" />
     <Compile Include="LogMatch.cs" />
     <Compile Include="LogRegex.cs" />
-    <Compile Include="LogRegExps.cs" />
     <Compile Include="LogType.cs" />
   </ItemGroup>
   <ItemGroup>

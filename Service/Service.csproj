@@ -53,6 +53,7 @@
     <Compile Include="AreaMatcher.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="LogParser.cs" />
+    <Compile Include="LogRegExps.cs" />
     <Compile Include="ProcMon.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
