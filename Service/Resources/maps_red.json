@@ -1,36 +1,11 @@
 [
   {
-    "name": "Shaped Canyon",
+    "name": "Infested Valley",
     "tier": 11,
     "key": "area_map_red"
   },
   {
-    "name": "Burial Chambers",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Park",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Crystal Ore",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Siege",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Factory",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Chateau",
+    "name": "Arena",
     "tier": 11,
     "key": "area_map_red"
   },
@@ -40,92 +15,12 @@
     "key": "area_map_red"
   },
   {
-    "name": "Mesa",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Lair",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
     "name": "Bog",
     "tier": 11,
     "key": "area_map_red"
   },
   {
-    "name": "Shaped Precinct",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Wharf",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Fields",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Volcano",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Phantasmagoria",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Waterways",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Ashen Wood",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Strand",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Temple",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Sulphur Vents",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Haunted Mansion",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Primordial Pool",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Promenade",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Spider Forest",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Pit",
+    "name": "Wasteland",
     "tier": 11,
     "key": "area_map_red"
   },
@@ -135,222 +30,37 @@
     "key": "area_map_red"
   },
   {
-    "name": "Colonnade",
+    "name": "Arsenal",
     "tier": 11,
     "key": "area_map_red"
   },
   {
-    "name": "Shaped Spider Forest",
+    "name": "Desert Spring",
     "tier": 11,
     "key": "area_map_red"
   },
   {
-    "name": "Shaped Atoll",
+    "name": "Dig",
     "tier": 11,
     "key": "area_map_red"
   },
   {
-    "name": "Shaped Academy",
+    "name": "Palace",
     "tier": 11,
     "key": "area_map_red"
   },
   {
-    "name": "Bazaar",
+    "name": "Basilica",
     "tier": 11,
     "key": "area_map_red"
   },
   {
-    "name": "Lava Chamber",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Primordial Blocks",
-    "tier": 11,
+    "name": "Courthouse",
+    "tier": 12,
     "key": "area_map_red"
   },
   {
     "name": "Precinct",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Wasteland",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Cemetery",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Academy",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Underground Sea",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Excavation",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Underground Sea",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Jungle Valley",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Thicket",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Mausoleum",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Racecourse",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Torture Chamber",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Ancient City",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Springs",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Colonnade",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Fungal Hollow",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Ramparts",
-    "tier": 11,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Malformation",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Ivory Temple",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Arsenal",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Colonnade",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Villa",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Underground River",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Castle Ruins",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Overgrown Shrine",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Necropolis",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Ghetto",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Toxic Sewer",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Defiled Cathedral",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Arcade",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Dunes",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Primordial Pool",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Primordial Blocks",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Cells",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Conservatory",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Lava Chamber",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Summit",
     "tier": 12,
     "key": "area_map_red"
   },
@@ -360,297 +70,67 @@
     "key": "area_map_red"
   },
   {
-    "name": "Racecourse",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Bazaar",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Geode",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Lava Chamber",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Plateau",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Estuary",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Residence",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Mud Geyser",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Coral Ruins",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Vault",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shipyard",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shrine",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Overgrown Ruin",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Bone Crypt",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Arachnid Nest",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Crater",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Ashen Wood",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Ramparts",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
     "name": "Torture Chamber",
     "tier": 12,
     "key": "area_map_red"
   },
   {
-    "name": "Shaped Tribunal",
+    "name": "Malformation",
     "tier": 12,
     "key": "area_map_red"
   },
   {
-    "name": "Shaped Residence",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Castle Ruins",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Gardens",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Armoury",
-    "tier": 12,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Arachnid Tomb",
+    "name": "Terrace",
     "tier": 12,
     "key": "area_map_red"
   },
   {
     "name": "Acid Caverns",
-    "tier": 13,
+    "tier": 12,
     "key": "area_map_red"
   },
   {
-    "name": "Shaped Laboratory",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Promenade",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Racecourse",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Crimson Temple",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Shore",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Colosseum",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Core",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Dig",
-    "tier": 13,
+    "name": "Carcass",
+    "tier": 12,
     "key": "area_map_red"
   },
   {
     "name": "Reef",
+    "tier": 12,
+    "key": "area_map_red"
+  },
+  {
+    "name": "Sunken City",
+    "tier": 12,
+    "key": "area_map_red"
+  },
+  {
+    "name": "Gardens",
     "tier": 13,
     "key": "area_map_red"
   },
   {
-    "name": "Shrine",
+    "name": "Tower",
     "tier": 13,
     "key": "area_map_red"
   },
   {
-    "name": "Shaped Orchard",
+    "name": "Shipyard",
     "tier": 13,
     "key": "area_map_red"
   },
   {
-    "name": "Shaped Sepulchre",
+    "name": "Siege",
     "tier": 13,
     "key": "area_map_red"
   },
   {
-    "name": "Caldera",
+    "name": "Colonnade",
     "tier": 13,
     "key": "area_map_red"
   },
   {
-    "name": "Shaped Mud Geyser",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Arachnid Nest",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Mineral Pools",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Infested Valley",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Wasteland",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Desert Spring",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Vaal Pyramid",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Overgrown Ruin",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Ghetto",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Terrace",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Arsenal",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Tropical Island",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Waterways",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Courtyard",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Malformation",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Leyline",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Excavation",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Lair",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Scriptorium",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Lighthouse",
+    "name": "Summit",
     "tier": 13,
     "key": "area_map_red"
   },
@@ -660,212 +140,37 @@
     "key": "area_map_red"
   },
   {
-    "name": "Palace",
+    "name": "Colosseum",
     "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Plaza",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Courtyard",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Wasteland",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Armoury",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Glacier",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Dig",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Geode",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Gorge",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Bog",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Atoll",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Arena",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Cemetery",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Pier",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Barrows",
-    "tier": 13,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Basilica",
-    "tier": 14,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Scriptorium",
-    "tier": 14,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Carcass",
-    "tier": 14,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Dark Forest",
-    "tier": 14,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Relic Chambers",
-    "tier": 14,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Museum",
-    "tier": 14,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Palace",
-    "tier": 14,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Courthouse",
-    "tier": 14,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Waste Pool",
-    "tier": 14,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Waterways",
-    "tier": 14,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Sunken City",
-    "tier": 14,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Terrace",
-    "tier": 14,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Plateau",
-    "tier": 14,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Temple",
-    "tier": 14,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Vault",
-    "tier": 14,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Moon Temple",
-    "tier": 14,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Tropical Island",
-    "tier": 14,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Ancient City",
-    "tier": 14,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Fungal Hollow",
-    "tier": 14,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Cemetery",
-    "tier": 14,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Arena",
-    "tier": 14,
     "key": "area_map_red"
   },
   {
     "name": "Crimson Temple",
+    "tier": 13,
+    "key": "area_map_red"
+  },
+  {
+    "name": "Ivory Temple",
     "tier": 14,
     "key": "area_map_red"
   },
   {
-    "name": "Acid Caverns",
+    "name": "Belfry",
     "tier": 14,
     "key": "area_map_red"
   },
   {
-    "name": "Plaza",
+    "name": "Racecourse",
     "tier": 14,
     "key": "area_map_red"
   },
   {
-    "name": "Volcano",
+    "name": "Primordial Blocks",
     "tier": 14,
     "key": "area_map_red"
   },
   {
-    "name": "Maze",
-    "tier": 14,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Cursed Crypt",
+    "name": "Caldera",
     "tier": 14,
     "key": "area_map_red"
   },
@@ -875,232 +180,22 @@
     "key": "area_map_red"
   },
   {
-    "name": "Colosseum",
-    "tier": 14,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Dig",
-    "tier": 14,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Overgrown Shrine",
-    "tier": 14,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Sepulchre",
-    "tier": 14,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Promenade",
-    "tier": 14,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Tower",
-    "tier": 14,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Estuary",
-    "tier": 14,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Dig",
-    "tier": 14,
-    "key": "area_map_red"
-  },
-  {
     "name": "Acid Lakes",
     "tier": 14,
     "key": "area_map_red"
   },
   {
-    "name": "Shaped Reef",
+    "name": "Plaza",
     "tier": 14,
     "key": "area_map_red"
   },
   {
-    "name": "Shaped Coves",
-    "tier": 14,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Springs",
-    "tier": 14,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Mineral Pools",
-    "tier": 14,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Orchard",
-    "tier": 14,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Vaal Temple",
-    "tier": 14,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Lava Lake",
+    "name": "Waste Pool",
     "tier": 15,
     "key": "area_map_red"
   },
   {
-    "name": "Primordial Blocks",
-    "tier": 15,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Belfry",
-    "tier": 15,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Leyline",
-    "tier": 15,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Spider Forest",
-    "tier": 15,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Desert Spring",
-    "tier": 15,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Summit",
-    "tier": 15,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Estuary",
-    "tier": 15,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Tower",
-    "tier": 15,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Plaza",
-    "tier": 15,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Plateau",
-    "tier": 15,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Coves",
-    "tier": 15,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Pier",
-    "tier": 15,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Coral Ruins",
-    "tier": 15,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Cursed Crypt",
-    "tier": 15,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Pit",
-    "tier": 15,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Basilica",
-    "tier": 15,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Sunken City",
-    "tier": 15,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Carcass",
-    "tier": 15,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Colonnade",
-    "tier": 15,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Overgrown Ruin",
-    "tier": 15,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Orchard",
-    "tier": 15,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Reef",
-    "tier": 15,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Caldera",
-    "tier": 15,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Courtyard",
-    "tier": 15,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Dark Forest",
-    "tier": 15,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Bog",
-    "tier": 15,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Underground River",
-    "tier": 15,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Arsenal",
-    "tier": 15,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Arachnid Tomb",
-    "tier": 15,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Siege",
+    "name": "Defiled Cathedral",
     "tier": 15,
     "key": "area_map_red"
   },
@@ -1110,47 +205,17 @@
     "key": "area_map_red"
   },
   {
-    "name": "Shaped Port",
+    "name": "Dark Forest",
     "tier": 15,
     "key": "area_map_red"
   },
   {
-    "name": "Colosseum",
+    "name": "Lava Lake",
     "tier": 15,
     "key": "area_map_red"
   },
   {
-    "name": "Shaped Shipyard",
-    "tier": 15,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Precinct",
-    "tier": 15,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Wasteland",
-    "tier": 15,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Gardens",
-    "tier": 15,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Malformation",
-    "tier": 15,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Fungal Hollow",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Maze of the Minotaur",
+    "name": "Forge of the Phoenix",
     "tier": 16,
     "key": "area_map_red"
   },
@@ -1160,7 +225,7 @@
     "key": "area_map_red"
   },
   {
-    "name": "Elder Underground Sea",
+    "name": "Maze of the Minotaur",
     "tier": 16,
     "key": "area_map_red"
   },
@@ -1170,707 +235,7 @@
     "key": "area_map_red"
   },
   {
-    "name": "Forge of the Phoenix",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Iceberg",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Cells",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Spider Forest",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Vault",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Chateau",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Burial Chambers",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Armoury",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Lighthouse",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Phantasmagoria",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Precinct",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Necropolis",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Grotto",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Crater",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Marshes",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Bone Crypt",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Strand",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Mesa",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Ancient City",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Toxic Sewer",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Beach",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Channel",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Graveyard",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Haunted Mansion",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Museum",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Belfry",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Tower",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Ghetto",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Crystal Ore",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Gardens",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Lair",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Dungeon",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Moon Temple",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Sepulchre",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Arsenal",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder City Square",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Arcade",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Excavation",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Underground River",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Pen",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Volcano",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Mausoleum",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Glacier",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Port",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Arid Lake",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Dark Forest",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Atoll",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Estuary",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Ivory Temple",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Jungle Valley",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Temple",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Shrine",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Bazaar",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Thicket",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Racecourse",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Barrows",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Defiled Cathedral",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Academy",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Lava Lake",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Waterways",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Vaal Pyramid",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Summit",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Shipyard",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Mud Geyser",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Lookout",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Scriptorium",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Canyon",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Courtyard",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Peninsula",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Sulphur Vents",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Laboratory",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Promenade",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Infested Valley",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Arena",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Castle Ruins",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Factory",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Coral Ruins",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Residence",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Arachnid Nest",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Relic Chambers",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Tropical Island",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Plaza",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Spider Lair",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Primordial Blocks",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Ashen Wood",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Siege",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Desert",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Cursed Crypt",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Maze",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Alleyways",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Conservatory",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Orchard",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Mineral Pools",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Shore",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Terrace",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Coves",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Plateau",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Leyline",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Park",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Cage",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Fields",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Waste Pool",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Overgrown Ruin",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Courthouse",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Wharf",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Pit",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Dunes",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
     "name": "Vaal Temple",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Malformation",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Bog",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Reef",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Desert Spring",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Colonnade",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Wasteland",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Gorge",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Core",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Colosseum",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Springs",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Overgrown Shrine",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Torture Chamber",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Carcass",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Primordial Pool",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Cemetery",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Tribunal",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Flooded Mine",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Ramparts",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Spider Forest",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Villa",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Lava Chamber",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Basilica",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Sunken City",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Acid Lakes",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Pier",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Shaped Colonnade",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Crimson Temple",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Caldera",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Geode",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Palace",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Arachnid Tomb",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Elder Acid Caverns",
-    "tier": 16,
-    "key": "area_map_red"
-  },
-  {
-    "name": "Acid Caverns",
     "tier": 16,
     "key": "area_map_red"
   }
