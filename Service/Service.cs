@@ -162,12 +162,12 @@ namespace Service {
 
             var mode = logMatch.Match.Groups[2].Value; // DND or AFK
             var on = logMatch.Match.Groups[3].Value.Equals("ON"); // ON or OFF
-            var msg = on ? logMatch.Match.Groups[4].Value : null; // Status message or null
+            var msg = on ? logMatch.Match.Groups[5].Value : null; // Status message or null
 
             _rpClient?.UpdateStatus(mode, on, msg);
 
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"[EVENT] Player switched {mode} {on} with message {msg}");
+            Console.WriteLine($@"[EVENT] Player switched {mode} {on} with message '{msg}'");
             Console.ResetColor();
         }
 

@@ -8,19 +8,14 @@ using Domain;
 
 namespace Service {
     public class RpClient {
-        private const int CharacterUpdateDelay = 60 * 1000;
-        private const int PollDelay = 500;
-        private const string ClientId = "551089446460850176";
         private static readonly ConsoleLogger Logger = new ConsoleLogger {Level = LogLevel.Warning, Coloured = true};
-
-        private DiscordRpcClient _client;
+        private readonly DiscordRpcClient _client;
+        private readonly RichPresence _presence;
         private Character _character;
-        private Timer _charUpdateTimer;
-        private DateTime? _lastAreaChange;
-        private string _lastStateAreaMsg;
-        private RichPresence _presence;
+        private DateTime? _lastCharUpdate;
         private bool _run = true;
         private bool _hasUpdate;
+        private Area _currentArea;
 
         /// <summary>
         /// Constructor
@@ -28,11 +23,12 @@ namespace Service {
         public RpClient() {
             _presence = new RichPresence {
                 Assets = new Assets {
-                    LargeImageKey = "misc_logo"
+                    LargeImageKey = "misc_logo",
+                    LargeImageText = $"{Settings.ProgramName} {Settings.Version}"
                 }
             };
 
-            _client = new DiscordRpcClient(ClientId, true, -1, Logger);
+            _client = new DiscordRpcClient(Settings.DiscordAppId, true, -1, Logger);
 
             _client.OnReady += OnReady;
             _client.OnClose += OnClose;
@@ -50,7 +46,6 @@ namespace Service {
         /// </summary>
         public void Stop() {
             _run = false;
-            _charUpdateTimer?.Dispose();
             _client?.Dispose();
         }
 
@@ -73,7 +68,7 @@ namespace Service {
                 }
 
                 _client?.Invoke();
-                Thread.Sleep(PollDelay);
+                Thread.Sleep(Settings.PresencePollDelayMs);
             }
         }
 
@@ -81,25 +76,22 @@ namespace Service {
         /// Requests current character from the API and asynchronously updates the presence
         /// </summary>
         public async void UpdateCharacter() {
-            // More than x minutes have passed since player switched areas
-            if (_lastAreaChange?.AddMinutes(5) < DateTime.UtcNow) {
-                Console.WriteLine("Ignored char update request due to inactivity for {0} min",
-                    _lastAreaChange == null ? 0 : (DateTime.UtcNow - _lastAreaChange).Value.Minutes);
+            // More than x has passed since last char update
+            if (_lastCharUpdate?.AddSeconds(Settings.CharacterUpdateDelaySec) > DateTime.UtcNow) {
                 return;
             }
 
             // todo: if character is not in an area that does not grant xp
-            // todo: disable character updates when xp is off?
 
-            _character = await Web.GetLastActiveChar();
-            if (_character == null) {
-                return;
-            }
+            var character = await Web.GetLastActiveChar();
+            if (character == null) return;
+            _character = character;
 
             UpdateCharacterData();
 
+            _lastCharUpdate = DateTime.UtcNow;
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine($"[EVENT] Got character from api: {_character.Name}");
+            Console.WriteLine($@"[EVENT] Got character from api: {_character.Name}");
             Console.ResetColor();
         }
 
@@ -108,15 +100,13 @@ namespace Service {
         /// </summary>
         private void ResetCharacter() {
             _character = null;
-            _charUpdateTimer?.Dispose();
-            _lastAreaChange = null;
         }
 
         /// <summary>
         /// Updates the presence AFK or DND status
         /// </summary>
         public void UpdateStatus(string mode, bool on, string message) {
-            _presence.State = on ? $"{_lastStateAreaMsg} ({mode})" : _lastStateAreaMsg;
+            _presence.State = on ? mode : null;
             _hasUpdate = true;
         }
 
@@ -124,26 +114,16 @@ namespace Service {
         /// Updates the presence area
         /// </summary>
         public void UpdateArea(string areaName) {
-            // First character login, get initial info
-            if (_character == null) {
-                UpdateCharacter();
-
-                // Disabled currently
-                // Create a timer that runs every x MS and updates character stats
-                // _charUpdateTimer = new Timer(state => UpdateCharacter(), null, CharacterUpdateDelay, CharacterUpdateDelay);
-            }
-
-            if (AreaMatcher.Match(areaName, out var area)) {
-                _presence.Assets.SmallImageKey = area.Key;
-                _presence.Assets.SmallImageText = $"In {areaName}";
-
-                _presence.Timestamps = Timestamps.Now;
-                _presence.State = null;
-
-                _lastAreaChange = DateTime.UtcNow;
-                _lastStateAreaMsg = _presence.State;
-                _hasUpdate = true;
-            }
+            // Update character data on area change
+            UpdateCharacter();
+            
+            AreaMatcher.Match(areaName, out _currentArea);
+            
+            UpdateSmallImageText();
+            _presence.Assets.SmallImageKey = _currentArea.Key;
+            _presence.Timestamps = Timestamps.Now;
+            _presence.State = null;
+            _hasUpdate = true;
         }
 
         /// <summary>
@@ -155,7 +135,7 @@ namespace Service {
             _presence.Assets.SmallImageKey = null;
             _presence.Assets.SmallImageText = null;
             _presence.Assets.LargeImageKey = Utility.GetArtKey();
-            _presence.Assets.LargeImageText = null;
+            _presence.Assets.LargeImageText = $"{Settings.ProgramName} {Settings.Version}";
             _presence.State = "In login screen";
             _presence.Details = null;
             _presence.Timestamps = Timestamps.Now;
@@ -171,7 +151,7 @@ namespace Service {
             _presence.Assets.SmallImageKey = null;
             _presence.Assets.SmallImageText = null;
             _presence.Assets.LargeImageKey = Utility.GetArtKey();
-            _presence.Assets.LargeImageText = null;
+            _presence.Assets.LargeImageText = $"{Settings.ProgramName} {Settings.Version}";
             _presence.State = "In character select";
             _presence.Details = null;
             _presence.Timestamps = Timestamps.Now;
@@ -184,14 +164,22 @@ namespace Service {
         private void UpdateCharacterData() {
             var largeAssetKey = Utility.GetArtKey(_character.Class);
             var xpPercent = Utility.GetPercentToNextLevel(_character.Level, _character.Experience);
-            var baseClass = Utility.GetBaseClass(_character.Class);
 
             _presence.Assets.LargeImageKey = largeAssetKey;
-            _presence.Details = $"Lvl {_character.Level} {_character.Class} ({_character.League})";
-            _presence.Assets.LargeImageText = $"{_character.Name} ({_character.Class}) - {xpPercent}% xp to next level";
+            _presence.Details = $"Playing as {_character.Name}";
+            _presence.Assets.LargeImageText = $"Level {_character.Level} {_character.Class} - {xpPercent}% xp";
 
-            //Presence.State = $"{xpPercent}% xp to next level";
+            UpdateSmallImageText();
+
             _hasUpdate = true;
+        }
+
+        private void UpdateSmallImageText() {
+            if (_currentArea != null && _presence.Assets.SmallImageKey != null) {
+                _presence.Assets.SmallImageText = _character == null
+                    ? $"{_currentArea.Name}"
+                    : $"{_currentArea.Name} in {_character.League}";
+            }
         }
 
         #region State Events

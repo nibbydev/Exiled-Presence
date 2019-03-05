@@ -14,7 +14,7 @@ namespace Service {
 
         public static async Task<Character> GetLastActiveChar() {
             if (string.IsNullOrEmpty(Config.Settings.AccountName)) {
-                Console.WriteLine("No accountname set!");
+                Console.WriteLine(@"No accountname set!");
                 return null;
             }
 
@@ -27,11 +27,11 @@ namespace Service {
 
             if (response.StatusCode == HttpStatusCode.Forbidden) {
                 if (string.IsNullOrEmpty(Config.Settings.PoeSessionId)) {
-                    Console.WriteLine("Profile is private and POESESSID is not set!");
+                    Console.WriteLine(@"Profile is private and POESESSID is not set!");
                     return null;
                 }
 
-                Console.WriteLine("Profile is private and POESESSID is invalid!");
+                Console.WriteLine(@"Profile is private and POESESSID is invalid!");
                 return null;
             }
 

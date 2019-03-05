@@ -7,7 +7,6 @@ using Service.Properties;
 
 namespace Service {
     public static class AreaMatcher {
-        private static readonly Area DefaultArea = new Area {Name = "default", Key = "area_default"};
         private static readonly Regex HideoutRegex = new Regex(@"^(.+) Hideout$");
         private static readonly Regex LabTrialRegex = new Regex("^Trial of [A-Za-z]+ [A-Za-z]+$");
         private static readonly List<Area[]> AreaData = new List<Area[]>(500);
@@ -48,7 +47,12 @@ namespace Service {
                 return true;
             }
 
-            area = DefaultArea;
+            // Default area
+            area = new Area {
+                Name = areaName,
+                Key = "area_default"
+            };
+            
             return false;
         }
     }

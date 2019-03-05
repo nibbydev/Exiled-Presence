@@ -114,7 +114,7 @@ namespace Service {
 
             var currentLvlXp = Xp[lvl - 1];
             var nextLvlXp = Xp[lvl > 99 ? 99 : lvl];
-            return (int) (100 - (xp - currentLvlXp) / (nextLvlXp - currentLvlXp) * 100);
+            return (int) ((xp - currentLvlXp) / (nextLvlXp - currentLvlXp) * 100);
         }
     }
 
