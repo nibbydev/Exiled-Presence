@@ -1,0 +1,39 @@
+[
+	{
+		"name": "Lioneye's Watch",
+		"act": 1
+	}, {
+		"name": "The Forest Encampment",
+		"act": 2
+	}, {
+		"name": "Sarn Arena Staging Area",
+		"act": 3
+	}, {
+		"name": "The Sarn Encampment",
+		"act": 3
+	}, {
+		"name": "Highgate",
+		"act": 4
+	}, {
+		"name": "Overseer's Tower",
+		"act": 5
+	}, {
+		"name": "Lioneye's Watch",
+		"act": 6
+	}, {
+		"name": "The Bridge Encampment",
+		"act": 7
+	}, {
+		"name": "The Sarn Encampment",
+		"act": 8
+	}, {
+		"name": "Highgate",
+		"act": 9
+	}, {
+		"name": "Oriath Docks",
+		"act": 10
+	}, {
+		"name": "Oriath",
+		"act": 11
+	}
+]

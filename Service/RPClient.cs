@@ -9,7 +9,7 @@ using Domain;
 namespace Service {
     public class RpClient {
         private const int CharacterUpdateDelay = 60 * 1000;
-        private const int PollDelay = 1000;
+        private const int PollDelay = 500;
         private const string ClientId = "551089446460850176";
         private static readonly ConsoleLogger Logger = new ConsoleLogger {Level = LogLevel.Warning, Coloured = true};
 
@@ -123,7 +123,7 @@ namespace Service {
         /// <summary>
         /// Updates the presence area
         /// </summary>
-        public void UpdateArea(string area) {
+        public void UpdateArea(string areaName) {
             // First character login, get initial info
             if (_character == null) {
                 UpdateCharacter();
@@ -133,8 +133,12 @@ namespace Service {
                 // _charUpdateTimer = new Timer(state => UpdateCharacter(), null, CharacterUpdateDelay, CharacterUpdateDelay);
             }
 
+            AreaMatcher.Match(areaName, out var area, out var artKey);
+            _presence.Assets.SmallImageKey = artKey;
+            _presence.Assets.SmallImageText = $"In {areaName}";
+
             _presence.Timestamps = Timestamps.Now;
-            _presence.State = $"In {area}";
+            _presence.State = null;
 
             _lastAreaChange = DateTime.UtcNow;
             _lastStateAreaMsg = _presence.State;
@@ -147,8 +151,10 @@ namespace Service {
         public void UpdateLoginScreen() {
             ResetCharacter();
 
+            _presence.Assets.SmallImageKey = null;
+            _presence.Assets.SmallImageText = null;
             _presence.Assets.LargeImageKey = Utility.GetArtKey();
-            _presence.Assets.LargeImageText = "Nothing particularly noteworthy going on right now";
+            _presence.Assets.LargeImageText = null;
             _presence.State = "In login screen";
             _presence.Details = null;
             _presence.Timestamps = Timestamps.Now;
@@ -161,8 +167,10 @@ namespace Service {
         public void UpdateCharacterSelect() {
             ResetCharacter();
 
+            _presence.Assets.SmallImageKey = null;
+            _presence.Assets.SmallImageText = null;
             _presence.Assets.LargeImageKey = Utility.GetArtKey();
-            _presence.Assets.LargeImageText = "Nothing particularly noteworthy going on right now";
+            _presence.Assets.LargeImageText = null;
             _presence.State = "In character select";
             _presence.Details = null;
             _presence.Timestamps = Timestamps.Now;

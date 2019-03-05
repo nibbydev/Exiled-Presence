@@ -1,0 +1,723 @@
+[
+	{
+		"name": "Volcano",
+		"tier": 6
+	}, {
+		"name": "Haunted Mansion",
+		"tier": 6
+	}, {
+		"name": "Academy",
+		"tier": 6
+	}, {
+		"name": "Canyon",
+		"tier": 6
+	}, {
+		"name": "Phantasmagoria",
+		"tier": 6
+	}, {
+		"name": "Sulphur Vents",
+		"tier": 6
+	}, {
+		"name": "Precinct",
+		"tier": 6
+	}, {
+		"name": "Fields",
+		"tier": 6
+	}, {
+		"name": "Wharf",
+		"tier": 6
+	}, {
+		"name": "Shaped Channel",
+		"tier": 6
+	}, {
+		"name": "Ashen Wood",
+		"tier": 6
+	}, {
+		"name": "Temple",
+		"tier": 6
+	}, {
+		"name": "Shaped Flooded Mine",
+		"tier": 6
+	}, {
+		"name": "Shaped Ramparts",
+		"tier": 6
+	}, {
+		"name": "Shaped Atoll",
+		"tier": 6
+	}, {
+		"name": "Thicket",
+		"tier": 6
+	}, {
+		"name": "Mausoleum",
+		"tier": 6
+	}, {
+		"name": "Shaped Dungeon",
+		"tier": 6
+	}, {
+		"name": "Atoll",
+		"tier": 6
+	}, {
+		"name": "Jungle Valley",
+		"tier": 6
+	}, {
+		"name": "Cemetery",
+		"tier": 6
+	}, {
+		"name": "Arachnid Nest",
+		"tier": 6
+	}, {
+		"name": "Ramparts",
+		"tier": 6
+	}, {
+		"name": "Racecourse",
+		"tier": 6
+	}, {
+		"name": "Colonnade",
+		"tier": 6
+	}, {
+		"name": "Geode",
+		"tier": 6
+	}, {
+		"name": "Shaped Desert",
+		"tier": 6
+	}, {
+		"name": "Underground Sea",
+		"tier": 6
+	}, {
+		"name": "Shaped Graveyard",
+		"tier": 6
+	}, {
+		"name": "Strand",
+		"tier": 6
+	}, {
+		"name": "Spider Forest",
+		"tier": 6
+	}, {
+		"name": "Shaped Jungle Valley",
+		"tier": 6
+	}, {
+		"name": "Shaped Beach",
+		"tier": 6
+	}, {
+		"name": "Shaped Arcade",
+		"tier": 6
+	}, {
+		"name": "Ancient City",
+		"tier": 6
+	}, {
+		"name": "Vaal Temple",
+		"tier": 6
+	}, {
+		"name": "Shaped Lookout",
+		"tier": 6
+	}, {
+		"name": "Shaped Crystal Ore",
+		"tier": 6
+	}, {
+		"name": "Bone Crypt",
+		"tier": 6
+	}, {
+		"name": "Dunes",
+		"tier": 7
+	}, {
+		"name": "Bazaar",
+		"tier": 7
+	}, {
+		"name": "Ghetto",
+		"tier": 7
+	}, {
+		"name": "Primordial Pool",
+		"tier": 7
+	}, {
+		"name": "Conservatory",
+		"tier": 7
+	}, {
+		"name": "Shaped Iceberg",
+		"tier": 7
+	}, {
+		"name": "Cells",
+		"tier": 7
+	}, {
+		"name": "Geode",
+		"tier": 7
+	}, {
+		"name": "Underground River",
+		"tier": 7
+	}, {
+		"name": "Shaped Arid Lake",
+		"tier": 7
+	}, {
+		"name": "Lava Chamber",
+		"tier": 7
+	}, {
+		"name": "Shaped Pen",
+		"tier": 7
+	}, {
+		"name": "Shaped Armoury",
+		"tier": 7
+	}, {
+		"name": "Arcade",
+		"tier": 7
+	}, {
+		"name": "Shaped Dungeon",
+		"tier": 7
+	}, {
+		"name": "Toxic Sewer",
+		"tier": 7
+	}, {
+		"name": "Shaped Thicket",
+		"tier": 7
+	}, {
+		"name": "Residence",
+		"tier": 7
+	}, {
+		"name": "Ramparts",
+		"tier": 7
+	}, {
+		"name": "Crater",
+		"tier": 7
+	}, {
+		"name": "Gardens",
+		"tier": 7
+	}, {
+		"name": "Flooded Mine",
+		"tier": 7
+	}, {
+		"name": "Jungle Valley",
+		"tier": 7
+	}, {
+		"name": "Bone Crypt",
+		"tier": 7
+	}, {
+		"name": "Shaped Alleyways",
+		"tier": 7
+	}, {
+		"name": "Coral Ruins",
+		"tier": 7
+	}, {
+		"name": "Arachnid Nest",
+		"tier": 7
+	}, {
+		"name": "Waste Pool",
+		"tier": 7
+	}, {
+		"name": "Primordial Blocks",
+		"tier": 7
+	}, {
+		"name": "Shaped Marshes",
+		"tier": 7
+	}, {
+		"name": "Shaped Desert",
+		"tier": 7
+	}, {
+		"name": "Shaped Flooded Mine",
+		"tier": 7
+	}, {
+		"name": "Armoury",
+		"tier": 7
+	}, {
+		"name": "Castle Ruins",
+		"tier": 7
+	}, {
+		"name": "Mud Geyser",
+		"tier": 7
+	}, {
+		"name": "Shaped Beach",
+		"tier": 7
+	}, {
+		"name": "Arachnid Tomb",
+		"tier": 7
+	}, {
+		"name": "Ashen Wood",
+		"tier": 7
+	}, {
+		"name": "Tribunal",
+		"tier": 7
+	}, {
+		"name": "Shaped Desert Spring",
+		"tier": 7
+	}, {
+		"name": "Shaped Ghetto",
+		"tier": 7
+	}, {
+		"name": "Shaped Factory",
+		"tier": 7
+	}, {
+		"name": "Torture Chamber",
+		"tier": 7
+	}, {
+		"name": "Laboratory",
+		"tier": 8
+	}, {
+		"name": "Mineral Pools",
+		"tier": 8
+	}, {
+		"name": "Wasteland",
+		"tier": 8
+	}, {
+		"name": "Infested Valley",
+		"tier": 8
+	}, {
+		"name": "Overgrown Ruin",
+		"tier": 8
+	}, {
+		"name": "Mud Geyser",
+		"tier": 8
+	}, {
+		"name": "Arachnid Nest",
+		"tier": 8
+	}, {
+		"name": "Shaped Shipyard",
+		"tier": 8
+	}, {
+		"name": "Promenade",
+		"tier": 8
+	}, {
+		"name": "Shaped Grotto",
+		"tier": 8
+	}, {
+		"name": "Orchard",
+		"tier": 8
+	}, {
+		"name": "Sepulchre",
+		"tier": 8
+	}, {
+		"name": "Shaped Excavation",
+		"tier": 8
+	}, {
+		"name": "Shaped Graveyard",
+		"tier": 8
+	}, {
+		"name": "Shaped Desert",
+		"tier": 8
+	}, {
+		"name": "Shore",
+		"tier": 8
+	}, {
+		"name": "Shaped Peninsula",
+		"tier": 8
+	}, {
+		"name": "Shaped Fungal Hollow",
+		"tier": 8
+	}, {
+		"name": "Shaped Burial Chambers",
+		"tier": 8
+	}, {
+		"name": "Shaped Port",
+		"tier": 8
+	}, {
+		"name": "Shaped Cursed Crypt",
+		"tier": 8
+	}, {
+		"name": "Shaped Bone Crypt",
+		"tier": 8
+	}, {
+		"name": "Courtyard",
+		"tier": 8
+	}, {
+		"name": "Vaal Pyramid",
+		"tier": 8
+	}, {
+		"name": "Geode",
+		"tier": 8
+	}, {
+		"name": "Shaped Cage",
+		"tier": 8
+	}, {
+		"name": "Shaped Iceberg",
+		"tier": 8
+	}, {
+		"name": "Armoury",
+		"tier": 8
+	}, {
+		"name": "Cemetery",
+		"tier": 8
+	}, {
+		"name": "Barrows",
+		"tier": 8
+	}, {
+		"name": "Tropical Island",
+		"tier": 8
+	}, {
+		"name": "Canyon",
+		"tier": 8
+	}, {
+		"name": "Bog",
+		"tier": 8
+	}, {
+		"name": "Cells",
+		"tier": 8
+	}, {
+		"name": "Shaped Cells",
+		"tier": 8
+	}, {
+		"name": "Shaped Toxic Sewer",
+		"tier": 8
+	}, {
+		"name": "Shaped Arcade",
+		"tier": 8
+	}, {
+		"name": "Peninsula",
+		"tier": 8
+	}, {
+		"name": "Arena",
+		"tier": 8
+	}, {
+		"name": "Dark Forest",
+		"tier": 8
+	}, {
+		"name": "Shaped Arid Lake",
+		"tier": 8
+	}, {
+		"name": "Shaped Leyline",
+		"tier": 8
+	}, {
+		"name": "Pier",
+		"tier": 8
+	}, {
+		"name": "Shaped Springs",
+		"tier": 8
+	}, {
+		"name": "Atoll",
+		"tier": 8
+	}, {
+		"name": "Shaped Channel",
+		"tier": 8
+	}, {
+		"name": "Shaped Vaal Pyramid",
+		"tier": 8
+	}, {
+		"name": "Shaped Marshes",
+		"tier": 8
+	}, {
+		"name": "Vault",
+		"tier": 9
+	}, {
+		"name": "Arena",
+		"tier": 9
+	}, {
+		"name": "Shaped Glacier",
+		"tier": 9
+	}, {
+		"name": "Waterways",
+		"tier": 9
+	}, {
+		"name": "Relic Chambers",
+		"tier": 9
+	}, {
+		"name": "Waste Pool",
+		"tier": 9
+	}, {
+		"name": "Scriptorium",
+		"tier": 9
+	}, {
+		"name": "Ancient City",
+		"tier": 9
+	}, {
+		"name": "Shaped Courtyard",
+		"tier": 9
+	}, {
+		"name": "Tropical Island",
+		"tier": 9
+	}, {
+		"name": "Cemetery",
+		"tier": 9
+	}, {
+		"name": "Shaped Crater",
+		"tier": 9
+	}, {
+		"name": "Museum",
+		"tier": 9
+	}, {
+		"name": "Shaped Beach",
+		"tier": 9
+	}, {
+		"name": "Moon Temple",
+		"tier": 9
+	}, {
+		"name": "Shaped Lighthouse",
+		"tier": 9
+	}, {
+		"name": "Shaped Lookout",
+		"tier": 9
+	}, {
+		"name": "Temple",
+		"tier": 9
+	}, {
+		"name": "Sepulchre",
+		"tier": 9
+	}, {
+		"name": "Shaped Marshes",
+		"tier": 9
+	}, {
+		"name": "Shaped Spider Lair",
+		"tier": 9
+	}, {
+		"name": "Shaped Strand",
+		"tier": 9
+	}, {
+		"name": "Tower",
+		"tier": 9
+	}, {
+		"name": "Shaped Grotto",
+		"tier": 9
+	}, {
+		"name": "Estuary",
+		"tier": 9
+	}, {
+		"name": "Shaped Chateau",
+		"tier": 9
+	}, {
+		"name": "Glacier",
+		"tier": 9
+	}, {
+		"name": "Shaped Barrows",
+		"tier": 9
+	}, {
+		"name": "Promenade",
+		"tier": 9
+	}, {
+		"name": "Shaped Volcano",
+		"tier": 9
+	}, {
+		"name": "Reef",
+		"tier": 9
+	}, {
+		"name": "Residence",
+		"tier": 9
+	}, {
+		"name": "Shaped Canyon",
+		"tier": 9
+	}, {
+		"name": "Shaped City Square",
+		"tier": 9
+	}, {
+		"name": "Overgrown Shrine",
+		"tier": 9
+	}, {
+		"name": "Arid Lake",
+		"tier": 9
+	}, {
+		"name": "Shaped Phantasmagoria",
+		"tier": 9
+	}, {
+		"name": "Underground Sea",
+		"tier": 9
+	}, {
+		"name": "Orchard",
+		"tier": 9
+	}, {
+		"name": "Cursed Crypt",
+		"tier": 9
+	}, {
+		"name": "Shaped Dungeon",
+		"tier": 9
+	}, {
+		"name": "Shaped Relic Chambers",
+		"tier": 9
+	}, {
+		"name": "Shaped Graveyard",
+		"tier": 9
+	}, {
+		"name": "Coves",
+		"tier": 9
+	}, {
+		"name": "Shaped Gorge",
+		"tier": 9
+	}, {
+		"name": "Plateau",
+		"tier": 9
+	}, {
+		"name": "Shaped Courthouse",
+		"tier": 9
+	}, {
+		"name": "Shaped Villa",
+		"tier": 9
+	}, {
+		"name": "Shaped Acid Lakes",
+		"tier": 9
+	}, {
+		"name": "Malformation",
+		"tier": 9
+	}, {
+		"name": "Gorge",
+		"tier": 9
+	}, {
+		"name": "Maze",
+		"tier": 9
+	}, {
+		"name": "Shaped Acid Caverns",
+		"tier": 9
+	}, {
+		"name": "Shaped Waste Pool",
+		"tier": 9
+	}, {
+		"name": "Vaal Temple",
+		"tier": 9
+	}, {
+		"name": "Leyline",
+		"tier": 10
+	}, {
+		"name": "Coves",
+		"tier": 10
+	}, {
+		"name": "Coral Ruins",
+		"tier": 10
+	}, {
+		"name": "Shaped Mausoleum",
+		"tier": 10
+	}, {
+		"name": "Plateau",
+		"tier": 10
+	}, {
+		"name": "Spider Forest",
+		"tier": 10
+	}, {
+		"name": "Pier",
+		"tier": 10
+	}, {
+		"name": "Plaza",
+		"tier": 10
+	}, {
+		"name": "Shaped Jungle Valley",
+		"tier": 10
+	}, {
+		"name": "Pit",
+		"tier": 10
+	}, {
+		"name": "Shaped Port",
+		"tier": 10
+	}, {
+		"name": "Shaped Alleyways",
+		"tier": 10
+	}, {
+		"name": "Estuary",
+		"tier": 10
+	}, {
+		"name": "Belfry",
+		"tier": 10
+	}, {
+		"name": "Shaped Underground Sea",
+		"tier": 10
+	}, {
+		"name": "Shaped City Square",
+		"tier": 10
+	}, {
+		"name": "Shaped Vaal Pyramid",
+		"tier": 10
+	}, {
+		"name": "Orchard",
+		"tier": 10
+	}, {
+		"name": "Cursed Crypt",
+		"tier": 10
+	}, {
+		"name": "Siege",
+		"tier": 10
+	}, {
+		"name": "Shaped Gardens",
+		"tier": 10
+	}, {
+		"name": "Shaped Maze",
+		"tier": 10
+	}, {
+		"name": "Shaped Ivory Temple",
+		"tier": 10
+	}, {
+		"name": "Arachnid Tomb",
+		"tier": 10
+	}, {
+		"name": "Bog",
+		"tier": 10
+	}, {
+		"name": "Wasteland",
+		"tier": 10
+	}, {
+		"name": "Shipyard",
+		"tier": 10
+	}, {
+		"name": "Shaped Mesa",
+		"tier": 10
+	}, {
+		"name": "Precinct",
+		"tier": 10
+	}, {
+		"name": "Shaped Residence",
+		"tier": 10
+	}, {
+		"name": "Shaped Haunted Mansion",
+		"tier": 10
+	}, {
+		"name": "Shaped Primordial Pool",
+		"tier": 10
+	}, {
+		"name": "Bazaar",
+		"tier": 10
+	}, {
+		"name": "Port",
+		"tier": 10
+	}, {
+		"name": "Shaped Channel",
+		"tier": 10
+	}, {
+		"name": "Necropolis",
+		"tier": 10
+	}, {
+		"name": "Arsenal",
+		"tier": 10
+	}, {
+		"name": "Shaped Dunes",
+		"tier": 10
+	}, {
+		"name": "Courtyard",
+		"tier": 10
+	}, {
+		"name": "Gardens",
+		"tier": 10
+	}, {
+		"name": "Underground River",
+		"tier": 10
+	}, {
+		"name": "Colonnade",
+		"tier": 10
+	}, {
+		"name": "Shaped Barrows",
+		"tier": 10
+	}, {
+		"name": "Malformation",
+		"tier": 10
+	}, {
+		"name": "Shaped Peninsula",
+		"tier": 10
+	}, {
+		"name": "Shaped Toxic Sewer",
+		"tier": 10
+	}, {
+		"name": "Shaped Ancient City",
+		"tier": 10
+	}, {
+		"name": "Shaped Sulphur Vents",
+		"tier": 10
+	}, {
+		"name": "Shaped Spider Lair",
+		"tier": 10
+	}, {
+		"name": "Shaped Conservatory",
+		"tier": 10
+	}, {
+		"name": "Shaped Pit",
+		"tier": 10
+	}, {
+		"name": "Shaped Burial Chambers",
+		"tier": 10
+	}, {
+		"name": "Chateau",
+		"tier": 10
+	}, {
+		"name": "Volcano",
+		"tier": 10
+	}, {
+		"name": "Shaped Tower",
+		"tier": 10
+	}
+]

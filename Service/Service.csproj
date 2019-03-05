@@ -50,9 +50,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AreaMatcher.cs" />
     <Compile Include="Config.cs" />
     <Compile Include="LogParser.cs" />
     <Compile Include="ProcMon.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="RPClient.cs" />
     <Compile Include="Service.cs" />
     <Compile Include="Settings.cs" />
@@ -68,6 +74,19 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Resources\maps_all.json" />
+    <None Include="Resources\maps_red.json" />
+    <None Include="Resources\maps_white.json" />
+    <None Include="Resources\maps_yellow.json" />
+    <None Include="Resources\quest.json" />
+    <None Include="Resources\towns.json" />
+    <None Include="Resources\vaal.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
