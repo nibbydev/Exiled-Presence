@@ -10,7 +10,8 @@ game events on your Discord profile.
 
 ## Usage
 
-Download the application from [releases](https://github.com/siegrest/Exiled-Presence/releases). It should work out-of-the-box.
+Download the application from [releases](https://github.com/siegrest/Exiled-Presence/releases). 
+It should work out-of-the-box.
 
 Upon running the executable it will start searching for the game process. 
 Once found, it will attempt to parse the game's log file. Note that if the log file
@@ -31,3 +32,9 @@ input `X` to hide the console, the service will remain running in the tray.
 
 Load up the game and log in, you should see your Discord presence update momentarily.
 
+## Addendum
+
+This project was based on [PathOfExileRPC](https://github.com/xKynn/PathOfExileRPC) 
+RPC client written in Python. 
+Also, shoutouts to [poe-log-monitor](https://github.com/viktorgullmark/poe-log-monitor)
+for providing examples of log messages and possible ways to parse them.
