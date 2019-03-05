@@ -1,0 +1,860 @@
+[
+  {
+    "name": "The Twilight Strand",
+    "act": 1,
+    "lvl": 1,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Coast",
+    "act": 1,
+    "lvl": 2,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Tidal Island",
+    "act": 1,
+    "lvl": 3,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Mud Flats",
+    "act": 1,
+    "lvl": 4,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Fetid Pool",
+    "act": 1,
+    "lvl": 5,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Submerged Passage",
+    "act": 1,
+    "lvl": 5,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Flooded Depths",
+    "act": 1,
+    "lvl": 6,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Ledge",
+    "act": 1,
+    "lvl": 6,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Climb",
+    "act": 1,
+    "lvl": 7,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Lower Prison",
+    "act": 1,
+    "lvl": 8,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Upper Prison",
+    "act": 1,
+    "lvl": 9,
+    "key": "area_quest"
+  },
+  {
+    "name": "Prisoner's Gate",
+    "act": 1,
+    "lvl": 10,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Ship Graveyard",
+    "act": 1,
+    "lvl": 11,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Ship Graveyard Cave",
+    "act": 1,
+    "lvl": 12,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Cavern of Wrath",
+    "act": 1,
+    "lvl": 12,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Cavern of Anger",
+    "act": 1,
+    "lvl": 13,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Southern Forest",
+    "act": 2,
+    "lvl": 13,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Old Fields",
+    "act": 2,
+    "lvl": 14,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Den",
+    "act": 2,
+    "lvl": 15,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Riverways",
+    "act": 2,
+    "lvl": 15,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Crossroads",
+    "act": 2,
+    "lvl": 15,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Chamber of Sins Level 1",
+    "act": 2,
+    "lvl": 15,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Chamber of Sins Level 2",
+    "act": 2,
+    "lvl": 16,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Broken Bridge",
+    "act": 2,
+    "lvl": 16,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Fellshrine Ruins",
+    "act": 2,
+    "lvl": 16,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Crypt Level 1",
+    "act": 2,
+    "lvl": 17,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Crypt Level 2",
+    "act": 2,
+    "lvl": 18,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Western Forest",
+    "act": 2,
+    "lvl": 17,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Weaver's Chambers",
+    "act": 2,
+    "lvl": 18,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Wetlands",
+    "act": 2,
+    "lvl": 19,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Vaal Ruins",
+    "act": 2,
+    "lvl": 20,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Northern Forest",
+    "act": 2,
+    "lvl": 21,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Dread Thicket",
+    "act": 2,
+    "lvl": 21,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Caverns",
+    "act": 2,
+    "lvl": 22,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Ancient Pyramid",
+    "act": 2,
+    "lvl": 23,
+    "key": "area_quest"
+  },
+  {
+    "name": "The City of Sarn",
+    "act": 3,
+    "lvl": 23,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Slums",
+    "act": 3,
+    "lvl": 24,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Crematorium",
+    "act": 3,
+    "lvl": 25,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Sewers",
+    "act": 3,
+    "lvl": 26,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Marketplace",
+    "act": 3,
+    "lvl": 26,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Catacombs",
+    "act": 3,
+    "lvl": 27,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Battlefront",
+    "act": 3,
+    "lvl": 27,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Solaris Temple Level 1",
+    "act": 3,
+    "lvl": 27,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Solaris Temple Level 2",
+    "act": 3,
+    "lvl": 28,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Docks",
+    "act": 3,
+    "lvl": 29,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Ebony Barracks",
+    "act": 3,
+    "lvl": 29,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Lunaris Temple Level 1",
+    "act": 3,
+    "lvl": 29,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Lunaris Temple Level 2",
+    "act": 3,
+    "lvl": 30,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Imperial Garden",
+    "act": 3,
+    "lvl": 30,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Library",
+    "act": 3,
+    "lvl": 30,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Archives",
+    "act": 3,
+    "lvl": 31,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Hedge Maze",
+    "act": 3,
+    "lvl": 31,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Sceptre of God",
+    "act": 3,
+    "lvl": 32,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Upper Sceptre of God",
+    "act": 3,
+    "lvl": 33,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Aqueduct",
+    "act": 4,
+    "lvl": 33,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Dried Lake",
+    "act": 4,
+    "lvl": 34,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Mines Level 1",
+    "act": 4,
+    "lvl": 34,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Mines Level 2",
+    "act": 4,
+    "lvl": 35,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Crystal Veins",
+    "act": 4,
+    "lvl": 36,
+    "key": "area_quest"
+  },
+  {
+    "name": "Daresso's Dream",
+    "act": 4,
+    "lvl": 37,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Grand Arena",
+    "act": 4,
+    "lvl": 38,
+    "key": "area_quest"
+  },
+  {
+    "name": "Kaom's Dream",
+    "act": 4,
+    "lvl": 37,
+    "key": "area_quest"
+  },
+  {
+    "name": "Kaom's Stronghold",
+    "act": 4,
+    "lvl": 38,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Belly of the Beast Level 1",
+    "act": 4,
+    "lvl": 38,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Belly of the Beast Level 2",
+    "act": 4,
+    "lvl": 39,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Harvest",
+    "act": 4,
+    "lvl": 40,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Ascent",
+    "act": 4,
+    "lvl": 40,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Slave Pens",
+    "act": 5,
+    "lvl": 41,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Control Blocks",
+    "act": 5,
+    "lvl": 41,
+    "key": "area_quest"
+  },
+  {
+    "name": "Oriath Square",
+    "act": 5,
+    "lvl": 42,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Templar Courts",
+    "act": 5,
+    "lvl": 42,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Chamber of Innocence",
+    "act": 5,
+    "lvl": 43,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Torched Courts",
+    "act": 5,
+    "lvl": 44,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Ruined Square",
+    "act": 5,
+    "lvl": 44,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Ossuary",
+    "act": 5,
+    "lvl": 44,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Reliquary",
+    "act": 5,
+    "lvl": 44,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Cathedral Rooftop",
+    "act": 5,
+    "lvl": 45,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Twilight Strand",
+    "act": 6,
+    "lvl": 45,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Coast",
+    "act": 6,
+    "lvl": 45,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Tidal Island",
+    "act": 6,
+    "lvl": 45,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Mud Flats",
+    "act": 6,
+    "lvl": 46,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Karui Fortress",
+    "act": 6,
+    "lvl": 46,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Ridge",
+    "act": 6,
+    "lvl": 46,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Lower Prison",
+    "act": 6,
+    "lvl": 47,
+    "key": "area_quest"
+  },
+  {
+    "name": "Shavronne's Tower",
+    "act": 6,
+    "lvl": 47,
+    "key": "area_quest"
+  },
+  {
+    "name": "Prisoner's Gate",
+    "act": 6,
+    "lvl": 47,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Western Forest",
+    "act": 6,
+    "lvl": 48,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Riverways",
+    "act": 6,
+    "lvl": 48,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Wetlands",
+    "act": 6,
+    "lvl": 48,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Southern Forest",
+    "act": 6,
+    "lvl": 49,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Cavern of Anger",
+    "act": 6,
+    "lvl": 49,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Beacon",
+    "act": 6,
+    "lvl": 49,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Brine King's Reef",
+    "act": 6,
+    "lvl": 50,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Broken Bridge",
+    "act": 7,
+    "lvl": 50,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Crossroads",
+    "act": 7,
+    "lvl": 51,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Fellshrine Ruins",
+    "act": 7,
+    "lvl": 51,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Crypt",
+    "act": 7,
+    "lvl": 51,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Chamber of Sins Level 1",
+    "act": 7,
+    "lvl": 52,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Chamber of Sins Level 2",
+    "act": 7,
+    "lvl": 52,
+    "key": "area_quest"
+  },
+  {
+    "name": "Maligaro's Sanctum",
+    "act": 7,
+    "lvl": 52,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Den",
+    "act": 7,
+    "lvl": 53,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Ashen Fields",
+    "act": 7,
+    "lvl": 53,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Northern Forest",
+    "act": 7,
+    "lvl": 53,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Dread Thicket",
+    "act": 7,
+    "lvl": 53,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Causeway",
+    "act": 7,
+    "lvl": 54,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Vaal City",
+    "act": 7,
+    "lvl": 54,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Temple of Decay Level 1",
+    "act": 7,
+    "lvl": 54,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Temple of Decay Level 2",
+    "act": 7,
+    "lvl": 55,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Sarn Ramparts",
+    "act": 8,
+    "lvl": 55,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Toxic Conduits",
+    "act": 8,
+    "lvl": 56,
+    "key": "area_quest"
+  },
+  {
+    "name": "Doedre's Cesspool",
+    "act": 8,
+    "lvl": 56,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Grand Promenade",
+    "act": 8,
+    "lvl": 56,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Quay",
+    "act": 8,
+    "lvl": 57,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Grain Gate",
+    "act": 8,
+    "lvl": 57,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Imperial Fields",
+    "act": 8,
+    "lvl": 58,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Solaris Temple Level 1",
+    "act": 8,
+    "lvl": 59,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Solaris Temple Level 2",
+    "act": 8,
+    "lvl": 59,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Solaris Concourse",
+    "act": 8,
+    "lvl": 58,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Bath House",
+    "act": 8,
+    "lvl": 57,
+    "key": "area_quest"
+  },
+  {
+    "name": "The High Gardens",
+    "act": 8,
+    "lvl": 58,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Lunaris Concourse",
+    "act": 8,
+    "lvl": 58,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Lunaris Temple Level 1",
+    "act": 8,
+    "lvl": 59,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Lunaris Temple Level 2",
+    "act": 8,
+    "lvl": 59,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Harbour Bridge",
+    "act": 8,
+    "lvl": 60,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Blood Aqueduct",
+    "act": 9,
+    "lvl": 61,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Descent",
+    "act": 9,
+    "lvl": 61,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Vastiri Desert",
+    "act": 9,
+    "lvl": 61,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Oasis",
+    "act": 9,
+    "lvl": 61,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Foothills",
+    "act": 9,
+    "lvl": 62,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Boiling Lake",
+    "act": 9,
+    "lvl": 62,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Tunnel",
+    "act": 9,
+    "lvl": 62,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Quarry",
+    "act": 9,
+    "lvl": 63,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Refinery",
+    "act": 9,
+    "lvl": 63,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Belly of the Beast",
+    "act": 9,
+    "lvl": 63,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Rotting Core",
+    "act": 9,
+    "lvl": 64,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Cathedral Rooftop",
+    "act": 10,
+    "lvl": 64,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Ravaged Square",
+    "act": 10,
+    "lvl": 64,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Torched Courts",
+    "act": 10,
+    "lvl": 65,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Desecrated Chambers",
+    "act": 10,
+    "lvl": 65,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Ossuary",
+    "act": 10,
+    "lvl": 67,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Reliquary",
+    "act": 10,
+    "lvl": 67,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Canals",
+    "act": 10,
+    "lvl": 66,
+    "key": "area_quest"
+  },
+  {
+    "name": "The Feeding Trough",
+    "act": 10,
+    "lvl": 67,
+    "key": "area_quest"
+  }
+]

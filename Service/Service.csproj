@@ -74,11 +74,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Resources\maps_all.json" />
     <None Include="Resources\maps_red.json" />
     <None Include="Resources\maps_white.json" />
     <None Include="Resources\maps_yellow.json" />
-    <None Include="Resources\quest.json" />
+    <None Include="Resources\quests.json" />
     <None Include="Resources\towns.json" />
     <None Include="Resources\vaal.json" />
   </ItemGroup>
@@ -87,6 +86,11 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\lab.json" />
+    <Content Include="Resources\maps_unique.json" />
+    <Content Include="Resources\special.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

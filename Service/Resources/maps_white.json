@@ -1,408 +1,677 @@
 [
-	{
-		"name": "Flooded Mine",
-		"tier": 1
-	}, {
-		"name": "Atoll",
-		"tier": 1
-	}, {
-		"name": "Channel",
-		"tier": 1
-	}, {
-		"name": "Ramparts",
-		"tier": 1
-	}, {
-		"name": "Graveyard",
-		"tier": 1
-	}, {
-		"name": "Desert",
-		"tier": 1
-	}, {
-		"name": "Lookout",
-		"tier": 1
-	}, {
-		"name": "Dungeon",
-		"tier": 1
-	}, {
-		"name": "Cursed Crypt",
-		"tier": 1
-	}, {
-		"name": "Dunes",
-		"tier": 1
-	}, {
-		"name": "Pit",
-		"tier": 1
-	}, {
-		"name": "Overgrown Ruin",
-		"tier": 1
-	}, {
-		"name": "Orchard",
-		"tier": 1
-	}, {
-		"name": "Tropical Island",
-		"tier": 1
-	}, {
-		"name": "Arid Lake",
-		"tier": 1
-	}, {
-		"name": "Grotto",
-		"tier": 1
-	}, {
-		"name": "Beach",
-		"tier": 1
-	}, {
-		"name": "Arcade",
-		"tier": 1
-	}, {
-		"name": "Crystal Ore",
-		"tier": 1
-	}, {
-		"name": "Jungle Valley",
-		"tier": 1
-	}, {
-		"name": "Dungeon",
-		"tier": 2
-	}, {
-		"name": "Thicket",
-		"tier": 2
-	}, {
-		"name": "Iceberg",
-		"tier": 2
-	}, {
-		"name": "Arid Lake",
-		"tier": 2
-	}, {
-		"name": "Pen",
-		"tier": 2
-	}, {
-		"name": "Armoury",
-		"tier": 2
-	}, {
-		"name": "Flooded Mine",
-		"tier": 2
-	}, {
-		"name": "Alleyways",
-		"tier": 2
-	}, {
-		"name": "Marshes",
-		"tier": 2
-	}, {
-		"name": "Cemetery",
-		"tier": 2
-	}, {
-		"name": "Arcade",
-		"tier": 2
-	}, {
-		"name": "Atoll",
-		"tier": 2
-	}, {
-		"name": "Desert",
-		"tier": 2
-	}, {
-		"name": "Toxic Sewer",
-		"tier": 2
-	}, {
-		"name": "Ghetto",
-		"tier": 2
-	}, {
-		"name": "Channel",
-		"tier": 2
-	}, {
-		"name": "Beach",
-		"tier": 2
-	}, {
-		"name": "Factory",
-		"tier": 2
-	}, {
-		"name": "Wharf",
-		"tier": 2
-	}, {
-		"name": "Desert Spring",
-		"tier": 2
-	}, {
-		"name": "Arsenal",
-		"tier": 2
-	}, {
-		"name": "Cage",
-		"tier": 3
-	}, {
-		"name": "Grotto",
-		"tier": 3
-	}, {
-		"name": "Cursed Crypt",
-		"tier": 3
-	}, {
-		"name": "Fungal Hollow",
-		"tier": 3
-	}, {
-		"name": "Desert",
-		"tier": 3
-	}, {
-		"name": "Bone Crypt",
-		"tier": 3
-	}, {
-		"name": "Graveyard",
-		"tier": 3
-	}, {
-		"name": "Shipyard",
-		"tier": 3
-	}, {
-		"name": "Excavation",
-		"tier": 3
-	}, {
-		"name": "Peninsula",
-		"tier": 3
-	}, {
-		"name": "Cells",
-		"tier": 3
-	}, {
-		"name": "Leyline",
-		"tier": 3
-	}, {
-		"name": "Vaal Pyramid",
-		"tier": 3
-	}, {
-		"name": "Port",
-		"tier": 3
-	}, {
-		"name": "Arcade",
-		"tier": 3
-	}, {
-		"name": "Mud Geyser",
-		"tier": 3
-	}, {
-		"name": "Reef",
-		"tier": 3
-	}, {
-		"name": "Spider Lair",
-		"tier": 3
-	}, {
-		"name": "Museum",
-		"tier": 3
-	}, {
-		"name": "Geode",
-		"tier": 3
-	}, {
-		"name": "Iceberg",
-		"tier": 3
-	}, {
-		"name": "Ghetto",
-		"tier": 3
-	}, {
-		"name": "Burial Chambers",
-		"tier": 3
-	}, {
-		"name": "Channel",
-		"tier": 3
-	}, {
-		"name": "Flooded Mine",
-		"tier": 3
-	}, {
-		"name": "Arid Lake",
-		"tier": 3
-	}, {
-		"name": "Springs",
-		"tier": 3
-	}, {
-		"name": "Marshes",
-		"tier": 3
-	}, {
-		"name": "Toxic Sewer",
-		"tier": 3
-	}, {
-		"name": "Barrows",
-		"tier": 4
-	}, {
-		"name": "Beach",
-		"tier": 4
-	}, {
-		"name": "Crater",
-		"tier": 4
-	}, {
-		"name": "Lighthouse",
-		"tier": 4
-	}, {
-		"name": "Glacier",
-		"tier": 4
-	}, {
-		"name": "Spider Lair",
-		"tier": 4
-	}, {
-		"name": "Strand",
-		"tier": 4
-	}, {
-		"name": "Courtyard",
-		"tier": 4
-	}, {
-		"name": "Lookout",
-		"tier": 4
-	}, {
-		"name": "Marshes",
-		"tier": 4
-	}, {
-		"name": "Chateau",
-		"tier": 4
-	}, {
-		"name": "Courthouse",
-		"tier": 4
-	}, {
-		"name": "Relic Chambers",
-		"tier": 4
-	}, {
-		"name": "Canyon",
-		"tier": 4
-	}, {
-		"name": "Overgrown Shrine",
-		"tier": 4
-	}, {
-		"name": "Shore",
-		"tier": 4
-	}, {
-		"name": "Promenade",
-		"tier": 4
-	}, {
-		"name": "Spider Forest",
-		"tier": 4
-	}, {
-		"name": "City Square",
-		"tier": 4
-	}, {
-		"name": "Grotto",
-		"tier": 4
-	}, {
-		"name": "Volcano",
-		"tier": 4
-	}, {
-		"name": "Bone Crypt",
-		"tier": 4
-	}, {
-		"name": "Villa",
-		"tier": 4
-	}, {
-		"name": "Phantasmagoria",
-		"tier": 4
-	}, {
-		"name": "Graveyard",
-		"tier": 4
-	}, {
-		"name": "Dungeon",
-		"tier": 4
-	}, {
-		"name": "Arena",
-		"tier": 4
-	}, {
-		"name": "Acid Caverns",
-		"tier": 4
-	}, {
-		"name": "Academy",
-		"tier": 4
-	}, {
-		"name": "Waste Pool",
-		"tier": 4
-	}, {
-		"name": "Gorge",
-		"tier": 4
-	}, {
-		"name": "Acid Lakes",
-		"tier": 4
-	}, {
-		"name": "Crystal Ore",
-		"tier": 4
-	}, {
-		"name": "Port",
-		"tier": 5
-	}, {
-		"name": "Mausoleum",
-		"tier": 5
-	}, {
-		"name": "City Square",
-		"tier": 5
-	}, {
-		"name": "Vaal Pyramid",
-		"tier": 5
-	}, {
-		"name": "Residence",
-		"tier": 5
-	}, {
-		"name": "Jungle Valley",
-		"tier": 5
-	}, {
-		"name": "Alleyways",
-		"tier": 5
-	}, {
-		"name": "Maze",
-		"tier": 5
-	}, {
-		"name": "Gardens",
-		"tier": 5
-	}, {
-		"name": "Underground Sea",
-		"tier": 5
-	}, {
-		"name": "Haunted Mansion",
-		"tier": 5
-	}, {
-		"name": "Ivory Temple",
-		"tier": 5
-	}, {
-		"name": "Barrows",
-		"tier": 5
-	}, {
-		"name": "Spider Lair",
-		"tier": 5
-	}, {
-		"name": "Channel",
-		"tier": 5
-	}, {
-		"name": "Ancient City",
-		"tier": 5
-	}, {
-		"name": "Toxic Sewer",
-		"tier": 5
-	}, {
-		"name": "Sulphur Vents",
-		"tier": 5
-	}, {
-		"name": "Peninsula",
-		"tier": 5
-	}, {
-		"name": "Mesa",
-		"tier": 5
-	}, {
-		"name": "Bog",
-		"tier": 5
-	}, {
-		"name": "Coves",
-		"tier": 5
-	}, {
-		"name": "Tower",
-		"tier": 5
-	}, {
-		"name": "Burial Chambers",
-		"tier": 5
-	}, {
-		"name": "Villa",
-		"tier": 5
-	}, {
-		"name": "Conservatory",
-		"tier": 5
-	}, {
-		"name": "Primordial Pool",
-		"tier": 5
-	}, {
-		"name": "Dunes",
-		"tier": 5
-	}, {
-		"name": "Underground River",
-		"tier": 5
-	}, {
-		"name": "Graveyard",
-		"tier": 5
-	}, {
-		"name": "Pier",
-		"tier": 5
-	}, {
-		"name": "Pit",
-		"tier": 5
-	}
+  {
+    "name": "Flooded Mine",
+    "tier": 1,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Atoll",
+    "tier": 1,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Channel",
+    "tier": 1,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Ramparts",
+    "tier": 1,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Graveyard",
+    "tier": 1,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Desert",
+    "tier": 1,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Lookout",
+    "tier": 1,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Dungeon",
+    "tier": 1,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Cursed Crypt",
+    "tier": 1,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Dunes",
+    "tier": 1,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Pit",
+    "tier": 1,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Overgrown Ruin",
+    "tier": 1,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Orchard",
+    "tier": 1,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Tropical Island",
+    "tier": 1,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Arid Lake",
+    "tier": 1,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Grotto",
+    "tier": 1,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Beach",
+    "tier": 1,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Arcade",
+    "tier": 1,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Crystal Ore",
+    "tier": 1,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Jungle Valley",
+    "tier": 1,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Dungeon",
+    "tier": 2,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Thicket",
+    "tier": 2,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Iceberg",
+    "tier": 2,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Arid Lake",
+    "tier": 2,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Pen",
+    "tier": 2,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Armoury",
+    "tier": 2,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Flooded Mine",
+    "tier": 2,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Alleyways",
+    "tier": 2,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Marshes",
+    "tier": 2,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Cemetery",
+    "tier": 2,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Arcade",
+    "tier": 2,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Atoll",
+    "tier": 2,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Desert",
+    "tier": 2,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Toxic Sewer",
+    "tier": 2,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Ghetto",
+    "tier": 2,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Channel",
+    "tier": 2,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Beach",
+    "tier": 2,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Factory",
+    "tier": 2,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Wharf",
+    "tier": 2,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Desert Spring",
+    "tier": 2,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Arsenal",
+    "tier": 2,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Cage",
+    "tier": 3,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Grotto",
+    "tier": 3,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Cursed Crypt",
+    "tier": 3,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Fungal Hollow",
+    "tier": 3,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Desert",
+    "tier": 3,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Bone Crypt",
+    "tier": 3,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Graveyard",
+    "tier": 3,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Shipyard",
+    "tier": 3,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Excavation",
+    "tier": 3,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Peninsula",
+    "tier": 3,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Cells",
+    "tier": 3,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Leyline",
+    "tier": 3,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Vaal Pyramid",
+    "tier": 3,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Port",
+    "tier": 3,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Arcade",
+    "tier": 3,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Mud Geyser",
+    "tier": 3,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Reef",
+    "tier": 3,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Spider Lair",
+    "tier": 3,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Museum",
+    "tier": 3,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Geode",
+    "tier": 3,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Iceberg",
+    "tier": 3,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Ghetto",
+    "tier": 3,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Burial Chambers",
+    "tier": 3,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Channel",
+    "tier": 3,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Flooded Mine",
+    "tier": 3,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Arid Lake",
+    "tier": 3,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Springs",
+    "tier": 3,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Marshes",
+    "tier": 3,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Toxic Sewer",
+    "tier": 3,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Barrows",
+    "tier": 4,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Beach",
+    "tier": 4,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Crater",
+    "tier": 4,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Lighthouse",
+    "tier": 4,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Glacier",
+    "tier": 4,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Spider Lair",
+    "tier": 4,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Strand",
+    "tier": 4,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Courtyard",
+    "tier": 4,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Lookout",
+    "tier": 4,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Marshes",
+    "tier": 4,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Chateau",
+    "tier": 4,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Courthouse",
+    "tier": 4,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Relic Chambers",
+    "tier": 4,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Canyon",
+    "tier": 4,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Overgrown Shrine",
+    "tier": 4,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Shore",
+    "tier": 4,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Promenade",
+    "tier": 4,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Spider Forest",
+    "tier": 4,
+    "key": "area_map_white"
+  },
+  {
+    "name": "City Square",
+    "tier": 4,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Grotto",
+    "tier": 4,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Volcano",
+    "tier": 4,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Bone Crypt",
+    "tier": 4,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Villa",
+    "tier": 4,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Phantasmagoria",
+    "tier": 4,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Graveyard",
+    "tier": 4,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Dungeon",
+    "tier": 4,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Arena",
+    "tier": 4,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Acid Caverns",
+    "tier": 4,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Academy",
+    "tier": 4,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Waste Pool",
+    "tier": 4,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Gorge",
+    "tier": 4,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Acid Lakes",
+    "tier": 4,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Crystal Ore",
+    "tier": 4,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Port",
+    "tier": 5,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Mausoleum",
+    "tier": 5,
+    "key": "area_map_white"
+  },
+  {
+    "name": "City Square",
+    "tier": 5,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Vaal Pyramid",
+    "tier": 5,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Residence",
+    "tier": 5,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Jungle Valley",
+    "tier": 5,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Alleyways",
+    "tier": 5,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Maze",
+    "tier": 5,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Gardens",
+    "tier": 5,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Underground Sea",
+    "tier": 5,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Haunted Mansion",
+    "tier": 5,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Ivory Temple",
+    "tier": 5,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Barrows",
+    "tier": 5,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Spider Lair",
+    "tier": 5,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Channel",
+    "tier": 5,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Ancient City",
+    "tier": 5,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Toxic Sewer",
+    "tier": 5,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Sulphur Vents",
+    "tier": 5,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Peninsula",
+    "tier": 5,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Mesa",
+    "tier": 5,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Bog",
+    "tier": 5,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Coves",
+    "tier": 5,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Tower",
+    "tier": 5,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Burial Chambers",
+    "tier": 5,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Villa",
+    "tier": 5,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Conservatory",
+    "tier": 5,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Primordial Pool",
+    "tier": 5,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Dunes",
+    "tier": 5,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Underground River",
+    "tier": 5,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Graveyard",
+    "tier": 5,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Pier",
+    "tier": 5,
+    "key": "area_map_white"
+  },
+  {
+    "name": "Pit",
+    "tier": 5,
+    "key": "area_map_white"
+  }
 ]

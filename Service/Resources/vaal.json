@@ -1,150 +1,247 @@
 [
-	{
-		"name": "Clouded Ridge",
-		"act": 1
-	}, {
-		"name": "Concealed Cavity",
-		"act": 1
-	}, {
-		"name": "Forgotten Oubliette",
-		"act": 1
-	}, {
-		"name": "Remote Gulch",
-		"act": 1
-	}, {
-		"name": "Strange Sinkhole",
-		"act": 1
-	}, {
-		"name": "Covered-up Hollow",
-		"act": 2
-	}, {
-		"name": "Entombed Alcove",
-		"act": 2
-	}, {
-		"name": "Forbidden Chamber",
-		"act": 2
-	}, {
-		"name": "Hidden Patch",
-		"act": 2
-	}, {
-		"name": "Mystical Clearing",
-		"act": 2
-	}, {
-		"name": "Narrow Ravine",
-		"act": 2
-	}, {
-		"name": "Secluded Copse",
-		"act": 2
-	}, {
-		"name": "Secret Laboratory",
-		"act": 2
-	}, {
-		"name": "Arcane Chambers",
-		"act": 3
-	}, {
-		"name": "Blind Alley",
-		"act": 3
-	}, {
-		"name": "Disused Furnace",
-		"act": 3
-	}, {
-		"name": "Entombed Chamber",
-		"act": 3
-	}, {
-		"name": "Inner Grounds",
-		"act": 3
-	}, {
-		"name": "Neglected Cellar",
-		"act": 3
-	}, {
-		"name": "Quarantined Quarters",
-		"act": 3
-	}, {
-		"name": "Restricted Gallery",
-		"act": 3
-	}, {
-		"name": "Sacred Chambers",
-		"act": 3
-	}, {
-		"name": "Sealed Corridors",
-		"act": 3
-	}, {
-		"name": "Stagnant Canal",
-		"act": 3
-	}, {
-		"name": "Abandoned Dam",
-		"act": 4
-	}, {
-		"name": "Ancient Catacomb",
-		"act": 4
-	}, {
-		"name": "Desolate Track",
-		"act": 4
-	}, {
-		"name": "Forgotten Conduit",
-		"act": 4
-	}, {
-		"name": "Haunted Mineshaft",
-		"act": 4
-	}, {
-		"name": "Cremated Archives",
-		"act": 5
-	}, {
-		"name": "Deathly Chambers",
-		"act": 5
-	}, {
-		"name": "Forbidden Archives",
-		"act": 5
-	}, {
-		"name": "Reclaimed Barracks",
-		"act": 5
-	}, {
-		"name": "Restricted Collection",
-		"act": 5
-	}, {
-		"name": "Sealed Basement",
-		"act": 5
-	}, {
-		"name": "Secluded Canal",
-		"act": 5
-	}, {
-		"name": "Side Chapel",
-		"act": 5
-	}, {
-		"name": "Clouded Ledge",
-		"act": 6
-	}, {
-		"name": "Radiant Pools",
-		"act": 6
-	}, {
-		"name": "Flooded Complex",
-		"act": 7
-	}, {
-		"name": "Forbidden Shrine",
-		"act": 7
-	}, {
-		"name": "Sealed Repository",
-		"act": 7
-	}, {
-		"name": "Concealed Caldarium",
-		"act": 8
-	}, {
-		"name": "Evacuated Quarter",
-		"act": 8
-	}, {
-		"name": "Moonlit Chambers",
-		"act": 8
-	}, {
-		"name": "Desolate Isle",
-		"act": 9
-	}, {
-		"name": "Dusty Bluff",
-		"act": 9
-	}, {
-		"name": "Forgotten Gulch",
-		"act": 9
-	}, {
-		"name": "Shifting Sands",
-		"act": 9
-	}
+  {
+    "name": "Clouded Ridge",
+    "act": 1,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Concealed Cavity",
+    "act": 1,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Forgotten Oubliette",
+    "act": 1,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Remote Gulch",
+    "act": 1,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Strange Sinkhole",
+    "act": 1,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Covered-up Hollow",
+    "act": 2,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Entombed Alcove",
+    "act": 2,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Forbidden Chamber",
+    "act": 2,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Hidden Patch",
+    "act": 2,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Mystical Clearing",
+    "act": 2,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Narrow Ravine",
+    "act": 2,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Secluded Copse",
+    "act": 2,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Secret Laboratory",
+    "act": 2,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Arcane Chambers",
+    "act": 3,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Blind Alley",
+    "act": 3,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Disused Furnace",
+    "act": 3,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Entombed Chamber",
+    "act": 3,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Inner Grounds",
+    "act": 3,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Neglected Cellar",
+    "act": 3,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Quarantined Quarters",
+    "act": 3,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Restricted Gallery",
+    "act": 3,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Sacred Chambers",
+    "act": 3,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Sealed Corridors",
+    "act": 3,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Stagnant Canal",
+    "act": 3,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Abandoned Dam",
+    "act": 4,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Ancient Catacomb",
+    "act": 4,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Desolate Track",
+    "act": 4,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Forgotten Conduit",
+    "act": 4,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Haunted Mineshaft",
+    "act": 4,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Cremated Archives",
+    "act": 5,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Deathly Chambers",
+    "act": 5,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Forbidden Archives",
+    "act": 5,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Reclaimed Barracks",
+    "act": 5,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Restricted Collection",
+    "act": 5,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Sealed Basement",
+    "act": 5,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Secluded Canal",
+    "act": 5,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Side Chapel",
+    "act": 5,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Clouded Ledge",
+    "act": 6,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Radiant Pools",
+    "act": 6,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Flooded Complex",
+    "act": 7,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Forbidden Shrine",
+    "act": 7,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Sealed Repository",
+    "act": 7,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Concealed Caldarium",
+    "act": 8,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Evacuated Quarter",
+    "act": 8,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Moonlit Chambers",
+    "act": 8,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Desolate Isle",
+    "act": 9,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Dusty Bluff",
+    "act": 9,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Forgotten Gulch",
+    "act": 9,
+    "key": "area_vaal"
+  },
+  {
+    "name": "Shifting Sands",
+    "act": 9,
+    "key": "area_vaal"
+  }
 ]

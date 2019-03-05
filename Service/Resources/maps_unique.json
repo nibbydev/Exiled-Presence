@@ -1,0 +1,82 @@
+[
+  {
+    "name": "Whakawairua Tuahu",
+    "key": "area_map_unique_whakawairua"
+  },
+  {
+    "name": "Maelström of Chaos",
+    "key": "area_map_unique_maelström"
+  },
+  {
+    "name": "Pillars of Arun",
+    "key": "area_map_unique_pillars"
+  },
+  {
+    "name": "Oba's Cursed Trove",
+    "key": "area_map_unique_obas"
+  },
+  {
+    "name": "Poorjoy's Asylum",
+    "key": "area_map_unique_poorjoy"
+  },
+  {
+    "name": "Caer Blaidd, Wolfpack's Den",
+    "key": "area_map_unique_caerblaidd"
+  },
+  {
+    "name": "The Twilight Temple",
+    "key": "area_map_unique_twilighttemple"
+  },
+  {
+    "name": "Mao Kun",
+    "key": "area_map_unique_maokun"
+  },
+  {
+    "name": "Acton's Nightmare",
+    "key": "area_map_unique_actons"
+  },
+  {
+    "name": "Olmec's Sanctum",
+    "key": "area_map_unique_olmecs"
+  },
+  {
+    "name": "The Coward's Trial",
+    "key": "area_map_unique_cowards"
+  },
+  {
+    "name": "Hall of Grandmasters",
+    "key": "area_map_unique_grandmasters"
+  },
+  {
+    "name": "The Putrid Cloister",
+    "key": "area_map_unique_putridcloister"
+  },
+  {
+    "name": "Death and Taxes",
+    "key": "area_map_unique_deathandtaxes"
+  },
+  {
+    "name": "The Vinktar Square",
+    "key": "area_map_unique_vinktar"
+  },
+  {
+    "name": "Hallowed Ground",
+    "key": "area_map_unique_hallowedground"
+  },
+  {
+    "name": "Vaults of Atziri",
+    "key": "area_map_unique_vaultsofatziri"
+  },
+  {
+    "name": "The Perandus Manor",
+    "key": "area_map_unique_perandus"
+  },
+  {
+    "name": "The Beachhead",
+    "key": "area_map_unique_beachhead"
+  },
+  {
+    "name": "Doryani's Machinarium",
+    "key": "area_map_unique_doryanis"
+  }
+]

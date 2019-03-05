@@ -133,16 +133,17 @@ namespace Service {
                 // _charUpdateTimer = new Timer(state => UpdateCharacter(), null, CharacterUpdateDelay, CharacterUpdateDelay);
             }
 
-            AreaMatcher.Match(areaName, out var area, out var artKey);
-            _presence.Assets.SmallImageKey = artKey;
-            _presence.Assets.SmallImageText = $"In {areaName}";
+            if (AreaMatcher.Match(areaName, out var area)) {
+                _presence.Assets.SmallImageKey = area.Key;
+                _presence.Assets.SmallImageText = $"In {areaName}";
 
-            _presence.Timestamps = Timestamps.Now;
-            _presence.State = null;
+                _presence.Timestamps = Timestamps.Now;
+                _presence.State = null;
 
-            _lastAreaChange = DateTime.UtcNow;
-            _lastStateAreaMsg = _presence.State;
-            _hasUpdate = true;
+                _lastAreaChange = DateTime.UtcNow;
+                _lastStateAreaMsg = _presence.State;
+                _hasUpdate = true;
+            }
         }
 
         /// <summary>

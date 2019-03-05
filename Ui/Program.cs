@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows.Forms;
 using MenuSystem;
 using Service;
@@ -14,7 +13,6 @@ namespace Ui {
         public static void Main() {
             HookMenuSystem();
             Config.LoadConfig();
-            AreaMatcher.LoadStaticData();
 
             try {
                 Application.Run(TrayAppContext);

@@ -1,99 +1,55 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Text.RegularExpressions;
 using Domain;
+using Service.Properties;
 
 namespace Service {
     public static class AreaMatcher {
+        private static readonly Area DefaultArea = new Area {Name = "default", Key = "area_default"};
         private static readonly Regex HideoutRegex = new Regex(@"^(.+) Hideout$");
         private static readonly Regex LabTrialRegex = new Regex("^Trial of [A-Za-z]+ [A-Za-z]+$");
-        private static readonly Regex LabAreaRegex = new Regex("^(Basilica|Domain|Estate|Mansion|Sanitorium|Sepulchre) (Annex|Atrium|Halls|Passage|Walkways|Crossing|Enclosure|Path)$");
-        private static readonly Regex LabRoomRegex = new Regex("^Aspirant['s]{2} (Plaza|Trial)$");
-        
-        private static Dictionary<Area[], string> _artMap;
-        private static Area[] _mapWhite, _mapYellow, _mapRed, _town, _quest, _vaal;
+        private static readonly List<Area[]> AreaData = new List<Area[]>(500);
 
-        public static bool Match(string areaName, out Area area, out string artKey) {
-            // Default values
-            artKey = "area_default";
-            area = null;
-            
-            // Try for an exact area name match against the arrays
-            area = _mapWhite.FirstOrDefault(t => t.Name.Equals(areaName));
-            if (area != null) return _artMap.TryGetValue(_mapWhite, out artKey);
-            area = _mapYellow.FirstOrDefault(t => t.Name.Equals(areaName));
-            if (area != null) return _artMap.TryGetValue(_mapYellow, out artKey);
-            area = _mapRed.FirstOrDefault(t => t.Name.Equals(areaName));
-            if (area != null) return _artMap.TryGetValue(_mapRed, out artKey);
-            area = _town.FirstOrDefault(t => t.Name.Equals(areaName));
-            if (area != null) return _artMap.TryGetValue(_town, out artKey);
-            area = _quest.FirstOrDefault(t => t.Name.Equals(areaName));
-            if (area != null) return _artMap.TryGetValue(_quest, out artKey);
-            area = _vaal.FirstOrDefault(t => t.Name.Equals(areaName));
-            if (area != null) return _artMap.TryGetValue(_vaal, out artKey);
-            
-
-            if (HideoutRegex.IsMatch(areaName)) {
-                artKey = "area_hideout";
-                return true;
-            }
-            
-            if (LabTrialRegex.IsMatch(areaName)) {
-                artKey = "area_trial";
-                return true;
-            }
-            
-            if (LabAreaRegex.IsMatch(areaName) || LabRoomRegex.IsMatch(areaName)) {
-                artKey = "area_lab";
-                return true;
-            }
-
-            if (areaName.Equals("Azurite Mine")) {
-                artKey = "area_delve";
-                return true;
-            }
-            
-            if (areaName.Equals("The Menagerie") || areaName.Equals("Menagerie Caverns")) {
-                artKey = "area_bestiary";
-                return true;
-            }
-            
-            if (areaName.Equals("The Temple of Atzoatl")) {
-                // todo: image
-                return true;
-            }
-
-            return false;
+        /// <summary>
+        /// Load data in from JSON resource files
+        /// </summary>
+        static AreaMatcher() {
+            AreaData.Add(JsonUtility.Deserialize<Area[]>(Encoding.Default.GetString(Resources.MapsWhite)));
+            AreaData.Add(JsonUtility.Deserialize<Area[]>(Encoding.Default.GetString(Resources.MapsYellow)));
+            AreaData.Add(JsonUtility.Deserialize<Area[]>(Encoding.Default.GetString(Resources.MapsRed)));
+            AreaData.Add(JsonUtility.Deserialize<Area[]>(Encoding.Default.GetString(Resources.MapsUnique)));
+            AreaData.Add(JsonUtility.Deserialize<Area[]>(Encoding.Default.GetString(Resources.AreaTown)));
+            AreaData.Add(JsonUtility.Deserialize<Area[]>(Encoding.Default.GetString(Resources.AreaQuest)));
+            AreaData.Add(JsonUtility.Deserialize<Area[]>(Encoding.Default.GetString(Resources.AreaVaal)));
+            AreaData.Add(JsonUtility.Deserialize<Area[]>(Encoding.Default.GetString(Resources.AreaSpecial)));
+            AreaData.Add(JsonUtility.Deserialize<Area[]>(Encoding.Default.GetString(Resources.AreaLab)));
         }
+        
+        /// <summary>
+        /// Attempts to match an area name and find the art key
+        /// </summary>
+        public static bool Match(string areaName, out Area area) {
+            if (HideoutRegex.IsMatch(areaName)) {
+                area = new Area {Name = areaName, Key = "area_hideout"};
+                return true;
+            }
+            
+            // Try for an exact name match against the area data arrays.
+            foreach (var areas in AreaData) {
+                if ((area = areas.FirstOrDefault(t => t.Name.Equals(areaName))) != null) {
+                    return true;
+                }
+            }
 
+            if (LabTrialRegex.IsMatch(areaName)) {
+                area = new Area {Name = areaName, Key = "area_trial"};
+                return true;
+            }
 
-        public static void LoadStaticData() {
-            var tmp = System.Text.Encoding.Default.GetString(Properties.Resources.maps_white);
-            _mapWhite = JsonUtility.Deserialize<Area[]>(tmp);
-            
-            tmp = System.Text.Encoding.Default.GetString(Properties.Resources.maps_yellow);
-            _mapYellow = JsonUtility.Deserialize<Area[]>(tmp);
-            
-            tmp = System.Text.Encoding.Default.GetString(Properties.Resources.maps_red);
-            _mapRed = JsonUtility.Deserialize<Area[]>(tmp);
-
-            tmp = System.Text.Encoding.Default.GetString(Properties.Resources.towns);
-            _town = JsonUtility.Deserialize<Area[]>(tmp);
-            
-            tmp = System.Text.Encoding.Default.GetString(Properties.Resources.quest);
-            _quest = JsonUtility.Deserialize<Area[]>(tmp);
-            
-            tmp = System.Text.Encoding.Default.GetString(Properties.Resources.vaal);
-            _vaal = JsonUtility.Deserialize<Area[]>(tmp);
-            
-            _artMap = new Dictionary<Area[], string> {
-                {_mapWhite, "area_map_white"},
-                {_mapYellow, "area_map_yellow"},
-                {_mapRed, "area_map_red"},
-                {_town, "area_town"},
-                {_quest, "area_quest"},
-                {_vaal, "area_vaal"}
-            };
+            area = DefaultArea;
+            return false;
         }
     }
 }
