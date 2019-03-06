@@ -35,6 +35,6 @@ Load up the game and log in, you should see your Discord presence update momenta
 ## Addendum
 
 This project was based on [PathOfExileRPC](https://github.com/xKynn/PathOfExileRPC) 
-RPC client written in Python. 
-Also, shoutouts to [poe-log-monitor](https://github.com/viktorgullmark/poe-log-monitor)
-for providing examples of log messages and possible ways to parse them.
+client written in Python. 
+Also, shoutouts to the guys at [poe-log-monitor](https://github.com/viktorgullmark/poe-log-monitor)
+for providing a list of up to date areas and map tiers.
