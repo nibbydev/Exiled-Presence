@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Chayula's Domain",
+    "key": "area_map_fragment_chayulas_domain"
+  },
+  {
+    "name": "Esh's Domain",
+    "key": "area_map_fragment_eshs_domain"
+  },
+  {
+    "name": "Tul's Domain",
+    "key": "area_map_fragment_tuls_domain"
+  },
+  {
+    "name": "Uul-Netol's Domain",
+    "key": "area_map_fragment_uulnetols_domain"
+  },
+  {
+    "name": "Xoph's Domain",
+    "key": "area_map_fragment_xophs_domain"
+  },
+  {
+    "name": "The Alluring Abyss",
+    "key": "area_map_fragment_the_alluring_abyss"
+  },
+  {
+    "name": "The Apex of Sacrifice",
+    "key": "area_map_fragment_the_apex_of_sacrifice"
+  },
+  {
+    "name": "The Pale Court",
+    "key": "area_map_fragment_the_pale_court"
+  }
+]

@@ -1,82 +1,82 @@
 [
   {
     "name": "Whakawairua Tuahu",
-    "key": "area_map_unique_whakawairua"
+    "key": "area_map_unique_whakawairua_tuahu"
   },
   {
     "name": "Maelström of Chaos",
-    "key": "area_map_unique_maelström"
+    "key": "area_map_unique_maelstrom_of_chaos"
   },
   {
     "name": "Pillars of Arun",
-    "key": "area_map_unique_pillars"
+    "key": "area_map_unique_pillars_of_arun"
   },
   {
     "name": "Oba's Cursed Trove",
-    "key": "area_map_unique_obas"
+    "key": "area_map_unique_obas_cursed_trove"
   },
   {
     "name": "Poorjoy's Asylum",
-    "key": "area_map_unique_poorjoy"
+    "key": "area_map_unique_poorjoys_asylum"
   },
   {
     "name": "Caer Blaidd, Wolfpack's Den",
-    "key": "area_map_unique_caerblaidd"
+    "key": "area_map_unique_caer_blaidd_wolfpacks_den"
   },
   {
     "name": "The Twilight Temple",
-    "key": "area_map_unique_twilighttemple"
+    "key": "area_map_unique_the_twilight_temple"
   },
   {
     "name": "Mao Kun",
-    "key": "area_map_unique_maokun"
+    "key": "area_map_unique_mao_kun"
   },
   {
     "name": "Acton's Nightmare",
-    "key": "area_map_unique_actons"
+    "key": "area_map_unique_actons_nightmare"
   },
   {
     "name": "Olmec's Sanctum",
-    "key": "area_map_unique_olmecs"
+    "key": "area_map_unique_olmecs_sanctum"
   },
   {
     "name": "The Coward's Trial",
-    "key": "area_map_unique_cowards"
+    "key": "area_map_unique_the_cowards_trial"
   },
   {
     "name": "Hall of Grandmasters",
-    "key": "area_map_unique_grandmasters"
+    "key": "area_map_unique_hall_of_grandmasters"
   },
   {
     "name": "The Putrid Cloister",
-    "key": "area_map_unique_putridcloister"
+    "key": "area_map_unique_the_putrid_cloister"
   },
   {
     "name": "Death and Taxes",
-    "key": "area_map_unique_deathandtaxes"
+    "key": "area_map_unique_death_and_taxes"
   },
   {
     "name": "The Vinktar Square",
-    "key": "area_map_unique_vinktar"
+    "key": "area_map_unique_the_vinktar_square"
   },
   {
     "name": "Hallowed Ground",
-    "key": "area_map_unique_hallowedground"
+    "key": "area_map_unique_hallowed_ground"
   },
   {
     "name": "Vaults of Atziri",
-    "key": "area_map_unique_vaultsofatziri"
+    "key": "area_map_unique_vaults_of_atziri"
   },
   {
     "name": "The Perandus Manor",
-    "key": "area_map_unique_perandus"
+    "key": "area_map_unique_the_perandus_manor"
   },
   {
     "name": "The Beachhead",
-    "key": "area_map_unique_beachhead"
+    "key": "area_map_unique_the_beachhead"
   },
   {
     "name": "Doryani's Machinarium",
-    "key": "area_map_unique_doryanis"
+    "key": "area_map_unique_doryanis_machinarium"
   }
 ]

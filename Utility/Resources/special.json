@@ -13,42 +13,42 @@
   },
   {
     "name": "The Temple of Atzoatl",
-    "key": null
+    "key": "area_incursion"
   },
   {
     "name": "The Shaper's Realm",
-    "key": null
+    "key": "area_shaper"
   },
   {
     "name": "Esh's Domain",
-    "key": null
+    "key": "area_map_fragment_eshs_domain"
   },
   {
     "name": "Tul's Domain",
-    "key": null
+    "key": "area_map_fragment_tuls_domain"
   },
   {
     "name": "Xoph's Domain",
-    "key": null
+    "key": "area_map_fragment_xophs_domain"
   },
   {
     "name": "The Apex of Sacrifice",
-    "key": null
+    "key": "area_map_fragment_the_apex_of_sacrifice"
   },
   {
     "name": "The Pale Court",
-    "key": null
+    "key": "area_map_fragment_the_pale_court"
   },
   {
     "name": "Uul-Netol's Domain",
-    "key": null
+    "key": "area_map_fragment_uulnetols_domain"
   },
   {
     "name": "Chayula's Domain",
-    "key": null
+    "key": "area_map_fragment_chayulas_domain"
   },
   {
     "name": "The Alluring Abyss",
-    "key": null
+    "key": "area_map_fragment_the_alluring_abyss"
   }
 ]

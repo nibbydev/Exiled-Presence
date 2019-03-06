@@ -13,7 +13,7 @@ namespace Utility {
 
         private static readonly byte[][] AreaDataFiles = {
             Resources.MapsWhite, Resources.MapsYellow, Resources.MapsRed, Resources.MapsUnique, Resources.AreaTown,
-            Resources.AreaQuest, Resources.AreaVaal, Resources.AreaSpecial, Resources.AreaLab
+            Resources.AreaQuest, Resources.AreaVaal, Resources.AreaSpecial, Resources.AreaLab, Resources.AreaFragments
         };
 
         /// <summary>
