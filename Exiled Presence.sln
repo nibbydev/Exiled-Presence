@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MenuSystem", "MenuSystem\Me
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ui", "Ui\Ui.csproj", "{4638C4DE-A421-405B-BC37-0F850ED39A52}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utility", "Utility\Utility.csproj", "{5232385C-D0E6-49E5-9208-8FF7BFE43B59}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{4638C4DE-A421-405B-BC37-0F850ED39A52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4638C4DE-A421-405B-BC37-0F850ED39A52}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4638C4DE-A421-405B-BC37-0F850ED39A52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5232385C-D0E6-49E5-9208-8FF7BFE43B59}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5232385C-D0E6-49E5-9208-8FF7BFE43B59}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5232385C-D0E6-49E5-9208-8FF7BFE43B59}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5232385C-D0E6-49E5-9208-8FF7BFE43B59}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -5,6 +5,7 @@ using DiscordRPC;
 using DiscordRPC.Logging;
 using DiscordRPC.Message;
 using Domain;
+using Utility;
 
 namespace Service {
     public class RpClient {
@@ -83,13 +84,24 @@ namespace Service {
 
             // todo: if character is not in an area that does not grant xp
 
-            var character = await Web.GetLastActiveChar();
-            if (character == null) return;
-            _character = character;
+            Character character;
+            try {
+                character = await Web.GetLastActiveChar(Config.Settings.AccountName, Config.Settings.PoeSessionId);
+            } catch (Exception ex) {
+                Console.WriteLine(ex.Message);
+                return;
+            }
 
+            // Something somehow went wrong, don't overwrite current character data
+            if (character == null) {
+                return;
+            }
+            
+            _lastCharUpdate = DateTime.UtcNow;
+            _character = character;
             UpdateCharacterData();
 
-            _lastCharUpdate = DateTime.UtcNow;
+            
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($@"[EVENT] Got character from api: {_character.Name}");
             Console.ResetColor();
@@ -134,7 +146,7 @@ namespace Service {
 
             _presence.Assets.SmallImageKey = null;
             _presence.Assets.SmallImageText = null;
-            _presence.Assets.LargeImageKey = Utility.GetArtKey();
+            _presence.Assets.LargeImageKey = General.GetArtKey();
             _presence.Assets.LargeImageText = $"{Settings.ProgramName} {Settings.Version}";
             _presence.State = "In login screen";
             _presence.Details = null;
@@ -150,7 +162,7 @@ namespace Service {
 
             _presence.Assets.SmallImageKey = null;
             _presence.Assets.SmallImageText = null;
-            _presence.Assets.LargeImageKey = Utility.GetArtKey();
+            _presence.Assets.LargeImageKey = General.GetArtKey();
             _presence.Assets.LargeImageText = $"{Settings.ProgramName} {Settings.Version}";
             _presence.State = "In character select";
             _presence.Details = null;
@@ -162,8 +174,8 @@ namespace Service {
         /// Updates the presence with the current character data
         /// </summary>
         private void UpdateCharacterData() {
-            var largeAssetKey = Utility.GetArtKey(_character.Class);
-            var xpPercent = Utility.GetPercentToNextLevel(_character.Level, _character.Experience);
+            var largeAssetKey = General.GetArtKey(_character.Class);
+            var xpPercent = General.GetPercentToNextLevel(_character.Level, _character.Experience);
 
             _presence.Assets.LargeImageKey = largeAssetKey;
             _presence.Details = $"Playing as {_character.Name}";

@@ -4,8 +4,9 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Domain;
+using Service;
 
-namespace Service {
+namespace Utility {
     /// <summary>
     /// Class for parsing the game's log file and calling actions based on matches
     /// </summary>
@@ -94,7 +95,7 @@ namespace Service {
             // Both need to be disposed
             using (var fs = new FileStream(_path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             using (var sr = new StreamReader(fs, Encoding.UTF8)) {
-                Console.WriteLine("Parsing log file...");
+                Console.WriteLine(@"Parsing log file...");
 
                 // Main loop
                 while (_run) {
@@ -104,7 +105,7 @@ namespace Service {
                         // This is ran the first time EOF is reached
                         if (!_eof) {
                             _eof = true;
-                            Console.WriteLine("Finished parsing log file");
+                            Console.WriteLine(@"Finished parsing log file");
                             CheckEof();
                         }
 
@@ -129,10 +130,10 @@ namespace Service {
             }
 
             // todo: remove
-            Console.WriteLine($"Found last event from log: {_lastMatch.Type}");
+            Console.WriteLine($@"Found last event from log: {_lastMatch.Type}");
 
             if (_lastAreaMatch != null) {
-                Console.WriteLine($"Found last area event from log: {_lastAreaMatch.Match.Groups[2].Value}");
+                Console.WriteLine($@"Found last area event from log: {_lastAreaMatch.Match.Groups[2].Value}");
             }
 
             // Set initial presence

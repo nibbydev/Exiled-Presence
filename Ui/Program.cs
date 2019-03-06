@@ -44,7 +44,7 @@ namespace Ui {
                 () => Service.Service.IsRunning ? "Running" : null;
             
             // Give LogParser access to show warning messages. Bit spaghetti but it'll do for now.
-            LogParser.TooltipMsg = TrayAppContext.TooltipMsg;
+            Utility.LogParser.TooltipMsg = TrayAppContext.TooltipMsg;
         }
     }
 }

@@ -4,8 +4,8 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Service {
-    internal static class Win32 {
+namespace Utility {
+    public static class Win32 {
         [DllImport("Kernel32.dll")]
         private static extern bool QueryFullProcessImageName([In] IntPtr hProcess, [In] uint dwFlags,
             [Out] StringBuilder lpExeName, [In, Out] ref uint lpdwSize);
