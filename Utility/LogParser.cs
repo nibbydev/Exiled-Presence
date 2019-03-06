@@ -11,6 +11,7 @@ namespace Utility {
     /// Class for parsing the game's log file and calling actions based on matches
     /// </summary>
     public class LogParser {
+        private const long LogOffsetBytes = 1024 * 1024 * 5;
         private const int ReadDelayMs = 1000;
         private readonly string _path;
         private bool _run = true;
@@ -24,7 +25,6 @@ namespace Utility {
         public Action<LogMatch> ActionLoginScreen { private get; set; }
         public Action<LogMatch> ActionAreaChange { private get; set; }
         public Action<LogMatch> ActionStatusChange { private get; set; }
-        public static Action<string, string> TooltipMsg { private get; set; }
 
         /// <summary>
         /// Constructor
@@ -39,26 +39,6 @@ namespace Utility {
             }
 
             _path = path;
-            CheckLogSize(path);
-        }
-
-        /// <summary>
-        /// Issues a warning to the user if log file is too big
-        /// </summary>
-        private static void CheckLogSize(string path) {
-            // Get log file size
-            var sizeInBytes = new FileInfo(path).Length;
-            // Convert to bytes
-            var sizeInMb = (int) (sizeInBytes / 1024f / 1024f);
-
-            if (sizeInMb < 15) {
-                return;
-            }
-
-            var msg = $"The client log file is {sizeInMb}MB. " +
-                      "This slows the program down considerably. " +
-                      "Delete it or trim it to ~10MB";
-            TooltipMsg?.Invoke(msg, "warning");
         }
 
         /// <summary>
@@ -96,6 +76,16 @@ namespace Utility {
             using (var fs = new FileStream(_path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             using (var sr = new StreamReader(fs, Encoding.UTF8)) {
                 Console.WriteLine(@"Parsing log file...");
+                
+                // If the file is more than x bytes, set the read position before the last x bytes
+                if (fs.Length > LogOffsetBytes) {
+                    fs.Seek(fs.Length - LogOffsetBytes, SeekOrigin.Begin);
+                    
+                    var skippedPercentage = Math.Round((double) fs.Position / fs.Length * 100f);
+                    var skippedMb = Math.Round((fs.Length - LogOffsetBytes) / 1024f / 1024f);
+                    
+                    Console.WriteLine($@"Skipped {skippedMb}MB ({skippedPercentage}%) of the log");
+                }
 
                 // Main loop
                 while (_run) {

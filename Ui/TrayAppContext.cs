@@ -29,6 +29,9 @@ namespace Ui {
             Service.Service.Init();
         }
 
+        /// <summary>
+        /// Shows the console and runs the menu system as a task
+        /// </summary>
         private static void RunConsoleAsTask(object sender = null, EventArgs e = null) {
             if (ConsoleManager.IsConsoleVisible) {
                 return;
@@ -41,6 +44,9 @@ namespace Ui {
             }).Start();
         }
 
+        /// <summary>
+        /// Exists the tray app safely
+        /// </summary>
         private void Exit(object sender = null, EventArgs e = null) {
             _trayItem.Visible = false;
             Service.Service.Stop();
@@ -48,6 +54,9 @@ namespace Ui {
             Application.Exit();
         }
 
+        /// <summary>
+        /// Displays a popup message to the user
+        /// </summary>
         public void TooltipMsg(string ttMsg, string ttIcon = "none") {
             // Don't display empty messages
             if (string.IsNullOrEmpty(ttMsg)) {

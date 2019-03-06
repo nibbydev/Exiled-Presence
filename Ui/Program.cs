@@ -42,9 +42,6 @@ namespace Ui {
                 Config.Settings.GetObfuscatedSessId;
             Menus.MainMenu.MenuItems.First(t => t.MenuToRun.Equals(Menus.AppStartFeedbackMenu)).ValueDelegate =
                 () => Service.Service.IsRunning ? "Running" : null;
-            
-            // Give LogParser access to show warning messages. Bit spaghetti but it'll do for now.
-            Utility.LogParser.TooltipMsg = TrayAppContext.TooltipMsg;
         }
     }
 }
