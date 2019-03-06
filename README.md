@@ -1,6 +1,6 @@
 # Exiled Presence
 
-![Image2](Resources/image.gif)
+![Image1](Assets/image.gif)
 
 ## About
 
@@ -13,10 +13,8 @@ game events on your Discord profile.
 Download the application from [releases](https://github.com/siegrest/Exiled-Presence/releases). 
 It should work out-of-the-box.
 
-Upon running the executable it will start searching for the game process. 
-Once found, it will attempt to parse the game's log file. Note that if the log file
-is over 10MB in size this can be extremely slow and resource consuming (you will get 
-a warning message if this is the case).
+Upon running the executable it will start searching for the game process. Once found, 
+it will parse the game's log file.
 
 To have it display information about your character one of two things are required.
 First, right click the tray icon and open up the "menu". Navigate to the `config`
