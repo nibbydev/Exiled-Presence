@@ -31,7 +31,6 @@ namespace Service {
         public static void Init() {
             // Don't allow running twice
             if (IsRunning) {
-                IsRunning = true;
                 return;
             }
 
@@ -45,6 +44,8 @@ namespace Service {
                 ActionProcessStart = ActionProcessStart,
                 ActionProcessStop = ActionProcessStop
             }.RunAsTask();
+            
+            IsRunning = true;
         }
 
         /// <summary>
