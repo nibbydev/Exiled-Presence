@@ -8,6 +8,7 @@ using Service;
 namespace Ui {
     internal class TrayAppContext : ApplicationContext {
         private readonly NotifyIcon _trayItem;
+        private string _releaseUrl;
 
         public TrayAppContext() {
             // Create a tray item
@@ -24,7 +25,8 @@ namespace Ui {
 
             // Display a tooltip
             TooltipMsg($@"Right click the {Settings.ProgramName} tray icon to access settings.");
-
+            CheckUpdates();
+            
             // Start the service
             Service.Service.Init();
         }
@@ -72,6 +74,31 @@ namespace Ui {
             _trayItem.BalloonTipIcon = ttIconEnum;
             _trayItem.BalloonTipText = ttMsg;
             _trayItem.ShowBalloonTip(0);
+        }
+        
+        private async void CheckUpdates() {
+            if (!Config.Settings.IsCheckUpdates()) {
+                return;
+            }
+            
+            var release = await Utility.Web.GetLatestRelease();
+            if (release == null) {
+                return;
+            }
+            
+            Config.Settings.LastUpdateCheck = DateTime.UtcNow;
+            Config.SaveConfig();
+
+            if (Utility.General.IsNewVersion(Settings.Version, release.tag_name)) {
+                _trayItem.BalloonTipClicked += OnBalloonClick;
+                _releaseUrl = release.html_url;
+                TooltipMsg($"{release.tag_name} released. Click here to download.");
+            }
+        }
+        
+        private void OnBalloonClick(object sender, EventArgs args) {
+            _trayItem.BalloonTipClicked -= OnBalloonClick;
+            System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(_releaseUrl));
         }
     }
 }

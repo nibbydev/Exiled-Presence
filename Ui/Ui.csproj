@@ -104,6 +104,10 @@
       <Project>{5fe478f0-a5d6-43b1-9fbe-fb50586bb542}</Project>
       <Name>Service</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Utility\Utility.csproj">
+      <Project>{5232385c-d0e6-49e5-9208-8ff7bfe43b59}</Project>
+      <Name>Utility</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.3.3.5\build\Fody.targets" Condition="Exists('..\packages\Fody.3.3.5\build\Fody.targets')" />

@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
+using Domain;
 
 namespace Utility {
     public static class General {
@@ -111,6 +113,31 @@ namespace Utility {
             var currentLvlXp = Xp[lvl];
             var nextLvlXp = Xp[lvl == 100 ? 100 : lvl + 1];
             return (int) Math.Floor((xp - currentLvlXp) / (double) (nextLvlXp - currentLvlXp) * 100f);
+        }
+        
+        /// <summary>
+        /// Compares two version strings
+        /// </summary>
+        public static bool IsNewVersion(string currentVersion, string newVersion) {
+            var splitCur = currentVersion.Substring(1).Split('.');
+            var splitNew = newVersion.Substring(1).Split('.');
+
+            var minLen = splitNew.Length > splitCur.Length ? splitCur.Length : splitNew.Length;
+
+            for (var i = 0; i < minLen; i++) {
+                int.TryParse(splitNew[i], out var newVer);
+                int.TryParse(splitCur[i], out var oldVer);
+
+                if (newVer > oldVer) {
+                    return true;
+                }
+
+                if (newVer < oldVer) {
+                    break;
+                }
+            }
+
+            return false;
         }
     }
 }

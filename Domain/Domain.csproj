@@ -48,6 +48,7 @@
     <Compile Include="LogRegex.cs" />
     <Compile Include="LogRegExps.cs" />
     <Compile Include="LogType.cs" />
+    <Compile Include="Release.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

@@ -1,3 +1,4 @@
+using System;
 using Newtonsoft.Json;
 
 namespace Service {
@@ -9,9 +10,11 @@ namespace Service {
         [JsonIgnore] public const string Version = "v1.0";
         [JsonIgnore] public const int CharacterUpdateDelaySec = 60;
         [JsonIgnore] public const int PresencePollDelayMs = 500;
+        [JsonIgnore] private const int UpdateCheckIntervalH = 24;
 
         public string AccountName { get; set; }
         public string PoeSessionId { get; set; }
+        public DateTime? LastUpdateCheck { get; set; }
 
         /// <summary>
         /// Returns an obfuscated sessID for display purposes
@@ -26,6 +29,18 @@ namespace Service {
         public void Update(Settings settings) {
             AccountName = settings.AccountName;
             PoeSessionId = settings.PoeSessionId;
+            LastUpdateCheck = settings.LastUpdateCheck;
+        }
+
+        /// <summary>
+        /// Compares time in config to current time
+        /// </summary>
+        public bool IsCheckUpdates() {
+            if (LastUpdateCheck == null) {
+                return true;
+            }
+
+            return LastUpdateCheck.Value.AddHours(UpdateCheckIntervalH) < DateTime.UtcNow;
         }
     }
 }
