@@ -32,9 +32,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DiscordRPC, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\DiscordRPC.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed">
       <HintPath>..\packages\Newtonsoft.Json.12.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -52,6 +49,10 @@
     <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DiscordRPC\DiscordRPC.csproj">
+      <Project>{819d20d6-8d88-45c1-a4d2-aa21f10abd19}</Project>
+      <Name>DiscordRPC</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{e3002305-05ce-40e3-9df7-13a0ce7e3731}</Project>
       <Name>Domain</Name>

@@ -7,7 +7,7 @@ namespace Service {
         [JsonIgnore] public const string ProgramName = "Exiled Presence";
         [JsonIgnore] public const string GameWindowTitle = "Path of Exile";
         [JsonIgnore] public const string ConfigFileName = "config.json";
-        [JsonIgnore] public const string Version = "v1.0";
+        [JsonIgnore] public const string Version = "v1.0.1";
         [JsonIgnore] public const int CharacterUpdateDelaySec = 60;
         [JsonIgnore] public const int PresencePollDelayMs = 500;
         [JsonIgnore] private const int UpdateCheckIntervalH = 24;
