@@ -11,31 +11,31 @@ namespace Utility {
         private static readonly Regex LabTrialRegex = new Regex("^Trial of [A-Za-z]+ [A-Za-z]+$");
         private static readonly List<Area[]> AreaData = new List<Area[]>(500);
 
+        private static readonly byte[][] AreaDataFiles = {
+            Resources.MapsWhite, Resources.MapsYellow, Resources.MapsRed, Resources.MapsUnique, Resources.AreaTown,
+            Resources.AreaQuest, Resources.AreaVaal, Resources.AreaSpecial, Resources.AreaLab
+        };
+
         /// <summary>
-        /// Load data in from JSON resource files
+        /// Process JSON resource files
         /// </summary>
         static AreaMatcher() {
-            AreaData.Add(JsonUtility.Deserialize<Area[]>(Encoding.Default.GetString(Resources.MapsWhite)));
-            AreaData.Add(JsonUtility.Deserialize<Area[]>(Encoding.Default.GetString(Resources.MapsYellow)));
-            AreaData.Add(JsonUtility.Deserialize<Area[]>(Encoding.Default.GetString(Resources.MapsRed)));
-            AreaData.Add(JsonUtility.Deserialize<Area[]>(Encoding.Default.GetString(Resources.MapsUnique)));
-            AreaData.Add(JsonUtility.Deserialize<Area[]>(Encoding.Default.GetString(Resources.AreaTown)));
-            AreaData.Add(JsonUtility.Deserialize<Area[]>(Encoding.Default.GetString(Resources.AreaQuest)));
-            AreaData.Add(JsonUtility.Deserialize<Area[]>(Encoding.Default.GetString(Resources.AreaVaal)));
-            AreaData.Add(JsonUtility.Deserialize<Area[]>(Encoding.Default.GetString(Resources.AreaSpecial)));
-            AreaData.Add(JsonUtility.Deserialize<Area[]>(Encoding.Default.GetString(Resources.AreaLab)));
+            foreach (var areaDataFile in AreaDataFiles) {
+                AreaData.Add(JsonUtility.Deserialize<Area[]>(Encoding.Default.GetString(areaDataFile)));
+            }
         }
-        
+
         /// <summary>
         /// Attempts to match an area name and find the art key
         /// </summary>
         public static bool Match(string areaName, out Area area) {
+            // Hideouts are very commonly accessed, attempt to match those first
             if (HideoutRegex.IsMatch(areaName)) {
                 area = new Area {Name = areaName, Key = "area_hideout"};
                 return true;
             }
-            
-            // Try for an exact name match against the area data arrays.
+
+            // Try for an exact name match against the area data arrays
             foreach (var areas in AreaData) {
                 if ((area = areas.FirstOrDefault(t => t.Name.Equals(areaName))) != null) {
                     return true;
@@ -52,7 +52,7 @@ namespace Utility {
                 Name = areaName,
                 Key = "area_default"
             };
-            
+
             return false;
         }
     }
