@@ -6,10 +6,6 @@ using System.Text;
 
 namespace Utility {
     public static class Win32 {
-        [DllImport("Kernel32.dll")]
-        private static extern bool QueryFullProcessImageName([In] IntPtr hProcess, [In] uint dwFlags,
-            [Out] StringBuilder lpExeName, [In, Out] ref uint lpdwSize);
-
         /// <summary>
         /// Check if a process with specified title is currently running
         /// </summary>
@@ -39,23 +35,8 @@ namespace Utility {
                 return null;
             }
 
-            return GetMainModuleFileName(gameProc);
-        }
 
-        /// <summary>
-        /// Finds the executable path of a Process
-        /// </summary>
-        private static string GetMainModuleFileName(Process process, int buffer = 1024) {
-            var fileNameBuilder = new StringBuilder(buffer);
-            var bufferLength = (uint) fileNameBuilder.Capacity + 1;
-
-            try {
-                return QueryFullProcessImageName(process.Handle, 0, fileNameBuilder, ref bufferLength)
-                    ? fileNameBuilder.ToString()
-                    : null;
-            } catch {
-                return null;
-            }
+            return gameProc.MainModule.FileName;
         }
     }
 }

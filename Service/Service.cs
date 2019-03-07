@@ -1,7 +1,5 @@
 using System;
 using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading;
 using Domain;
 using Utility;
 
@@ -44,7 +42,7 @@ namespace Service {
                 ActionProcessStart = ActionProcessStart,
                 ActionProcessStop = ActionProcessStop
             }.RunAsTask();
-            
+
             IsRunning = true;
         }
 
@@ -74,7 +72,7 @@ namespace Service {
             Console.ResetColor();
 
             // Get the expected log path or null by using the game executable location
-            var exePath = Utility.Win32.FindProcessPath(Settings.GameWindowTitle);
+            var exePath = Win32.FindProcessPath(Settings.GameWindowTitle);
             var logPath = LogParser.GetLogFilePath(exePath);
 
             // Make sure the the last instances were disposed of
