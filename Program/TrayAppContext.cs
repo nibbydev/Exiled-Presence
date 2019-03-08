@@ -1,58 +1,51 @@
 ﻿using System;
-using System.Drawing;
-using System.IO;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Service;
 
-namespace Ui {
-    internal class TrayAppContext : ApplicationContext {
-        private readonly NotifyIcon _trayItem;
+namespace Program {
+    public class TrayAppContext : ApplicationContext {
         private string _releaseUrl;
 
+        private readonly NotifyIcon _trayItem = new NotifyIcon {
+            Text = Settings.ProgramName,
+            Icon = Properties.Resources.ico,
+            BalloonTipTitle = Settings.ProgramName,
+            ContextMenu = new ContextMenu(),
+            Visible = true
+        };
+
+
         public TrayAppContext() {
-            // Create a tray item
-            _trayItem = new NotifyIcon {
-                Text = Settings.ProgramName,
-                Icon = Properties.Resources.AppIcon,
-                BalloonTipTitle = Settings.ProgramName,
-                ContextMenu = new ContextMenu(new[] {
-                    new MenuItem("Open menu", RunConsoleAsTask),
-                    new MenuItem("Exit", Exit)
-                }),
-                Visible = true
-            };
+            _trayItem.ContextMenu.MenuItems.Add(new MenuItem("Restart service", RestartService));
+            _trayItem.ContextMenu.MenuItems.Add(new MenuItem("Edit config", delegate { Config.OpenConfig(); }));
+            _trayItem.ContextMenu.MenuItems.Add(new MenuItem("Reload config", ReloadConfig));
+            _trayItem.ContextMenu.MenuItems.Add(new MenuItem("Exit", Exit));
 
-            // Display a tooltip
-            TooltipMsg($@"Right click the {Settings.ProgramName} tray icon to access settings.");
-            CheckUpdates();
-            
-            // Start the service
-            Service.Service.Init();
-        }
-
-        /// <summary>
-        /// Shows the console and runs the menu system as a task
-        /// </summary>
-        private static void RunConsoleAsTask(object sender = null, EventArgs e = null) {
-            if (ConsoleManager.IsConsoleVisible) {
-                return;
+            if (!Config.LoadConfig()) {
+                TooltipMsg("Right click the tray icon to access settings");
             }
 
-            new Task(() => {
-                ConsoleManager.Show();
-                MenuSystem.Menus.MainMenu.RunMenu();
-                ConsoleManager.Hide();
-            }).Start();
+            CheckUpdates();
+            Service.Service.Init();
+        }
+        
+        private static void ReloadConfig(object sender = null, EventArgs args = null) {
+            Config.LoadConfig();
+            RestartService();
+        }
+
+        private static void RestartService(object sender = null, EventArgs args = null) {
+            Service.Service.Stop();
+            Service.Service.Init();
         }
 
         /// <summary>
         /// Exists the tray app safely
         /// </summary>
         private void Exit(object sender = null, EventArgs e = null) {
+            // Hide the icon so it doesn't persist
             _trayItem.Visible = false;
             Service.Service.Stop();
-            ConsoleManager.Deallocate();
             Application.Exit();
         }
 
@@ -75,17 +68,17 @@ namespace Ui {
             _trayItem.BalloonTipText = ttMsg;
             _trayItem.ShowBalloonTip(0);
         }
-        
+
         private async void CheckUpdates() {
             if (!Config.Settings.IsCheckUpdates()) {
                 return;
             }
-            
+
             var release = await Utility.Web.GetLatestRelease();
             if (release == null) {
                 return;
             }
-            
+
             Config.Settings.LastUpdateCheck = DateTime.UtcNow;
             Config.SaveConfig();
 
@@ -95,7 +88,7 @@ namespace Ui {
                 TooltipMsg($"{release.tag_name} released. Click here to download.");
             }
         }
-        
+
         private void OnBalloonClick(object sender, EventArgs args) {
             _trayItem.BalloonTipClicked -= OnBalloonClick;
             System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(_releaseUrl));

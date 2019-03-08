@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using System.Text.RegularExpressions;
-using Domain;
 using Utility;
 
 namespace Service {
@@ -32,16 +31,18 @@ namespace Service {
         /// <summary>
         /// Loads config into static context on program start
         /// </summary>
-        public static void LoadConfig() {
+        public static bool LoadConfig() {
             if (!Directory.Exists(CfgFolderPath)) {
                 Directory.CreateDirectory(CfgFolderPath);
             }
 
             if (File.Exists(CfgFilePath)) {
                 ReadConfig();
-            } else {
-                SaveConfig();
+                return true;
             }
+
+            SaveConfig();
+            return false;
         }
 
         /// <summary>
@@ -63,6 +64,21 @@ namespace Service {
                 var rawData = JsonUtility.Serialize(Settings);
                 streamWriter.Write(rawData);
             }
+        }
+
+        /// <summary>
+        /// Opens the config file in the default text editor
+        /// </summary>
+        public static void OpenConfig() {
+            if (!Directory.Exists(CfgFolderPath)) {
+                Directory.CreateDirectory(CfgFolderPath);
+            }
+
+            if (!File.Exists(CfgFilePath)) {
+                SaveConfig();
+            }
+
+            System.Diagnostics.Process.Start(CfgFilePath);
         }
 
         #region Propagators

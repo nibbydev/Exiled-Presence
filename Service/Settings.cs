@@ -12,8 +12,8 @@ namespace Service {
         [JsonIgnore] public const int PresencePollDelayMs = 500;
         [JsonIgnore] private const int UpdateCheckIntervalH = 24;
 
-        public string AccountName { get; set; }
-        public string PoeSessionId { get; set; }
+        public string AccountName { get; set; } = "";
+        public string PoeSessionId { get; set; } = "";
         public DateTime? LastUpdateCheck { get; set; }
 
         /// <summary>
