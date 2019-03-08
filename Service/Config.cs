@@ -1,17 +1,19 @@
 using System;
 using System.IO;
 using System.Text.RegularExpressions;
-using Domain;
 using Utility;
 
 namespace Service {
     public static class Config {
+        public static readonly Regex SessIdRegex = new Regex("^[0-9a-fA-F]{32}$");
+
         private const Environment.SpecialFolder AppDataFolder = Environment.SpecialFolder.LocalApplicationData;
 
         private static readonly string AppDataPath = Environment.GetFolderPath(AppDataFolder);
         private static readonly string CfgFolderPath = Path.Combine(AppDataPath, Settings.ProgramName);
         private static readonly string CfgFilePath = Path.Combine(CfgFolderPath, Settings.ConfigFileName);
         public static Settings Settings { get; } = new Settings();
+        public static Action<string> NotifyAction { private get; set; }
 
         /// <summary>
         /// Removes config file from disk and resets settings
@@ -32,16 +34,27 @@ namespace Service {
         /// <summary>
         /// Loads config into static context on program start
         /// </summary>
-        public static void LoadConfig() {
+        public static bool LoadConfig() {
             if (!Directory.Exists(CfgFolderPath)) {
                 Directory.CreateDirectory(CfgFolderPath);
             }
 
             if (File.Exists(CfgFilePath)) {
-                ReadConfig();
-            } else {
-                SaveConfig();
+                try {
+                    ReadConfig();
+                } catch {
+                    NotifyAction?.Invoke("Invalid config syntax");
+                    SaveConfig();
+                    return false;
+                }
             }
+
+            if (!Settings.Validate(out var errorMsg)) {
+                NotifyAction?.Invoke($"Invalid config ({errorMsg})");
+                return false;
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -50,6 +63,7 @@ namespace Service {
         private static void ReadConfig() {
             using (var streamReader = File.OpenText(CfgFilePath)) {
                 var configString = streamReader.ReadToEnd();
+                
                 var settings = JsonUtility.Deserialize<Settings>(configString);
                 Settings.Update(settings);
             }
@@ -63,6 +77,21 @@ namespace Service {
                 var rawData = JsonUtility.Serialize(Settings);
                 streamWriter.Write(rawData);
             }
+        }
+
+        /// <summary>
+        /// Opens the config file in the default text editor
+        /// </summary>
+        public static void OpenConfig() {
+            if (!Directory.Exists(CfgFolderPath)) {
+                Directory.CreateDirectory(CfgFolderPath);
+            }
+
+            if (!File.Exists(CfgFilePath)) {
+                SaveConfig();
+            }
+
+            System.Diagnostics.Process.Start(CfgFilePath);
         }
 
         #region Propagators
