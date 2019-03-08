@@ -128,13 +128,12 @@ namespace Service {
         public void UpdateArea(string areaName) {
             // Update character data on area change
             UpdateCharacter();
-            
             AreaMatcher.Match(areaName, out _currentArea);
             
-            UpdateSmallImageText();
             _presence.Assets.SmallImageKey = _currentArea.Key;
             _presence.Timestamps = Timestamps.Now;
             _presence.State = null;
+            UpdateSmallImageText();
             _hasUpdate = true;
         }
 
@@ -148,7 +147,7 @@ namespace Service {
             _presence.Assets.SmallImageText = null;
             _presence.Assets.LargeImageKey = General.GetArtKey();
             _presence.Assets.LargeImageText = $"{Settings.ProgramName} {Settings.Version}";
-            _presence.State = "In login screen";
+            _presence.State = "Login screen";
             _presence.Details = null;
             _presence.Timestamps = Timestamps.Now;
             _hasUpdate = true;
@@ -164,7 +163,7 @@ namespace Service {
             _presence.Assets.SmallImageText = null;
             _presence.Assets.LargeImageKey = General.GetArtKey();
             _presence.Assets.LargeImageText = $"{Settings.ProgramName} {Settings.Version}";
-            _presence.State = "In character select";
+            _presence.State = "Character select";
             _presence.Details = null;
             _presence.Timestamps = Timestamps.Now;
             _hasUpdate = true;
@@ -190,7 +189,7 @@ namespace Service {
             if (_currentArea != null && _presence.Assets.SmallImageKey != null) {
                 _presence.Assets.SmallImageText = _character == null
                     ? $"{_currentArea.Name}"
-                    : $"{_currentArea.Name} in {_character.League}";
+                    : $"{_currentArea.Name} ({_character.League})";
             }
         }
 
