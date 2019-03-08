@@ -16,27 +16,28 @@ namespace Program {
 
 
         public TrayAppContext() {
-            _trayItem.ContextMenu.MenuItems.Add(new MenuItem("Restart service", RestartService));
+            // Create context menus
             _trayItem.ContextMenu.MenuItems.Add(new MenuItem("Edit config", delegate { Config.OpenConfig(); }));
-            _trayItem.ContextMenu.MenuItems.Add(new MenuItem("Reload config", ReloadConfig));
+            _trayItem.ContextMenu.MenuItems.Add(new MenuItem("Reload", ReloadConfig));
             _trayItem.ContextMenu.MenuItems.Add(new MenuItem("Exit", Exit));
+            
+            // Allow config loader to display error messages
+            Config.NotifyAction = s => TooltipMsg(s, "error");
 
-            if (!Config.LoadConfig()) {
-                TooltipMsg("Right click the tray icon to access settings");
-            }
-
+            Config.LoadConfig();
             CheckUpdates();
             Service.Service.Init();
         }
         
-        private static void ReloadConfig(object sender = null, EventArgs args = null) {
-            Config.LoadConfig();
-            RestartService();
-        }
-
-        private static void RestartService(object sender = null, EventArgs args = null) {
+        private void ReloadConfig(object sender = null, EventArgs args = null) {
+            var success = Config.LoadConfig();
+            
             Service.Service.Stop();
             Service.Service.Init();
+
+            if (success) {
+                TooltipMsg("Reload successful");
+            }
         }
 
         /// <summary>

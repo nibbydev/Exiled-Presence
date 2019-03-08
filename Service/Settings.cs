@@ -1,27 +1,21 @@
 using System;
+using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 
 namespace Service {
     public class Settings {
-        [JsonIgnore] public const string DiscordAppId = "551089446460850176";
-        [JsonIgnore] public const string ProgramName = "Exiled Presence";
-        [JsonIgnore] public const string GameWindowTitle = "Path of Exile";
-        [JsonIgnore] public const string ConfigFileName = "config.json";
-        [JsonIgnore] public const string Version = "v1.0.1";
-        [JsonIgnore] public const int CharacterUpdateDelaySec = 60;
-        [JsonIgnore] public const int PresencePollDelayMs = 500;
-        [JsonIgnore] private const int UpdateCheckIntervalH = 24;
+        public const string DiscordAppId = "551089446460850176";
+        public const string ProgramName = "Exiled Presence";
+        public const string GameWindowTitle = "Path of Exile";
+        public const string ConfigFileName = "config.json";
+        public const string Version = "v1.0.1";
+        public const int CharacterUpdateDelaySec = 60;
+        public const int PresencePollDelayMs = 500;
+        public const int UpdateCheckIntervalH = 24;
 
         public string AccountName { get; set; } = "";
         public string PoeSessionId { get; set; } = "";
         public DateTime? LastUpdateCheck { get; set; }
-
-        /// <summary>
-        /// Returns an obfuscated sessID for display purposes
-        /// </summary>
-        public string GetObfuscatedSessId() {
-            return PoeSessionId == null ? null : new string('*', 28) + PoeSessionId.Substring(28);
-        }
 
         /// <summary>
         /// Loads in settings from another instance
@@ -30,6 +24,21 @@ namespace Service {
             AccountName = settings.AccountName;
             PoeSessionId = settings.PoeSessionId;
             LastUpdateCheck = settings.LastUpdateCheck;
+        }
+
+        public bool Validate(out string errorMsg) {
+            if (!string.IsNullOrEmpty(PoeSessionId) && !Config.SessIdRegex.IsMatch(PoeSessionId)) {
+                errorMsg = "Invalid session ID";
+                return false;
+            }
+
+            if (!string.IsNullOrEmpty(AccountName) && AccountName.Length < 3) {
+                errorMsg = "Invalid account name";
+                return false;
+            }
+
+            errorMsg = null;
+            return true;
         }
 
         /// <summary>
