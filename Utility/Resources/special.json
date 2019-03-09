@@ -14,5 +14,9 @@
   {
     "name": "The Temple of Atzoatl",
     "key": "area_incursion"
+  },
+  {
+    "name": "Memory Nexus",
+    "key": "area_synthesis"
   }
 ]
