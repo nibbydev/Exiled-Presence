@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -55,6 +56,22 @@ namespace Utility {
                     : null;
             } catch {
                 return null;
+            }
+        }
+
+        /// <summary>
+        /// Creates a shortcut of the current application in the specified folder
+        /// </summary>
+        public static void CreateShortcut(string currentFile, string targetShortcut, string param = null) {
+            if (!File.Exists(currentFile)) throw new FileNotFoundException();
+            if (!Directory.GetParent(targetShortcut).Exists) throw new DirectoryNotFoundException();
+            
+            using (var sw = new StreamWriter(targetShortcut)) {
+                sw.WriteLine("[InternetShortcut]");
+                sw.WriteLine("URL=file:///" + currentFile + (param ?? ""));
+                sw.WriteLine("IconIndex=0");
+                sw.WriteLine("IconFile=" + currentFile);
+                sw.Flush();
             }
         }
     }

@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Reflection;
 using System.Text.RegularExpressions;
 
 namespace Service {
@@ -15,7 +16,9 @@ namespace Service {
         public static readonly string AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         public static readonly string CfgFolderPath = Path.Combine(AppDataPath, ProgramName);
         public static readonly string CfgFilePath = Path.Combine(CfgFolderPath, ConfigFileName);
-        public static readonly string StartupFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonStartup);
+        public static readonly string StartupFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Startup);
+        public static readonly string StartupShortcutPath =  Path.Combine(StartupFolderPath, $"{ProgramName}.url");
+        public static readonly string AppPath = Assembly.GetEntryAssembly().Location;
         public static readonly Regex SessIdRegex = new Regex("^[0-9a-fA-F]{32}$");
         public static readonly TimeSpan PresencePollDelay = TimeSpan.FromMilliseconds(500);
 

@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
+using System.IO;
 using System.Windows.Forms;
+using Program.Properties;
 using Service;
 using Utility;
 
@@ -11,7 +14,7 @@ namespace Program {
 
         private readonly NotifyIcon _trayItem = new NotifyIcon {
             Text = Settings.ProgramName,
-            Icon = Properties.Resources.ico,
+            Icon = Resources.ico,
             BalloonTipTitle = Settings.ProgramName,
             ContextMenu = new ContextMenu(),
             Visible = true
@@ -42,7 +45,7 @@ namespace Program {
             );
 
             _trayItem.ContextMenu.MenuItems.Add(
-                new MenuItem("Reload", delegate {
+                new MenuItem("Reload service", delegate {
                     if (_config.LoadConfig(out var msg)) {
                         _controller.Dispose();
                         _controller.Initialize();
@@ -52,10 +55,24 @@ namespace Program {
                 })
             );
 
-            _trayItem.ContextMenu.MenuItems.Add("Open..", new[] {
-                new MenuItem("Config folder", delegate { General.OpenPath(Settings.CfgFolderPath); })
+            _trayItem.ContextMenu.MenuItems.Add("Startup..", new[] {
+                new MenuItem("Add to startup", delegate {
+                    TooltipMsg(File.Exists(Settings.StartupShortcutPath)
+                        ? "Recreated startup shortcut"
+                        : "Created startup shortcut", "info");
+                    Win32.CreateShortcut(Settings.AppPath, Settings.StartupShortcutPath);
+                }),
+                new MenuItem("Remove from startup", delegate {
+                    if (File.Exists(Settings.StartupShortcutPath)) {
+                        File.Delete(Settings.StartupShortcutPath);
+                        TooltipMsg("Deleted startup shortcut", "info");
+                    } else TooltipMsg("Startup shortcut did not exist", "error");
+                }),
+                new MenuItem("Open startup folder", delegate {
+                    General.OpenPath(Settings.StartupFolderPath);
+                })
             });
-
+            
             _trayItem.ContextMenu.MenuItems.Add(
                 new MenuItem("Exit", delegate {
                     // Hide the icon so it doesn't persist
@@ -97,7 +114,7 @@ namespace Program {
                 return;
             }
 
-            var release = await Utility.Web.GetLatestRelease();
+            var release = await Web.GetLatestRelease();
             if (release == null) {
                 return;
             }
@@ -105,7 +122,7 @@ namespace Program {
             _config.Settings.LastUpdateCheck = DateTime.UtcNow;
             _config.SaveConfig();
 
-            if (Utility.General.IsNewVersion(Settings.Version, release.tag_name)) {
+            if (General.IsNewVersion(Settings.Version, release.tag_name)) {
                 _releaseUrl = release.html_url;
                 TooltipMsg($"{release.tag_name} released. Click here to open in browser");
             }
@@ -116,7 +133,7 @@ namespace Program {
         /// </summary>
         private void OnBalloonClick(object sender, EventArgs args) {
             if (!string.IsNullOrEmpty(_releaseUrl)) {
-                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(_releaseUrl));
+                Process.Start(new ProcessStartInfo(_releaseUrl));
                 _releaseUrl = null;
             }
         }
