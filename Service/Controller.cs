@@ -27,13 +27,13 @@ namespace Service {
                 ActionProcessStart = ActionProcessStart,
                 ActionProcessStop = ActionProcessStop
             };
-            
+
             // Create a parser for the game's log
             _logParser = new LogParser {
                 LogAction = LogAction,
                 EofAction = SetInitialPresence
             };
-            
+
             // Create an RPC client
             _rpcClient = new RpcClient(_settings);
         }
@@ -42,19 +42,16 @@ namespace Service {
         /// Service initializer
         /// </summary>
         public void Initialize() {
-            if (_procMon.IsInitialized) {
-                throw new Exception("Already running! Dispose first");
-            }
-
             Console.WriteLine(@"Starting controller");
+
             if (string.IsNullOrEmpty(_settings.PoeSessionId)) Console.WriteLine(@"No POESESSID set");
             if (string.IsNullOrEmpty(_settings.AccountName)) Console.WriteLine(@"No account name set");
 
             _procMon.Initialize();
         }
-        
+
         /// <summary>
-        /// Disposer
+        /// Disposes of used resources
         /// </summary>
         public void Dispose() {
             _logParser.Dispose();
@@ -89,9 +86,9 @@ namespace Service {
         }
 
         #endregion
-        
+
         #region Log parser callbacks
-        
+
         /// <summary>
         /// Attempts to match the log line against all predefined regex patterns. If there was a match, the action
         /// associated with the pattern will be called.
@@ -173,7 +170,7 @@ namespace Service {
                 case LogType.LoginScreen:
                     ActionLoginScreen(null);
                     return;
-                
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }

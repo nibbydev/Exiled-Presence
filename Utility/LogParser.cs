@@ -11,6 +11,7 @@ namespace Utility {
     /// Class for parsing the game's log file and calling actions based on matches
     /// </summary>
     public class LogParser : IDisposable {
+        private readonly TimeSpan _callbackTimespan = TimeSpan.FromMilliseconds(500);
         private const long LogOffsetBytes = 1024 * 1024 * 5;
         public Action<string> LogAction { private get; set; }
         public Action EofAction { private get; set; }
@@ -18,28 +19,21 @@ namespace Utility {
 
         private Stream _fs;
         private StreamReader _sr;
-        private FileSystemWatcher _fsw;
+        private Timer _callbackTimer;
 
         /// <summary>
         /// Set up file tailing
         /// </summary>
         public void Initialize(string path) {
             CheckErrors(path);
-            
-            // Create a file watcher
-            _fsw = new FileSystemWatcher(".") {
-                EnableRaisingEvents = true,
-                Filter = path
-            };
 
             // Create streams
-            _fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+            _fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
             _sr = new StreamReader(_fs, Encoding.UTF8);
 
-            ReadFile();
-            
-            // Subscribe to file changes
-            _fsw.Changed += (s, e) => FileChangedCallback();
+            InitialParse();
+
+            _callbackTimer = new Timer(ReadToEof, null, TimeSpan.Zero, _callbackTimespan);
         }
 
         /// <summary>
@@ -62,7 +56,7 @@ namespace Utility {
                 throw new NullReferenceException("EOF action cannot be null");
             }
 
-            if (_fsw != null || _fs != null || _sr != null) {
+            if (_callbackTimer != null || _fs != null || _sr != null) {
                 throw new Exception("Already running! Dispose first");
             }
         }
@@ -70,7 +64,7 @@ namespace Utility {
         /// <summary>
         /// Initially parse log file
         /// </summary>
-        private void ReadFile() {
+        private void InitialParse() {
             // If the file is more than x bytes, set the read position before the last x bytes
             if (_fs.Length > LogOffsetBytes) {
                 _fs.Seek(_fs.Length - LogOffsetBytes, SeekOrigin.Begin);
@@ -82,33 +76,38 @@ namespace Utility {
             }
 
             // Parse the log from the offset
-            string s;
-            while ((s = _sr.ReadLine()) != null) {
-                LogAction.Invoke(s);
-            }
-            
+            ReadToEof();
+
             // EOF is reached
             IsEof = true;
             EofAction.Invoke();
         }
 
         /// <summary>
-        /// Action upon file change
+        /// Read the log file until EOF
         /// </summary>
-        private void FileChangedCallback() {
+        private void ReadToEof(object state = null) {
             string s;
-            if ((s = _sr.ReadLine()) != null) {
+            while ((s = _sr.ReadLine()) != null) {
+                Console.WriteLine(s);
                 LogAction.Invoke(s);
             }
         }
 
         /// <summary>
-        /// Disposer
+        /// Disposer. Has same functionality as close.
         /// </summary>
         public void Dispose() {
-            _fsw?.Dispose();
+            _callbackTimer?.Dispose();
+            _callbackTimer = null;
+
             _fs?.Dispose();
+            _fs = null;
+
             _sr?.Dispose();
+            _sr = null;
+
+            IsEof = false;
         }
     }
 }

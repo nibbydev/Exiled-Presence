@@ -9,10 +9,10 @@ using Utility;
 
 namespace Service {
     public class RpcClient : IDisposable {
-        private readonly DiscordRpcClient _rpcClient;
-        private readonly RichPresence _presence;
         private readonly Settings _settings;
 
+        private DiscordRpcClient _rpcClient;
+        private RichPresence _presence;
         private Character _character;
         private DateTime? _lastCharUpdate;
         private bool _hasUpdate;
@@ -22,9 +22,18 @@ namespace Service {
         /// <summary>
         /// Constructor
         /// </summary>
-        public RpcClient(Settings settings, int pipe = -1) {
+        public RpcClient(Settings settings) {
             _settings = settings ?? throw new ArgumentNullException();
-            
+        }
+
+        /// <summary>
+        /// Sets up the timer
+        /// </summary>
+        public void Initialize(int pipe = -1) {
+            if (_callbackTimer != null || _rpcClient != null || _presence != null) {
+                throw new Exception("Already running! Dispose first");
+            }
+
             // Create the RPC client
             _rpcClient = new DiscordRpcClient(Settings.DiscordAppId, pipe);
             _rpcClient.OnReady += OnReady;
@@ -32,7 +41,7 @@ namespace Service {
             _rpcClient.OnError += OnError;
             _rpcClient.OnConnectionEstablished += OnConnectionEstablished;
             _rpcClient.OnConnectionFailed += OnConnectionFailed;
-            
+
             // Define an initial presence
             _presence = new RichPresence {
                 Assets = new Assets {
@@ -43,37 +52,37 @@ namespace Service {
 
             // Start the client
             _rpcClient.SetPresence(_presence);
+            _rpcClient.Initialize();
+            _callbackTimer = new Timer(TimerCallback, null, TimeSpan.Zero, Settings.PresencePollDelay);
         }
-        
+
         /// <summary>
-        /// Dispose of
+        /// Disposer
         /// </summary>
         public void Dispose() {
             _callbackTimer?.Dispose();
+            _callbackTimer = null;
+
             _rpcClient?.Dispose();
+            _rpcClient = null;
+
+            _presence = null;
+            _character = null;
+            _lastCharUpdate = null;
+            _hasUpdate = false;
+            _currentArea = null;
         }
 
         /// <summary>
-        /// Sets up the timer
+        /// Updates presence, if necessary
         /// </summary>
-        public void Initialize() {
-            if (_callbackTimer != null) {
-                throw new Exception("Already running! Dispose first");
-            }
-            
-            _rpcClient.Initialize();
-
-            // Inner method for timer callback
-            void Tick(object state) {
-                if (_hasUpdate) {
-                    _hasUpdate = false;
-                    _rpcClient.SetPresence(_presence);
-                }
-
-                _rpcClient.Invoke();
+        private void TimerCallback(object state = null) {
+            if (_hasUpdate) {
+                _hasUpdate = false;
+                _rpcClient.SetPresence(_presence);
             }
 
-            _callbackTimer = new Timer(Tick, null, TimeSpan.Zero, Settings.PresencePollDelay);
+            _rpcClient.Invoke();
         }
 
         /// <summary>
@@ -189,7 +198,7 @@ namespace Service {
                     : $"{_currentArea.Name} ({_character.League})";
             }
         }
-        
+
         #endregion
 
         #region Pipe Connection Events

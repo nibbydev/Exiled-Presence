@@ -25,11 +25,13 @@ namespace Utility {
         }
 
         /// <summary>
-        /// Disposer
+        /// Disposer. Has same functionality as close.
         /// </summary>
         public void Dispose() {
             _callbackTimer?.Dispose();
             _callbackTimer = null;
+            IsProcRunning = false;
+            _lastIsProcRunning = false;
         }
 
         /// <summary>
