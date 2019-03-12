@@ -8,7 +8,7 @@ namespace Service {
         public const string DiscordAppId = "551089446460850176";
         public const string ProgramName = "Exiled Presence";
         public const string GameWindowTitle = "Path of Exile";
-        public const string Version = "v1.0.2";
+        public const string Version = "v1.0.0";
         public const int CharacterUpdateDelaySec = 60;
         public const int UpdateCheckIntervalH = 24;
         

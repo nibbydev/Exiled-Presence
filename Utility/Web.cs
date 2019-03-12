@@ -59,7 +59,7 @@ namespace Utility {
                 return null;
             }
 
-            return releases[0];
+            return releases.FirstOrDefault(t => !t.prerelease);
         }
     }
 }
