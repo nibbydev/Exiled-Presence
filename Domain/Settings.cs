@@ -3,14 +3,12 @@ using System.IO;
 using System.Reflection;
 using System.Text.RegularExpressions;
 
-namespace Service {
+namespace Domain {
     public class Settings {
         public const string DiscordAppId = "551089446460850176";
         public const string ProgramName = "Exiled Presence";
         public const string GameWindowTitle = "Path of Exile";
         public const string Version = "v1.0.0";
-        public const int CharacterUpdateDelaySec = 60;
-        public const int UpdateCheckIntervalH = 24;
         
         public const string ConfigFileName = "config.json";
         public static readonly string AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
@@ -20,7 +18,10 @@ namespace Service {
         public static readonly string StartupShortcutPath =  Path.Combine(StartupFolderPath, $"{ProgramName}.url");
         public static readonly string AppPath = Assembly.GetEntryAssembly().Location;
         public static readonly Regex SessIdRegex = new Regex("^[0-9a-fA-F]{32}$");
-        public static readonly TimeSpan PresencePollDelay = TimeSpan.FromMilliseconds(500);
+        
+        public static readonly TimeSpan PresencePollInterval = TimeSpan.FromMilliseconds(500);
+        public static readonly TimeSpan UpdateCheckInterval = TimeSpan.FromHours(24);
+        public static readonly TimeSpan CharacterUpdateInterval = TimeSpan.FromSeconds(60);
 
         public string AccountName { get; set; } = "";
         public string PoeSessionId { get; set; } = "";
@@ -51,14 +52,14 @@ namespace Service {
         }
 
         /// <summary>
-        /// Compares time in config to current time
+        /// Compares time in config to current time to determine if updates should be checked
         /// </summary>
         public bool IsCheckUpdates() {
             if (LastUpdateCheck == null) {
                 return true;
             }
 
-            return LastUpdateCheck.Value.AddHours(UpdateCheckIntervalH) < DateTime.UtcNow;
+            return LastUpdateCheck.Value.Add(UpdateCheckInterval) < DateTime.UtcNow;
         }
     }
 }

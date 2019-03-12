@@ -12,7 +12,6 @@ namespace Utility {
         private const string ReleaseApi = "https://api.github.com/repos/siegrest/Exiled-Presence/releases";
         private const string PoeApi = "https://www.pathofexile.com/character-window/get-characters";
 
-
         /// <summary>
         /// Queries all the characters of the user and returns the last active one
         /// </summary>
@@ -43,8 +42,7 @@ namespace Utility {
             var characters = JsonUtility.Deserialize<Character[]>(response.Content);
             return characters.FirstOrDefault(t => t.LastActive != null);
         }
-        
-        
+
         /// <summary>
         /// Gets releases from Github
         /// </summary>

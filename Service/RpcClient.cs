@@ -53,7 +53,7 @@ namespace Service {
             // Start the client
             _rpcClient.SetPresence(_presence);
             _rpcClient.Initialize();
-            _callbackTimer = new Timer(TimerCallback, null, TimeSpan.Zero, Settings.PresencePollDelay);
+            _callbackTimer = new Timer(TimerCallback, null, TimeSpan.Zero, Settings.PresencePollInterval);
         }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace Service {
         /// </summary>
         private async void RequestCharacterUpdate() {
             // Less than x has passed since last char update
-            if (_lastCharUpdate?.AddSeconds(Settings.CharacterUpdateDelaySec) > DateTime.UtcNow) {
+            if (_lastCharUpdate > DateTime.UtcNow.Subtract(Settings.CharacterUpdateInterval)) {
                 return;
             }
 

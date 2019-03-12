@@ -52,7 +52,6 @@
     <Compile Include="Config.cs" />
     <Compile Include="RpcClient.cs" />
     <Compile Include="Controller.cs" />
-    <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DiscordRPC\DiscordRPC.csproj">

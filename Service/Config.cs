@@ -1,24 +1,16 @@
 using System.IO;
+using Domain;
 using Utility;
 
 namespace Service {
     public class Config {
-        public Settings Settings { get; } = new Settings();
+        private readonly Settings _settings;
 
         /// <summary>
-        /// Removes config file from disk and resets settings
+        /// Constructor
         /// </summary>
-        public void ResetConfig() {
-            if (!Directory.Exists(Settings.CfgFolderPath)) {
-                return;
-            }
-
-            if (!File.Exists(Settings.CfgFilePath)) {
-                return;
-            }
-
-            File.Delete(Settings.CfgFilePath);
-            Settings.Update(new Settings());
+        public Config(Settings settings) {
+            _settings = settings;
         }
 
         /// <summary>
@@ -39,7 +31,7 @@ namespace Service {
                 }
             }
 
-            if (!Settings.Validate(out var errorMsg)) {
+            if (!_settings.Validate(out var errorMsg)) {
                 msg = $"Invalid config ({errorMsg})";
                 return false;
             }
@@ -56,7 +48,7 @@ namespace Service {
                 var configString = streamReader.ReadToEnd();
                 
                 var settings = JsonUtility.Deserialize<Settings>(configString);
-                Settings.Update(settings);
+                _settings.Update(settings);
             }
         }
 
@@ -65,7 +57,7 @@ namespace Service {
         /// </summary>
         public void SaveConfig() {
             using (var streamWriter = new StreamWriter(Settings.CfgFilePath)) {
-                var rawData = JsonUtility.Serialize(Settings);
+                var rawData = JsonUtility.Serialize(_settings);
                 streamWriter.Write(rawData);
             }
         }

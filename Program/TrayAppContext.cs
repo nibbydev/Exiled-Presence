@@ -2,13 +2,15 @@
 using System.Diagnostics;
 using System.IO;
 using System.Windows.Forms;
+using Domain;
 using Program.Properties;
 using Service;
 using Utility;
 
 namespace Program {
     public class TrayAppContext : ApplicationContext {
-        private readonly Config _config = new Config();
+        private readonly Settings _settings;
+        private readonly Config _config;
         private readonly Controller _controller;
         private string _releaseUrl;
 
@@ -24,6 +26,9 @@ namespace Program {
         /// Constructor
         /// </summary>
         public TrayAppContext() {
+            _settings = new Settings();
+            _config = new Config(_settings);
+            
             CreateContextMenuEntries();
 
             if (!_config.LoadConfig(out var msg)) {
@@ -32,7 +37,7 @@ namespace Program {
 
             CheckUpdates();
             
-            _controller  = new Controller(_config.Settings);
+            _controller  = new Controller(_settings);
             _controller.Initialize();
         }
 
@@ -110,7 +115,7 @@ namespace Program {
         /// Checks for updates infrequently
         /// </summary>
         private async void CheckUpdates() {
-            if (!_config.Settings.IsCheckUpdates()) {
+            if (!_settings.IsCheckUpdates()) {
                 return;
             }
 
@@ -119,7 +124,7 @@ namespace Program {
                 return;
             }
 
-            _config.Settings.LastUpdateCheck = DateTime.UtcNow;
+            _settings.LastUpdateCheck = DateTime.UtcNow;
             _config.SaveConfig();
 
             if (General.IsNewVersion(Settings.Version, release.tag_name)) {
