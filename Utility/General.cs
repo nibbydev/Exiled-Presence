@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using Domain;
 
@@ -138,6 +139,30 @@ namespace Utility {
             }
 
             return false;
+        }
+        
+        /// <summary>
+        /// Finds the game log file's full path based on process path
+        /// </summary>
+        public static string GetPoeLogPath(string exePath) {
+            if (string.IsNullOrEmpty(exePath)) {
+                return null;
+            }
+
+            var gameDir = Path.GetDirectoryName(exePath);
+            if (gameDir == null) {
+                return null;
+            }
+
+            var logFile = Path.Combine(gameDir, "logs", "Client.txt");
+            return File.Exists(logFile) ? logFile : null;
+        }
+        
+        /// <summary>
+        /// Opens the file/path using the default application
+        /// </summary>
+        public static void OpenPath(string path) {
+            System.Diagnostics.Process.Start(path);
         }
     }
 }

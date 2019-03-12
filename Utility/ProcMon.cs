@@ -7,16 +7,16 @@ namespace Utility {
     /// A process monitor that executes actions when the process is started/stopped. Process is found based on window
     /// title.
     /// </summary>
-    public class ProcMon {
-        private const int PollRateActive = 5000;
-        private const int PollRateInactive = 5000;
+    public class ProcMon : IDisposable {
+        private readonly TimeSpan _callbackTimespan = TimeSpan.FromSeconds(5);
         private readonly string _windowTitle;
         public bool IsProcRunning { get; private set; }
         private bool _lastIsProcRunning;
-        private bool _run = true;
-        public Action ActionProcessStart { get; set; }
-        public Action ActionProcessStop { get; set; }
-
+        public Action ActionProcessStart { private get; set; }
+        public Action ActionProcessStop { private get; set; }
+        private Timer _callbackTimer;
+        public bool IsInitialized => _callbackTimer != null;
+        
         /// <summary>
         /// Constructor
         /// </summary>
@@ -25,46 +25,44 @@ namespace Utility {
         }
 
         /// <summary>
-        /// Stops the main loop
+        /// Disposer
         /// </summary>
-        public void Stop() {
-            _run = false;
+        public void Dispose() {
+            _callbackTimer?.Dispose();
+            _callbackTimer = null;
         }
 
         /// <summary>
-        /// Runs the main loop as a Task
+        /// Sets up the timer
         /// </summary>
-        public ProcMon RunAsTask() {
-            new Task(Run).Start();
-            return this;
+        public void Initialize() {
+            if (IsInitialized) {
+                throw new Exception("Already running! Dispose first");
+            }
+
+            _callbackTimer = new Timer(Tick, null, TimeSpan.Zero, _callbackTimespan);
         }
 
         /// <summary>
         /// Main loop of the class
         /// </summary>
-        public void Run() {
-            do {
-                // todo: replace with system events
-                IsProcRunning = Win32.IsRunning(_windowTitle);
+        private void Tick(object state) {
+            // todo: replace with system events
+            IsProcRunning = Win32.IsRunning(_windowTitle);
 
-                // If the state of the process has changed from either OFF->ON or vice-versa
-                if (_lastIsProcRunning != IsProcRunning) {
-                    if (IsProcRunning) {
-                        // Process was started
-                        ActionProcessStart?.Invoke();
-                    } else {
-                        // Process was stopped
-                        ActionProcessStop?.Invoke();
-                    }
+            // If the on state of the process has not toggled
+            if (_lastIsProcRunning == IsProcRunning) return;
+            
+            if (IsProcRunning) {
+                // Process was started
+                ActionProcessStart?.Invoke();
+            } else {
+                // Process was stopped
+                ActionProcessStop?.Invoke();
+            }
 
-                    // Set last state to current state
-                    _lastIsProcRunning = IsProcRunning;
-                }
-
-                // todo: notify
-                // Sleep for x MS depending on the process state
-                Thread.Sleep(IsProcRunning ? PollRateActive : PollRateInactive);
-            } while (_run);
+            // Set last state to current state
+            _lastIsProcRunning = IsProcRunning;
         }
     }
 }

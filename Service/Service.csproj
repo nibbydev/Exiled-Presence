@@ -50,8 +50,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config.cs" />
-    <Compile Include="RPClient.cs" />
-    <Compile Include="Service.cs" />
+    <Compile Include="RpcClient.cs" />
+    <Compile Include="Controller.cs" />
     <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>

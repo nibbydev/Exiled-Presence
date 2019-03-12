@@ -8,20 +8,32 @@ using Domain;
 using Utility;
 
 namespace Service {
-    public class RpClient {
-        private static readonly ConsoleLogger Logger = new ConsoleLogger {Level = LogLevel.Warning, Coloured = true};
-        private readonly DiscordRpcClient _client;
+    public class RpcClient : IDisposable {
+        private readonly DiscordRpcClient _rpcClient;
         private readonly RichPresence _presence;
+        private readonly Settings _settings;
+
         private Character _character;
         private DateTime? _lastCharUpdate;
-        private bool _run = true;
         private bool _hasUpdate;
         private Area _currentArea;
+        private Timer _callbackTimer;
 
         /// <summary>
         /// Constructor
         /// </summary>
-        public RpClient() {
+        public RpcClient(Settings settings, int pipe = -1) {
+            _settings = settings ?? throw new ArgumentNullException();
+            
+            // Create the RPC client
+            _rpcClient = new DiscordRpcClient(Settings.DiscordAppId, pipe);
+            _rpcClient.OnReady += OnReady;
+            _rpcClient.OnClose += OnClose;
+            _rpcClient.OnError += OnError;
+            _rpcClient.OnConnectionEstablished += OnConnectionEstablished;
+            _rpcClient.OnConnectionFailed += OnConnectionFailed;
+            
+            // Define an initial presence
             _presence = new RichPresence {
                 Assets = new Assets {
                     LargeImageKey = "misc_logo",
@@ -29,64 +41,55 @@ namespace Service {
                 }
             };
 
-            _client = new DiscordRpcClient(Settings.DiscordAppId, true, -1, Logger);
-
-            _client.OnReady += OnReady;
-            _client.OnClose += OnClose;
-            _client.OnError += OnError;
-
-            _client.OnConnectionEstablished += OnConnectionEstablished;
-            _client.OnConnectionFailed += OnConnectionFailed;
-
-            _client.SetPresence(_presence);
-            _client.Initialize();
+            // Start the client
+            _rpcClient.SetPresence(_presence);
+        }
+        
+        /// <summary>
+        /// Dispose of
+        /// </summary>
+        public void Dispose() {
+            _callbackTimer?.Dispose();
+            _rpcClient?.Dispose();
         }
 
         /// <summary>
-        /// Stops the main loop
+        /// Sets up the timer
         /// </summary>
-        public void Stop() {
-            _run = false;
-            _client?.Dispose();
-        }
+        public void Initialize() {
+            if (_callbackTimer != null) {
+                throw new Exception("Already running! Dispose first");
+            }
+            
+            _rpcClient.Initialize();
 
-        /// <summary>
-        /// Runs the main loop as a Task
-        /// </summary>
-        public RpClient RunAsTask() {
-            new Task(Run).Start();
-            return this;
-        }
-
-        /// <summary>
-        /// Main loop of the class
-        /// </summary>
-        public void Run() {
-            while (_run) {
+            // Inner method for timer callback
+            void Tick(object state) {
                 if (_hasUpdate) {
                     _hasUpdate = false;
-                    _client?.SetPresence(_presence);
+                    _rpcClient.SetPresence(_presence);
                 }
 
-                _client?.Invoke();
-                Thread.Sleep(Settings.PresencePollDelayMs);
+                _rpcClient.Invoke();
             }
+
+            _callbackTimer = new Timer(Tick, null, TimeSpan.Zero, Settings.PresencePollDelay);
         }
 
         /// <summary>
         /// Requests current character from the API and asynchronously updates the presence
         /// </summary>
-        public async void UpdateCharacter() {
-            // More than x has passed since last char update
+        private async void RequestCharacterUpdate() {
+            // Less than x has passed since last char update
             if (_lastCharUpdate?.AddSeconds(Settings.CharacterUpdateDelaySec) > DateTime.UtcNow) {
                 return;
             }
 
-            // todo: if character is not in an area that does not grant xp
+            // todo: if character is in an area that does not grant xp
 
             Character character;
             try {
-                character = await Web.GetLastActiveChar(Config.Settings.AccountName, Config.Settings.PoeSessionId);
+                character = await Web.GetLastActiveChar(_settings.AccountName, _settings.PoeSessionId);
             } catch (Exception ex) {
                 Console.WriteLine(ex.Message);
                 return;
@@ -96,28 +99,20 @@ namespace Service {
             if (character == null) {
                 return;
             }
-            
+
             _lastCharUpdate = DateTime.UtcNow;
             _character = character;
-            UpdateCharacterData();
+            PresenceUpdateCharacterData();
 
-            
-            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine($@"[EVENT] Got character from api: {_character.Name}");
-            Console.ResetColor();
         }
 
-        /// <summary>
-        /// Resets active character
-        /// </summary>
-        private void ResetCharacter() {
-            _character = null;
-        }
+        #region Presence update methods
 
         /// <summary>
         /// Updates the presence AFK or DND status
         /// </summary>
-        public void UpdateStatus(string mode, bool on, string message) {
+        public void PresenceUpdateStatus(string mode, bool on, string message) {
             _presence.State = on ? mode : null;
             _hasUpdate = true;
         }
@@ -125,24 +120,23 @@ namespace Service {
         /// <summary>
         /// Updates the presence area
         /// </summary>
-        public void UpdateArea(string areaName) {
+        public void PresenceUpdateArea(string areaName) {
             // Update character data on area change
-            UpdateCharacter();
+            RequestCharacterUpdate();
             AreaMatcher.Match(areaName, out _currentArea);
-            
+
             _presence.Assets.SmallImageKey = _currentArea.Key;
             _presence.Timestamps = Timestamps.Now;
             _presence.State = null;
-            UpdateSmallImageText();
+            PresenceUpdateSmallImageText();
             _hasUpdate = true;
         }
 
         /// <summary>
         /// Sets the presence to login screen
         /// </summary>
-        public void UpdateLoginScreen() {
-            ResetCharacter();
-
+        public void PresenceUpdateLoginScreen() {
+            _character = null;
             _presence.Assets.SmallImageKey = null;
             _presence.Assets.SmallImageText = null;
             _presence.Assets.LargeImageKey = General.GetArtKey();
@@ -156,8 +150,8 @@ namespace Service {
         /// <summary>
         /// Sets the presence to character select
         /// </summary>
-        public void UpdateCharacterSelect() {
-            ResetCharacter();
+        public void PresenceUpdateCharacterSelect() {
+            _character = null;
 
             _presence.Assets.SmallImageKey = null;
             _presence.Assets.SmallImageText = null;
@@ -172,7 +166,7 @@ namespace Service {
         /// <summary>
         /// Updates the presence with the current character data
         /// </summary>
-        private void UpdateCharacterData() {
+        private void PresenceUpdateCharacterData() {
             var largeAssetKey = General.GetArtKey(_character.Class);
             var xpPercent = General.GetPercentToNextLevel(_character.Level, _character.Experience);
 
@@ -180,54 +174,55 @@ namespace Service {
             _presence.Details = $"Playing as {_character.Name}";
             _presence.Assets.LargeImageText = $"Level {_character.Level} {_character.Class} - {xpPercent}% xp";
 
-            UpdateSmallImageText();
+            PresenceUpdateSmallImageText();
 
             _hasUpdate = true;
         }
 
-        private void UpdateSmallImageText() {
+        /// <summary>
+        /// Updates the presence small image text
+        /// </summary>
+        private void PresenceUpdateSmallImageText() {
             if (_currentArea != null && _presence.Assets.SmallImageKey != null) {
                 _presence.Assets.SmallImageText = _character == null
                     ? $"{_currentArea.Name}"
                     : $"{_currentArea.Name} ({_character.League})";
             }
         }
+        
+        #endregion
 
-        #region State Events
+        #region Pipe Connection Events
 
         private static void OnReady(object sender, ReadyMessage args) {
             //This is called when we are all ready to start receiving and sending discord events. 
             // It will give us some basic information about discord to use in the future.
 
-            //It can be a good idea to send a inital presence update on this event too, just to setup the inital game state.
-            Console.WriteLine("On Ready. RPC Version: {0}", args.Version);
+            //It can be a good idea to send a initial presence update on this event too, just to setup the initial game state.
+            Console.WriteLine(@"[EVENT] RPC Ready. Version: {0}", args.Version);
         }
 
         private static void OnClose(object sender, CloseMessage args) {
             //This is called when our client has closed. The client can no longer send or receive events after this message.
             // Connection will automatically try to re-establish and another OnReady will be called (unless it was disposed).
-            Console.WriteLine("Lost Connection with client because of '{0}'", args.Reason);
+            Console.WriteLine(@"[EVENT] Lost Connection with client because of '{0}'", args.Reason);
         }
 
         private static void OnError(object sender, ErrorMessage args) {
             //Some error has occured from one of our messages. Could be a malformed presence for example.
             // Discord will give us one of these events and its upto us to handle it
-            Console.WriteLine("Error occured within discord. ({1}) {0}", args.Message, args.Code);
+            Console.WriteLine(@"[EVENT] Error occured within discord. ({1}) {0}", args.Message, args.Code);
         }
-
-        #endregion
-
-        #region Pipe Connection Events
 
         private static void OnConnectionEstablished(object sender, ConnectionEstablishedMessage args) {
             //This is called when a pipe connection is established. The connection is not ready yet, but we have at least found a valid pipe.
-            Console.WriteLine("Pipe Connection Established. Valid on pipe #{0}", args.ConnectedPipe);
+            Console.WriteLine(@"[EVENT] Pipe Connection Established. Valid on pipe #{0}", args.ConnectedPipe);
         }
 
         private static void OnConnectionFailed(object sender, ConnectionFailedMessage args) {
             //This is called when the client fails to establish a connection to discord. 
             // It can be assumed that Discord is unavailable on the supplied pipe.
-            Console.WriteLine("Pipe Connection Failed. Could not connect to pipe #{0}", args.FailedPipe);
+            Console.WriteLine(@"[EVENT] Pipe Connection Failed. Could not connect to pipe #{0}", args.FailedPipe);
         }
 
         #endregion
