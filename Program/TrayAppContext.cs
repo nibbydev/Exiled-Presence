@@ -5,7 +5,6 @@ using System.Windows.Forms;
 using Domain;
 using Program.Properties;
 using Service;
-using Utility;
 
 namespace Program {
     public class TrayAppContext : ApplicationContext {
@@ -74,7 +73,7 @@ namespace Program {
                     } else TooltipMsg("Startup shortcut did not exist", "error");
                 }),
                 new MenuItem("Open startup folder", delegate {
-                    General.OpenPath(Settings.StartupFolderPath);
+                    Misc.OpenPath(Settings.StartupFolderPath);
                 })
             });
             
@@ -127,7 +126,7 @@ namespace Program {
             _settings.LastUpdateCheck = DateTime.UtcNow;
             _config.SaveConfig();
 
-            if (General.IsNewVersion(Settings.Version, release.tag_name)) {
+            if (Misc.IsNewVersion(Settings.Version, release.tag_name)) {
                 _releaseUrl = release.html_url;
                 TooltipMsg($"{release.tag_name} released. Click here to open in browser");
             }

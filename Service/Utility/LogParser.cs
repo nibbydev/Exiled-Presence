@@ -2,11 +2,8 @@ using System;
 using System.IO;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using Domain;
-using Service;
 
-namespace Utility {
+namespace Service {
     /// <summary>
     /// Class for parsing the game's log file and calling actions based on matches
     /// </summary>
@@ -89,7 +86,6 @@ namespace Utility {
         private void ReadToEof(object state = null) {
             string s;
             while ((s = _sr.ReadLine()) != null) {
-                Console.WriteLine(s);
                 LogAction.Invoke(s);
             }
         }

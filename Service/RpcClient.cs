@@ -5,7 +5,6 @@ using DiscordRPC;
 using DiscordRPC.Logging;
 using DiscordRPC.Message;
 using Domain;
-using Utility;
 
 namespace Service {
     public class RpcClient : IDisposable {
@@ -148,7 +147,7 @@ namespace Service {
             _character = null;
             _presence.Assets.SmallImageKey = null;
             _presence.Assets.SmallImageText = null;
-            _presence.Assets.LargeImageKey = General.GetArtKey();
+            _presence.Assets.LargeImageKey = Misc.GetArtKey();
             _presence.Assets.LargeImageText = $"{Settings.ProgramName} {Settings.Version}";
             _presence.State = "Login screen";
             _presence.Details = null;
@@ -164,7 +163,7 @@ namespace Service {
 
             _presence.Assets.SmallImageKey = null;
             _presence.Assets.SmallImageText = null;
-            _presence.Assets.LargeImageKey = General.GetArtKey();
+            _presence.Assets.LargeImageKey = Misc.GetArtKey();
             _presence.Assets.LargeImageText = $"{Settings.ProgramName} {Settings.Version}";
             _presence.State = "Character select";
             _presence.Details = null;
@@ -176,8 +175,8 @@ namespace Service {
         /// Updates the presence with the current character data
         /// </summary>
         private void PresenceUpdateCharacterData() {
-            var largeAssetKey = General.GetArtKey(_character.Class);
-            var xpPercent = General.GetPercentToNextLevel(_character.Level, _character.Experience);
+            var largeAssetKey = Misc.GetArtKey(_character.Class);
+            var xpPercent = Misc.GetPercentToNextLevel(_character.Level, _character.Experience);
 
             _presence.Assets.LargeImageKey = largeAssetKey;
             _presence.Details = $"Playing as {_character.Name}";

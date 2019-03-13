@@ -1,6 +1,5 @@
 using System.IO;
 using Domain;
-using Utility;
 
 namespace Service {
     public class Config {
@@ -74,7 +73,7 @@ namespace Service {
                 SaveConfig();
             }
 
-            General.OpenPath(Settings.CfgFilePath);
+            Misc.OpenPath(Settings.CfgFilePath);
         }
     }
 }

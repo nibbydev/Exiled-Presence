@@ -1,11 +1,9 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Domain;
 
-namespace Utility {
-    public static class General {
+namespace Service {
+    public static class Misc {
         /// <summary>
         /// Xp array. If level is 2, then the value at position 2 is the total amount of xp required to reach lvl 2
         /// </summary>
@@ -115,7 +113,7 @@ namespace Utility {
             var nextLvlXp = Xp[lvl == 100 ? 100 : lvl + 1];
             return (int) Math.Floor((xp - currentLvlXp) / (double) (nextLvlXp - currentLvlXp) * 100f);
         }
-        
+
         /// <summary>
         /// Compares two version strings
         /// </summary>
@@ -140,7 +138,7 @@ namespace Utility {
 
             return false;
         }
-        
+
         /// <summary>
         /// Finds the game log file's full path based on process path
         /// </summary>
@@ -157,7 +155,7 @@ namespace Utility {
             var logFile = Path.Combine(gameDir, "logs", "Client.txt");
             return File.Exists(logFile) ? logFile : null;
         }
-        
+
         /// <summary>
         /// Opens the file/path using the default application
         /// </summary>

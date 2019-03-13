@@ -4,7 +4,6 @@ using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using Domain;
-using Utility;
 
 namespace Service {
     public class Controller : IDisposable {
@@ -69,7 +68,7 @@ namespace Service {
 
             // Get the expected log path or null by using the game executable location
             var exePath = Win32.FindProcessPath(Settings.GameWindowTitle);
-            var logPath = General.GetPoeLogPath(exePath);
+            var logPath = Misc.GetPoeLogPath(exePath);
 
             // Run log parser
             _rpcClient.Initialize();

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Utility {
+namespace Service {
     public static class Win32 {
         [DllImport("Kernel32.dll")]
         private static extern bool QueryFullProcessImageName([In] IntPtr hProcess, [In] uint dwFlags,
@@ -65,7 +65,7 @@ namespace Utility {
         public static void CreateShortcut(string currentFile, string targetShortcut, string param = null) {
             if (!File.Exists(currentFile)) throw new FileNotFoundException();
             if (!Directory.GetParent(targetShortcut).Exists) throw new DirectoryNotFoundException();
-            
+
             using (var sw = new StreamWriter(targetShortcut)) {
                 sw.WriteLine("[InternetShortcut]");
                 sw.WriteLine("URL=file:///" + currentFile + (param ?? ""));

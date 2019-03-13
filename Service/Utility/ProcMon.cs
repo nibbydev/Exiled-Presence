@@ -1,8 +1,7 @@
 using System;
 using System.Threading;
-using System.Threading.Tasks;
 
-namespace Utility {
+namespace Service {
     /// <summary>
     /// A process monitor that executes actions when the process is started/stopped. Process is found based on window
     /// title.
@@ -16,7 +15,7 @@ namespace Utility {
         public Action ActionProcessStop { private get; set; }
         private Timer _callbackTimer;
         public bool IsInitialized => _callbackTimer != null;
-        
+
         /// <summary>
         /// Constructor
         /// </summary>
@@ -54,7 +53,7 @@ namespace Utility {
 
             // If the on state of the process has not toggled
             if (_lastIsProcRunning == IsProcRunning) return;
-            
+
             if (IsProcRunning) {
                 // Process was started
                 ActionProcessStart?.Invoke();

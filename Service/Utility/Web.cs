@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Domain;
 using RestSharp;
 
-namespace Utility {
+namespace Service {
     public static class Web {
         private static readonly RestClient Client = new RestClient();
         private const string ReleaseApi = "https://api.github.com/repos/siegrest/Exiled-Presence/releases";
@@ -22,7 +22,7 @@ namespace Utility {
 
             var request = new RestRequest(PoeApi, Method.GET);
             request.AddParameter("accountName", accountName);
-            
+
             // Add session Id cookie if present
             if (!string.IsNullOrEmpty(sessId)) {
                 request.AddCookie("POESESSID", sessId);
@@ -35,7 +35,7 @@ namespace Utility {
                 if (string.IsNullOrEmpty(sessId)) {
                     throw new Exception("Profile is private and POESESSID is not set!");
                 }
-                
+
                 throw new Exception("Profile is private and POESESSID is invalid!");
             }
 
@@ -51,7 +51,7 @@ namespace Utility {
             var request = new RestRequest(ReleaseApi, Method.GET);
             var cancellationTokenSource = new CancellationTokenSource();
             var response = await Client.ExecuteTaskAsync(request, cancellationTokenSource.Token);
-            
+
             var releases = JsonUtility.Deserialize<Release[]>(response.Content);
             if (releases == null || releases.Length == 0) {
                 return null;

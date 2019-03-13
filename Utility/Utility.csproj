@@ -47,46 +47,16 @@
         <Reference Include="System.Xml" />
     </ItemGroup>
     <ItemGroup>
-        <Compile Include="AreaMatcher.cs" />
-        <Compile Include="General.cs" />
-        <Compile Include="JsonUtility.cs" />
-        <Compile Include="LogParser.cs" />
-        <Compile Include="ProcMon.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
-        <Compile Include="Properties\Resources.Designer.cs">
-          <AutoGen>True</AutoGen>
-          <DesignTime>True</DesignTime>
-          <DependentUpon>Resources.resx</DependentUpon>
-        </Compile>
-        <Compile Include="Web.cs" />
-        <Compile Include="Win32.cs" />
     </ItemGroup>
     <ItemGroup>
       <None Include="packages.config" />
-      <None Include="Resources\maps_red.json" />
-      <None Include="Resources\maps_white.json" />
-      <None Include="Resources\maps_yellow.json" />
-      <None Include="Resources\quests.json" />
-      <None Include="Resources\towns.json" />
-      <None Include="Resources\vaal.json" />
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\Domain\Domain.csproj">
         <Project>{e3002305-05ce-40e3-9df7-13a0ce7e3731}</Project>
         <Name>Domain</Name>
       </ProjectReference>
-    </ItemGroup>
-    <ItemGroup>
-      <Content Include="Resources\fragments.json" />
-      <Content Include="Resources\lab.json" />
-      <Content Include="Resources\maps_unique.json" />
-      <Content Include="Resources\special.json" />
-    </ItemGroup>
-    <ItemGroup>
-      <EmbeddedResource Include="Properties\Resources.resx">
-        <Generator>ResXFileCodeGenerator</Generator>
-        <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      </EmbeddedResource>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
