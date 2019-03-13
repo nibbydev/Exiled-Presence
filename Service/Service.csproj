@@ -93,6 +93,7 @@
     <None Include="Resources\vaal.json" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\config.txt" />
     <Content Include="Resources\fragments.json" />
     <Content Include="Resources\lab.json" />
     <Content Include="Resources\maps_unique.json" />

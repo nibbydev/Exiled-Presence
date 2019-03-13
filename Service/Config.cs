@@ -1,8 +1,21 @@
+using System;
 using System.IO;
+using System.Text;
+using System.Text.RegularExpressions;
 using Domain;
+using Service.Properties;
 
 namespace Service {
     public class Config {
+        private const string ConfigFileName = "config.txt";
+
+        private static readonly string AppDataPath =
+            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+
+        private static readonly string CfgFolderPath = Path.Combine(AppDataPath, Settings.ProgramName);
+        private static readonly string CfgFilePath = Path.Combine(CfgFolderPath, ConfigFileName);
+        private static readonly Regex CfgRegex = new Regex(@"^(\s*)(.*?)(\s*=\s*)(.*?)(\s*)$");
+
         private readonly Settings _settings;
 
         /// <summary>
@@ -13,67 +26,107 @@ namespace Service {
         }
 
         /// <summary>
-        /// Loads config into static context on program start
+        /// Loads config on program start
         /// </summary>
-        public bool LoadConfig(out string msg) {
-            if (!Directory.Exists(Settings.CfgFolderPath)) {
-                Directory.CreateDirectory(Settings.CfgFolderPath);
+        public void Load() {
+            if (!Directory.Exists(CfgFolderPath)) {
+                Directory.CreateDirectory(CfgFolderPath);
             }
 
-            if (File.Exists(Settings.CfgFilePath)) {
+            if (File.Exists(CfgFilePath)) {
                 try {
-                    ReadConfig();
+                    Read();
                 } catch {
-                    msg = "Invalid config syntax";
-                    SaveConfig();
-                    return false;
+                    Save();
+                    throw;
                 }
             }
 
-            if (!_settings.Validate(out var errorMsg)) {
-                msg = $"Invalid config ({errorMsg})";
-                return false;
+            try {
+                _settings.Validate();
+            } catch {
+                _settings.Reset();
+                throw;
             }
 
-            msg = "Config loaded successfully";
-            return true;
+            Save();
         }
 
         /// <summary>
         /// Read config and overwrite values
         /// </summary>
-        private void ReadConfig() {
-            using (var streamReader = File.OpenText(Settings.CfgFilePath)) {
-                var configString = streamReader.ReadToEnd();
-                
-                var settings = JsonUtility.Deserialize<Settings>(configString);
-                _settings.Update(settings);
+        private void Read() {
+            string conf;
+            using (var sr = File.OpenText(CfgFilePath)) {
+                conf = sr.ReadToEnd();
+            }
+
+            if (string.IsNullOrEmpty(conf.Trim())) {
+                throw new Exception("Config was empty");
+            }
+
+            Parse(conf);
+        }
+
+        /// <summary>
+        /// Attempt to read values from config string and load them into settings
+        /// </summary>
+        private void Parse(string conf) {
+            var splitConf = conf.Split(new[] {Environment.NewLine}, StringSplitOptions.None);
+
+            foreach (var s in splitConf) {
+                if (string.IsNullOrEmpty(s) || s.StartsWith("#")) continue;
+
+                var match = CfgRegex.Match(s);
+                if (!match.Success) continue;
+
+                var key = match.Groups[2].Value.Trim();
+                var val = match.Groups[4].Value.Trim();
+
+                if (val.StartsWith("#")) continue;
+
+                _settings.ParseValue(key, val);
             }
         }
 
         /// <summary>
-        /// Overwrite config
+        /// Overwrite/create config
         /// </summary>
-        public void SaveConfig() {
-            using (var streamWriter = new StreamWriter(Settings.CfgFilePath)) {
-                var rawData = JsonUtility.Serialize(_settings);
-                streamWriter.Write(rawData);
+        public void Save() {
+            // Get the base config and split it line by line
+            var baseConf = Encoding.Default.GetString(Resources.BaseConfig)
+                .Split(new[] {Environment.NewLine}, StringSplitOptions.None);
+
+            using (var sr = new StreamWriter(CfgFilePath)) {
+                // Loop though each line, replacing values with current settings
+                foreach (var s in baseConf) {
+                    var match = CfgRegex.Match(s);
+
+                    if (match.Success) {
+                        var val = _settings.GetValue(match.Groups[2].Value);
+                        var replacement = CfgRegex.Replace(s, "$1$2$3") + (val ?? "#none");
+
+                        sr.WriteLine(replacement);
+                    } else {
+                        sr.WriteLine(s);
+                    }
+                }
             }
         }
 
         /// <summary>
         /// Opens the config file in the default text editor
         /// </summary>
-        public void OpenConfig() {
-            if (!Directory.Exists(Settings.CfgFolderPath)) {
-                Directory.CreateDirectory(Settings.CfgFolderPath);
+        public void OpenInEditor() {
+            if (!Directory.Exists(CfgFolderPath)) {
+                Directory.CreateDirectory(CfgFolderPath);
             }
 
-            if (!File.Exists(Settings.CfgFilePath)) {
-                SaveConfig();
+            if (!File.Exists(CfgFilePath)) {
+                Save();
             }
 
-            Misc.OpenPath(Settings.CfgFilePath);
+            Misc.OpenPath(CfgFilePath);
         }
     }
 }

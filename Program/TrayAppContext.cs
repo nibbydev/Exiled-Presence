@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
 using Domain;
@@ -27,16 +28,18 @@ namespace Program {
         public TrayAppContext() {
             _settings = new Settings();
             _config = new Config(_settings);
-            
+
             CreateContextMenuEntries();
 
-            if (!_config.LoadConfig(out var msg)) {
-                TooltipMsg(msg, "error");
+            try {
+                _config.Load();
+            } catch (Exception e) {
+                TooltipMsg(e.Message, "error");
             }
 
             CheckUpdates();
-            
-            _controller  = new Controller(_settings);
+
+            _controller = new Controller(_settings);
             _controller.Initialize();
         }
 
@@ -45,17 +48,17 @@ namespace Program {
         /// </summary>
         private void CreateContextMenuEntries() {
             _trayItem.ContextMenu.MenuItems.Add(
-                new MenuItem("Edit config", delegate { _config.OpenConfig(); })
+                new MenuItem("Edit config", delegate { _config.OpenInEditor(); })
             );
 
             _trayItem.ContextMenu.MenuItems.Add(
                 new MenuItem("Reload service", delegate {
-                    if (_config.LoadConfig(out var msg)) {
-                        _controller.Dispose();
-                        _controller.Initialize();
-
+                    try {
+                        _config.Load();
                         TooltipMsg("Reload successful");
-                    } else TooltipMsg(msg, "error");
+                    } catch (Exception e) {
+                        TooltipMsg(e.Message, "error");
+                    }
                 })
             );
 
@@ -72,11 +75,9 @@ namespace Program {
                         TooltipMsg("Deleted startup shortcut", "info");
                     } else TooltipMsg("Startup shortcut did not exist", "error");
                 }),
-                new MenuItem("Open startup folder", delegate {
-                    Misc.OpenPath(Settings.StartupFolderPath);
-                })
+                new MenuItem("Open startup folder", delegate { Misc.OpenPath(Settings.StartupFolderPath); })
             });
-            
+
             _trayItem.ContextMenu.MenuItems.Add(
                 new MenuItem("Exit", delegate {
                     // Hide the icon so it doesn't persist
@@ -123,8 +124,8 @@ namespace Program {
                 return;
             }
 
-            _settings.LastUpdateCheck = DateTime.UtcNow;
-            _config.SaveConfig();
+            _settings.UpdateLastUpdateTime();
+            _config.Save();
 
             if (Misc.IsNewVersion(Settings.Version, release.tag_name)) {
                 _releaseUrl = release.html_url;

@@ -1,0 +1,39 @@
+[]---------------------------------------------------------------------[]
+  ______      _ _          _   _____                                   
+ |  ____|    (_) |        | | |  __ \                                  
+ | |__  __  ___| | ___  __| | | |__) | __ ___  ___  ___ _ __   ___ ___ 
+ |  __| \ \/ / | |/ _ \/ _` | |  ___/ '__/ _ \/ __|/ _ \ '_ \ / __/ _ \
+ | |____ >  <| | |  __/ (_| | | |   | | |  __/\__ \  __/ | | | (_|  __/
+ |______/_/\_\_|_|\___|\__,_| |_|   |_|  \___||___/\___|_| |_|\___\___|
+
+[]---------------------------------------------------------------------[]
+
+This is the config. Change whatever you want. Anything starting 
+with a pound sign is explicitly ignored, be it in front of a line 
+or a config value.
+
+[]--------------------------[] Description []--------------------------[]
+
+* An account name is required to get the character's name, league, 
+ascendancy class, level and xp percentage.
+
+* A POESESSID is required if your profile is private.
+    To find the session id, follow these steps:
+        1. Open your browser and navigate to pathofexile.com
+        2. Click the lock symbol left of the URL bar
+        3. Navigate pathofexile.com > Cookies > POESESSID
+        4. Copy what looks like '649a3c717ec06642db550046f1149b76'
+    
+    Warning: Do not share the POESESSID with anyone as that could 
+    compromise your account
+
+[]---------------------------[] Settings  []---------------------------[]
+
+account name = #none
+POESESSID    = #none
+
+[]-----------------------[] Don't touch these []-----------------------[]
+
+last update check = #none
+
+[]---------------------------------------------------------------------[]
