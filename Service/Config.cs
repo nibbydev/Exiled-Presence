@@ -75,7 +75,7 @@ namespace Service {
             var splitConf = conf.Split(new[] {Environment.NewLine}, StringSplitOptions.None);
 
             foreach (var s in splitConf) {
-                if (string.IsNullOrEmpty(s) || s.StartsWith("#")) continue;
+                if (string.IsNullOrEmpty(s) || s.Trim().StartsWith("#")) continue;
 
                 var match = CfgRegex.Match(s);
                 if (!match.Success) continue;
