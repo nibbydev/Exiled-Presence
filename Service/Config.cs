@@ -9,9 +9,7 @@ namespace Service {
     public class Config {
         private const string ConfigFileName = "config.txt";
 
-        private static readonly string AppDataPath =
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-
+        private static readonly string AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         private static readonly string CfgFolderPath = Path.Combine(AppDataPath, Settings.ProgramName);
         private static readonly string CfgFilePath = Path.Combine(CfgFolderPath, ConfigFileName);
         private static readonly Regex CfgRegex = new Regex(@"^(\s*)(.*?)(\s*=\s*)(.*?)(\s*)$");
@@ -48,8 +46,6 @@ namespace Service {
                 _settings.Reset();
                 throw;
             }
-
-            Save();
         }
 
         /// <summary>

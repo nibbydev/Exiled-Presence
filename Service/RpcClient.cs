@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using DiscordRPC;
@@ -134,7 +135,7 @@ namespace Service {
             AreaMatcher.Match(areaName, out _currentArea);
 
             _presence.Assets.SmallImageKey = _currentArea.Key;
-            _presence.Timestamps = Timestamps.Now;
+            _presence.Timestamps = _settings.ShowElapsedTime ? Timestamps.Now : null;
             _presence.State = null;
             PresenceUpdateSmallImageText();
             _hasUpdate = true;
@@ -151,7 +152,7 @@ namespace Service {
             _presence.Assets.LargeImageText = $"{Settings.ProgramName} {Settings.Version}";
             _presence.State = "Login screen";
             _presence.Details = null;
-            _presence.Timestamps = Timestamps.Now;
+            _presence.Timestamps = _settings.ShowElapsedTime ? Timestamps.Now : null;
             _hasUpdate = true;
         }
 
@@ -167,7 +168,7 @@ namespace Service {
             _presence.Assets.LargeImageText = $"{Settings.ProgramName} {Settings.Version}";
             _presence.State = "Character select";
             _presence.Details = null;
-            _presence.Timestamps = Timestamps.Now;
+            _presence.Timestamps = _settings.ShowElapsedTime ? Timestamps.Now : null;
             _hasUpdate = true;
         }
 
@@ -179,8 +180,14 @@ namespace Service {
             var xpPercent = Misc.GetPercentToNextLevel(_character.Level, _character.Experience);
 
             _presence.Assets.LargeImageKey = largeAssetKey;
-            _presence.Details = $"Playing as {_character.Name}";
-            _presence.Assets.LargeImageText = $"Level {_character.Level} {_character.Class} - {xpPercent}% xp";
+            _presence.Details = _settings.ShowCharName
+                ? $"Playing as {_character.Name}"
+                : $"Playing as a {_character.Class}";
+            
+            _presence.Assets.LargeImageText =
+                (_settings.ShowCharLevel ? $"Level {_character.Level} " : "") +
+                _character.Class +
+                (_settings.ShowCharXp ? $" - {xpPercent}% xp" : "");
 
             PresenceUpdateSmallImageText();
 

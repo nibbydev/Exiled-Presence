@@ -21,9 +21,24 @@ namespace Domain {
         public static readonly TimeSpan CharacterUpdateInterval = TimeSpan.FromSeconds(60);
         private const string ConfTimeFormat = "yyyy-MM-dd HH:mm";
 
+
         public string AccountName { get; set; }
         public string PoeSessionId { get; set; }
-        public string LastUpdateCheck { get; set; }
+
+        private string _lastUpdateCheck;
+        private string _showElapsedTime;
+        private string _showCharName;
+        private string _showCharXp;
+        private string _showCharLevel;
+
+        public bool ShowElapsedTime => _showElapsedTime?.Equals("1") ?? true;
+        public bool ShowCharName => _showCharName?.Equals("1") ?? true;
+        public bool ShowCharXp => _showCharXp?.Equals("1") ?? true;
+        public bool ShowCharLevel => _showCharLevel?.Equals("1") ?? true;
+        
+        public bool CheckUpdates => _lastUpdateCheck == null ||
+                                    DateTime.Parse(_lastUpdateCheck) <
+                                    DateTime.UtcNow.Subtract(UpdateCheckInterval);
 
         /// <summary>
         /// Loads in settings from another instance
@@ -31,7 +46,12 @@ namespace Domain {
         public void Update(Settings settings) {
             AccountName = settings.AccountName;
             PoeSessionId = settings.PoeSessionId;
-            LastUpdateCheck = settings.LastUpdateCheck;
+            _lastUpdateCheck = settings._lastUpdateCheck;
+
+            _showElapsedTime = settings._showElapsedTime;
+            _showCharName = settings._showCharName;
+            _showCharXp = settings._showCharXp;
+            _showCharLevel = settings._showCharXp;
         }
 
         /// <summary>
@@ -46,21 +66,34 @@ namespace Domain {
                 throw new ArgumentException("Invalid account name");
             }
 
-            if (!string.IsNullOrEmpty(LastUpdateCheck) && !DateTime.TryParseExact(LastUpdateCheck, ConfTimeFormat, 
-                    CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out _)) {
-                throw new ArgumentException("Invalid last update time");
-            }
-        }
-
-        /// <summary>
-        /// Compares time in config to current time to determine if updates should be checked
-        /// </summary>
-        public bool IsCheckUpdates() {
-            if (LastUpdateCheck == null) {
-                return true;
+            if (!string.IsNullOrEmpty(_lastUpdateCheck) && !DateTime.TryParseExact(_lastUpdateCheck,
+                    ConfTimeFormat, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out _)) {
+                throw new ArgumentException($"Invalid last update time (expected format {ConfTimeFormat})");
             }
 
-            return DateTime.Parse(LastUpdateCheck) < DateTime.UtcNow.Subtract(UpdateCheckInterval);
+            if (!string.IsNullOrEmpty(_showElapsedTime) &&
+                !_showElapsedTime.Equals("0") &&
+                !_showElapsedTime.Equals("1")) {
+                throw new ArgumentException("Invalid value for show elapsed time (expected 1 or 0)");
+            }
+
+            if (!string.IsNullOrEmpty(_showCharName) &&
+                !_showCharName.Equals("0") &&
+                !_showCharName.Equals("1")) {
+                throw new ArgumentException("Invalid value for show character name (expected 1 or 0)");
+            }
+
+            if (!string.IsNullOrEmpty(_showCharXp) &&
+                !_showCharXp.Equals("0") &&
+                !_showCharXp.Equals("1")) {
+                throw new ArgumentException("Invalid value for show character xp (expected 1 or 0)");
+            }
+
+            if (!string.IsNullOrEmpty(_showCharLevel) &&
+                !_showCharLevel.Equals("0") &&
+                !_showCharLevel.Equals("1")) {
+                throw new ArgumentException("Invalid value for show character level (expected 1 or 0)");
+            }
         }
 
         /// <summary>
@@ -79,12 +112,28 @@ namespace Domain {
                     AccountName = val;
                     break;
 
-                case "POESESSID":
+                case "session id":
                     PoeSessionId = val;
                     break;
 
                 case "last update check":
-                    LastUpdateCheck = val;
+                    _lastUpdateCheck = val;
+                    break;
+
+                case "show elapsed time":
+                    _showElapsedTime = val;
+                    break;
+
+                case "show character name":
+                    _showCharName = val;
+                    break;
+
+                case "show character xp":
+                    _showCharXp = val;
+                    break;
+
+                case "show character level":
+                    _showCharLevel = val;
                     break;
 
                 default:
@@ -100,11 +149,23 @@ namespace Domain {
                 case "account name":
                     return AccountName;
 
-                case "POESESSID":
+                case "session id":
                     return PoeSessionId;
 
                 case "last update check":
-                    return LastUpdateCheck;
+                    return _lastUpdateCheck;
+
+                case "show elapsed time":
+                    return _showElapsedTime ?? "1";
+
+                case "show character name":
+                    return _showCharName ?? "1";
+
+                case "show character xp":
+                    return _showCharXp ?? "1";
+
+                case "show character level":
+                    return _showCharLevel ?? "1";
 
                 default:
                     return null;
@@ -115,7 +176,7 @@ namespace Domain {
         /// Sets the last update check time to now
         /// </summary>
         public void UpdateLastUpdateTime() {
-            LastUpdateCheck = DateTime.UtcNow.ToString(ConfTimeFormat);
+            _lastUpdateCheck = DateTime.UtcNow.ToString(ConfTimeFormat);
         }
     }
 }

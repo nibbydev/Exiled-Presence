@@ -55,6 +55,8 @@ namespace Program {
                 new MenuItem("Reload service", delegate {
                     try {
                         _config.Load();
+                        _controller.Dispose();
+                        _controller.Initialize();
                         TooltipMsg("Reload successful");
                     } catch (Exception e) {
                         TooltipMsg(e.Message, "error");
@@ -115,7 +117,7 @@ namespace Program {
         /// Checks for updates infrequently
         /// </summary>
         private async void CheckUpdates() {
-            if (!_settings.IsCheckUpdates()) {
+            if (!_settings.CheckUpdates) {
                 return;
             }
 
