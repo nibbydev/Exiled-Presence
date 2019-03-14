@@ -36,7 +36,7 @@ namespace Program {
                 _config.Load();
                 CheckUpdates();
                 _controller.Initialize();
-            } catch (ArgumentException e) {
+            } catch (Exception e) {
                 // Config has invalid options
                 TooltipMsg(e.Message, "error");
             }
@@ -124,6 +124,8 @@ namespace Program {
             if (!_settings.CheckUpdates) {
                 return;
             }
+            
+            Console.WriteLine(@"Checking updates...");
 
             var release = await Web.GetLatestRelease();
             if (release == null) {
@@ -135,6 +137,7 @@ namespace Program {
 
             if (Misc.IsNewVersion(Settings.Version, release.tag_name)) {
                 _releaseUrl = release.html_url;
+                Console.WriteLine(@"New version is available");
                 TooltipMsg($"{release.tag_name} released. Click here to open in browser");
             }
         }

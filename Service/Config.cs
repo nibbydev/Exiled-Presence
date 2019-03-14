@@ -48,6 +48,8 @@ namespace Service {
                 // There were missing config fields. Regenerate it and read it in
                 Save();
                 Read();
+                
+                _settings.Validate();
             }
         }
 
@@ -83,9 +85,6 @@ namespace Service {
 
                 var key = match.Groups[2].Value.Trim();
                 var val = match.Groups[4].Value.Trim();
-
-                if (string.IsNullOrEmpty(val)) val = null;
-                else if (val.StartsWith("#")) val = "";
 
                 _settings.ParseValue(key, val);
             }

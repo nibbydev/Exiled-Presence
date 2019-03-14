@@ -38,9 +38,9 @@ namespace Domain {
         public bool ShowCharXp => _showCharXp.Equals("1");
         public bool ShowCharLevel => _showCharLevel.Equals("1");
 
-        public bool CheckUpdates => _lastUpdateCheck == null ||
-                                    DateTime.Parse(_lastUpdateCheck) <
-                                    DateTime.UtcNow.Subtract(UpdateCheckInterval);
+        public bool CheckUpdates => string.IsNullOrEmpty(_lastUpdateCheck) ||
+                                    DateTime.ParseExact(_lastUpdateCheck, ConfTimeFormat, CultureInfo.InvariantCulture,
+                                        DateTimeStyles.AssumeUniversal) < DateTime.UtcNow.Subtract(UpdateCheckInterval);
 
         /// <summary>
         /// Loads in settings from another instance
@@ -50,7 +50,7 @@ namespace Domain {
             PoeSessionId = settings.PoeSessionId;
             _lastUpdateCheck = settings._lastUpdateCheck;
             _configVersion = settings._configVersion;
-            
+
             _showElapsedTime = settings._showElapsedTime;
             _showCharName = settings._showCharName;
             _showCharXp = settings._showCharXp;
@@ -78,8 +78,8 @@ namespace Domain {
                     ConfTimeFormat, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out _)) {
                 throw new ArgumentException($"Invalid last update time (expected format {ConfTimeFormat})");
             }
-                        
-            if (!string.IsNullOrEmpty(_configVersion) && !VersionRegex.IsMatch(_configVersion)){
+
+            if (string.IsNullOrEmpty(_configVersion) || !VersionRegex.IsMatch(_configVersion)) {
                 throw new ArgumentException("Invalid config version");
             }
 
@@ -119,6 +119,12 @@ namespace Domain {
         /// Attempt to store value with key
         /// </summary>
         public void ParseValue(string key, string val) {
+            if (string.IsNullOrEmpty(val)) {
+                val = null;
+            } else if (val.StartsWith("#")) {
+                val = "";
+            }
+
             switch (key) {
                 case "account name":
                     AccountName = val;
@@ -147,7 +153,7 @@ namespace Domain {
                 case "show character level":
                     _showCharLevel = val;
                     break;
-                
+
                 case "config version":
                     _configVersion = val;
                     break;
