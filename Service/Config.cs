@@ -42,9 +42,9 @@ namespace Service {
 
             try {
                 _settings.Validate();
-            } catch {
-                _settings.Reset();
-                throw;
+            } catch (ArgumentNullException) {
+                Save();
+                throw new Exception("Missing config options. Regenerating config.");
             }
         }
 
@@ -79,7 +79,7 @@ namespace Service {
                 var key = match.Groups[2].Value.Trim();
                 var val = match.Groups[4].Value.Trim();
 
-                if (val.StartsWith("#")) continue;
+                if (val.StartsWith("#")) val = "";
 
                 _settings.ParseValue(key, val);
             }
@@ -100,7 +100,7 @@ namespace Service {
 
                     if (match.Success) {
                         var val = _settings.GetValue(match.Groups[2].Value);
-                        var replacement = CfgRegex.Replace(s, "$1$2$3") + (val ?? "#none");
+                        var replacement = CfgRegex.Replace(s, "$1$2$3") + (string.IsNullOrEmpty(val) ? "#none" : val);
 
                         sr.WriteLine(replacement);
                     } else {

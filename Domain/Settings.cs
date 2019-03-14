@@ -31,11 +31,11 @@ namespace Domain {
         private string _showCharXp;
         private string _showCharLevel;
 
-        public bool ShowElapsedTime => _showElapsedTime?.Equals("1") ?? true;
-        public bool ShowCharName => _showCharName?.Equals("1") ?? true;
-        public bool ShowCharXp => _showCharXp?.Equals("1") ?? true;
-        public bool ShowCharLevel => _showCharLevel?.Equals("1") ?? true;
-        
+        public bool ShowElapsedTime => _showElapsedTime.Equals("1");
+        public bool ShowCharName => _showCharName.Equals("1");
+        public bool ShowCharXp => _showCharXp.Equals("1");
+        public bool ShowCharLevel => _showCharLevel.Equals("1");
+
         public bool CheckUpdates => _lastUpdateCheck == null ||
                                     DateTime.Parse(_lastUpdateCheck) <
                                     DateTime.UtcNow.Subtract(UpdateCheckInterval);
@@ -58,6 +58,11 @@ namespace Domain {
         /// Validate all config options
         /// </summary>
         public void Validate() {
+            if (AccountName == null || PoeSessionId == null || _lastUpdateCheck == null ||
+                _showCharXp == null | _showCharName == null || _showCharLevel == null || _showElapsedTime == null) {
+                throw new ArgumentNullException();
+            }
+
             if (!string.IsNullOrEmpty(PoeSessionId) && !SessIdRegex.IsMatch(PoeSessionId)) {
                 throw new ArgumentException("Invalid session ID");
             }
