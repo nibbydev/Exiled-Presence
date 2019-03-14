@@ -78,10 +78,6 @@
       <Project>{e3002305-05ce-40e3-9df7-13a0ce7e3731}</Project>
       <Name>Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Utility\Utility.csproj">
-      <Project>{5232385c-d0e6-49e5-9208-8ff7bfe43b59}</Project>
-      <Name>Utility</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

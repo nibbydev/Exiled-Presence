@@ -79,10 +79,6 @@
       <Project>{5fe478f0-a5d6-43b1-9fbe-fb50586bb542}</Project>
       <Name>Service</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Utility\Utility.csproj">
-      <Project>{5232385c-d0e6-49e5-9208-8ff7bfe43b59}</Project>
-      <Name>Utility</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
