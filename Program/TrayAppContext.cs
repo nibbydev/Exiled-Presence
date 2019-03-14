@@ -28,19 +28,34 @@ namespace Program {
         public TrayAppContext() {
             _settings = new Settings();
             _config = new Config(_settings);
-
+            _controller = new Controller(_settings);
+            
             CreateContextMenuEntries();
 
             try {
                 _config.Load();
-            } catch (Exception e) {
+                CheckUpdates();
+                _controller.Initialize();
+            } catch (ArgumentException e) {
+                // Config has invalid options
                 TooltipMsg(e.Message, "error");
             }
+        }
 
-            CheckUpdates();
-
-            _controller = new Controller(_settings);
-            _controller.Initialize();
+        /// <summary>
+        /// Attempts to read config and reinitialize the service
+        /// </summary>
+        private void Reload(object sender = null, EventArgs args = null) {
+            _controller.Dispose();
+            
+            try {
+                _config.Load();
+                _controller.Initialize();
+                TooltipMsg("Reload successful");
+            } catch (ArgumentException e) {
+                // Config has invalid options
+                TooltipMsg(e.Message, "error");
+            }
         }
 
         /// <summary>
@@ -51,18 +66,7 @@ namespace Program {
                 new MenuItem("Edit config", delegate { _config.OpenInEditor(); })
             );
 
-            _trayItem.ContextMenu.MenuItems.Add(
-                new MenuItem("Reload service", delegate {
-                    try {
-                        _config.Load();
-                        _controller.Dispose();
-                        _controller.Initialize();
-                        TooltipMsg("Reload successful");
-                    } catch (Exception e) {
-                        TooltipMsg(e.Message, "error");
-                    }
-                })
-            );
+            _trayItem.ContextMenu.MenuItems.Add(new MenuItem("Reload service", Reload));
 
             _trayItem.ContextMenu.MenuItems.Add("Startup..", new[] {
                 new MenuItem("Add to startup", delegate {

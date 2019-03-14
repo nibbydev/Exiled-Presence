@@ -76,25 +76,25 @@ namespace Domain {
                 throw new ArgumentException($"Invalid last update time (expected format {ConfTimeFormat})");
             }
 
-            if (!string.IsNullOrEmpty(_showElapsedTime) &&
+            if (string.IsNullOrEmpty(_showElapsedTime) ||
                 !_showElapsedTime.Equals("0") &&
                 !_showElapsedTime.Equals("1")) {
                 throw new ArgumentException("Invalid value for show elapsed time (expected 1 or 0)");
             }
 
-            if (!string.IsNullOrEmpty(_showCharName) &&
+            if (string.IsNullOrEmpty(_showCharName) ||
                 !_showCharName.Equals("0") &&
                 !_showCharName.Equals("1")) {
                 throw new ArgumentException("Invalid value for show character name (expected 1 or 0)");
             }
 
-            if (!string.IsNullOrEmpty(_showCharXp) &&
+            if (string.IsNullOrEmpty(_showCharXp) ||
                 !_showCharXp.Equals("0") &&
                 !_showCharXp.Equals("1")) {
                 throw new ArgumentException("Invalid value for show character xp (expected 1 or 0)");
             }
 
-            if (!string.IsNullOrEmpty(_showCharLevel) &&
+            if (string.IsNullOrEmpty(_showCharLevel) ||
                 !_showCharLevel.Equals("0") &&
                 !_showCharLevel.Equals("1")) {
                 throw new ArgumentException("Invalid value for show character level (expected 1 or 0)");

@@ -32,6 +32,8 @@ namespace Service {
             }
 
             if (File.Exists(CfgFilePath)) {
+                _settings.Reset();
+                
                 try {
                     Read();
                 } catch {
@@ -43,8 +45,9 @@ namespace Service {
             try {
                 _settings.Validate();
             } catch (ArgumentNullException) {
+                // There were missing config fields. Regenerate it and read it in
                 Save();
-                throw new Exception("Missing config options. Regenerating config.");
+                Read();
             }
         }
 
@@ -52,6 +55,8 @@ namespace Service {
         /// Read config and overwrite values
         /// </summary>
         private void Read() {
+            _settings.Reset();
+            
             string conf;
             using (var sr = File.OpenText(CfgFilePath)) {
                 conf = sr.ReadToEnd();
@@ -79,7 +84,8 @@ namespace Service {
                 var key = match.Groups[2].Value.Trim();
                 var val = match.Groups[4].Value.Trim();
 
-                if (val.StartsWith("#")) val = "";
+                if (string.IsNullOrEmpty(val)) val = null;
+                else if (val.StartsWith("#")) val = "";
 
                 _settings.ParseValue(key, val);
             }
