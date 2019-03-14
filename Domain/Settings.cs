@@ -15,6 +15,7 @@ namespace Domain {
         public static readonly string StartupShortcutPath = Path.Combine(StartupFolderPath, $"{ProgramName}.url");
         public static readonly string AppPath = Assembly.GetEntryAssembly().Location;
         public static readonly Regex SessIdRegex = new Regex("^[0-9a-fA-F]{32}$");
+        public static readonly Regex VersionRegex = new Regex(@"^v\d+(\.\d+)*$");
 
         public static readonly TimeSpan PresencePollInterval = TimeSpan.FromMilliseconds(500);
         public static readonly TimeSpan UpdateCheckInterval = TimeSpan.FromHours(24);
@@ -25,6 +26,7 @@ namespace Domain {
         public string AccountName { get; set; }
         public string PoeSessionId { get; set; }
 
+        private string _configVersion;
         private string _lastUpdateCheck;
         private string _showElapsedTime;
         private string _showCharName;
@@ -47,7 +49,8 @@ namespace Domain {
             AccountName = settings.AccountName;
             PoeSessionId = settings.PoeSessionId;
             _lastUpdateCheck = settings._lastUpdateCheck;
-
+            _configVersion = settings._configVersion;
+            
             _showElapsedTime = settings._showElapsedTime;
             _showCharName = settings._showCharName;
             _showCharXp = settings._showCharXp;
@@ -55,10 +58,10 @@ namespace Domain {
         }
 
         /// <summary>
-        /// Validate all config options
+        /// Validate all config values
         /// </summary>
         public void Validate() {
-            if (AccountName == null || PoeSessionId == null || _lastUpdateCheck == null ||
+            if (AccountName == null || PoeSessionId == null || _lastUpdateCheck == null || _configVersion == null ||
                 _showCharXp == null | _showCharName == null || _showCharLevel == null || _showElapsedTime == null) {
                 throw new ArgumentNullException();
             }
@@ -74,6 +77,10 @@ namespace Domain {
             if (!string.IsNullOrEmpty(_lastUpdateCheck) && !DateTime.TryParseExact(_lastUpdateCheck,
                     ConfTimeFormat, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out _)) {
                 throw new ArgumentException($"Invalid last update time (expected format {ConfTimeFormat})");
+            }
+                        
+            if (!string.IsNullOrEmpty(_configVersion) && !VersionRegex.IsMatch(_configVersion)){
+                throw new ArgumentException("Invalid config version");
             }
 
             if (string.IsNullOrEmpty(_showElapsedTime) ||
@@ -140,6 +147,10 @@ namespace Domain {
                 case "show character level":
                     _showCharLevel = val;
                     break;
+                
+                case "config version":
+                    _configVersion = val;
+                    break;
 
                 default:
                     return;
@@ -159,6 +170,9 @@ namespace Domain {
 
                 case "last update check":
                     return _lastUpdateCheck;
+
+                case "config version":
+                    return _configVersion ?? Version;
 
                 case "show elapsed time":
                     return _showElapsedTime ?? "1";

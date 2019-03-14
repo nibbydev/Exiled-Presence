@@ -31,3 +31,4 @@ show character level = #none
 []-----------------------[] Don't touch these []-----------------------[]
 
 last update check    = #none
+config version       = #none
