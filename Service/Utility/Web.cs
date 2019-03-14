@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 using Domain;
 using RestSharp;
 
-namespace Utility {
+namespace Service {
     public static class Web {
         private static readonly RestClient Client = new RestClient();
         private const string ReleaseApi = "https://api.github.com/repos/siegrest/Exiled-Presence/releases";
         private const string PoeApi = "https://www.pathofexile.com/character-window/get-characters";
-
 
         /// <summary>
         /// Queries all the characters of the user and returns the last active one
@@ -23,7 +22,7 @@ namespace Utility {
 
             var request = new RestRequest(PoeApi, Method.GET);
             request.AddParameter("accountName", accountName);
-            
+
             // Add session Id cookie if present
             if (!string.IsNullOrEmpty(sessId)) {
                 request.AddCookie("POESESSID", sessId);
@@ -36,15 +35,14 @@ namespace Utility {
                 if (string.IsNullOrEmpty(sessId)) {
                     throw new Exception("Profile is private and POESESSID is not set!");
                 }
-                
+
                 throw new Exception("Profile is private and POESESSID is invalid!");
             }
 
             var characters = JsonUtility.Deserialize<Character[]>(response.Content);
             return characters.FirstOrDefault(t => t.LastActive != null);
         }
-        
-        
+
         /// <summary>
         /// Gets releases from Github
         /// </summary>
@@ -53,13 +51,13 @@ namespace Utility {
             var request = new RestRequest(ReleaseApi, Method.GET);
             var cancellationTokenSource = new CancellationTokenSource();
             var response = await Client.ExecuteTaskAsync(request, cancellationTokenSource.Token);
-            
+
             var releases = JsonUtility.Deserialize<Release[]>(response.Content);
             if (releases == null || releases.Length == 0) {
                 return null;
             }
 
-            return releases[0];
+            return releases.FirstOrDefault(t => !t.prerelease);
         }
     }
 }

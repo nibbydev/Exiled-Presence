@@ -1,130 +1,133 @@
 using System;
 using System.IO;
+using System.Text;
 using System.Text.RegularExpressions;
-using Utility;
+using Domain;
+using Service.Properties;
 
 namespace Service {
-    public static class Config {
-        public static readonly Regex SessIdRegex = new Regex("^[0-9a-fA-F]{32}$");
+    public class Config {
+        private const string ConfigFileName = "config.txt";
 
-        private const Environment.SpecialFolder AppDataFolder = Environment.SpecialFolder.LocalApplicationData;
-
-        private static readonly string AppDataPath = Environment.GetFolderPath(AppDataFolder);
+        private static readonly string AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         private static readonly string CfgFolderPath = Path.Combine(AppDataPath, Settings.ProgramName);
-        private static readonly string CfgFilePath = Path.Combine(CfgFolderPath, Settings.ConfigFileName);
-        public static Settings Settings { get; } = new Settings();
-        public static Action<string> NotifyAction { private get; set; }
+        private static readonly string CfgFilePath = Path.Combine(CfgFolderPath, ConfigFileName);
+        private static readonly Regex CfgRegex = new Regex(@"^(\s*)(.*?)(\s*=\s*)(.*?)(\s*)$");
+
+        private readonly Settings _settings;
 
         /// <summary>
-        /// Removes config file from disk and resets settings
+        /// Constructor
         /// </summary>
-        public static void ResetConfig() {
-            if (!Directory.Exists(CfgFolderPath)) {
-                return;
-            }
-
-            if (!File.Exists(CfgFilePath)) {
-                return;
-            }
-
-            File.Delete(CfgFilePath);
-            Settings.Update(new Settings());
+        public Config(Settings settings) {
+            _settings = settings;
         }
 
         /// <summary>
-        /// Loads config into static context on program start
+        /// Loads config on program start
         /// </summary>
-        public static bool LoadConfig() {
+        public void Load() {
             if (!Directory.Exists(CfgFolderPath)) {
                 Directory.CreateDirectory(CfgFolderPath);
             }
 
             if (File.Exists(CfgFilePath)) {
+                _settings.Reset();
+                
                 try {
-                    ReadConfig();
+                    Read();
                 } catch {
-                    NotifyAction?.Invoke("Invalid config syntax");
-                    SaveConfig();
-                    return false;
+                    Save();
+                    throw;
                 }
             }
 
-            if (!Settings.Validate(out var errorMsg)) {
-                NotifyAction?.Invoke($"Invalid config ({errorMsg})");
-                return false;
+            try {
+                _settings.Validate();
+            } catch (ArgumentNullException) {
+                // There were missing config fields. Regenerate it and read it in
+                Save();
+                Read();
+                
+                _settings.Validate();
             }
-
-            return true;
         }
 
         /// <summary>
         /// Read config and overwrite values
         /// </summary>
-        private static void ReadConfig() {
-            using (var streamReader = File.OpenText(CfgFilePath)) {
-                var configString = streamReader.ReadToEnd();
-                
-                var settings = JsonUtility.Deserialize<Settings>(configString);
-                Settings.Update(settings);
+        private void Read() {
+            _settings.Reset();
+            
+            string conf;
+            using (var sr = File.OpenText(CfgFilePath)) {
+                conf = sr.ReadToEnd();
+            }
+
+            if (string.IsNullOrEmpty(conf.Trim())) {
+                throw new Exception("Config was empty");
+            }
+
+            Parse(conf);
+        }
+
+        /// <summary>
+        /// Attempt to read values from config string and load them into settings
+        /// </summary>
+        private void Parse(string conf) {
+            var splitConf = conf.Split(new[] {Environment.NewLine}, StringSplitOptions.None);
+
+            foreach (var s in splitConf) {
+                if (string.IsNullOrEmpty(s) || s.Trim().StartsWith("#")) continue;
+
+                var match = CfgRegex.Match(s);
+                if (!match.Success) continue;
+
+                var key = match.Groups[2].Value.Trim();
+                var val = match.Groups[4].Value.Trim();
+
+                _settings.ParseValue(key, val);
             }
         }
 
         /// <summary>
-        /// Overwrite config
+        /// Overwrite/create config
         /// </summary>
-        public static void SaveConfig() {
-            using (var streamWriter = new StreamWriter(CfgFilePath)) {
-                var rawData = JsonUtility.Serialize(Settings);
-                streamWriter.Write(rawData);
+        public void Save() {
+            // Get the base config and split it line by line
+            var baseConf = Encoding.Default.GetString(Resources.BaseConfig)
+                .Split(new[] {Environment.NewLine}, StringSplitOptions.None);
+
+            using (var sr = new StreamWriter(CfgFilePath)) {
+                // Loop though each line, replacing values with current settings
+                foreach (var s in baseConf) {
+                    var match = CfgRegex.Match(s);
+
+                    if (match.Success) {
+                        var val = _settings.GetValue(match.Groups[2].Value);
+                        var replacement = CfgRegex.Replace(s, "$1$2$3") + (string.IsNullOrEmpty(val) ? "#none" : val);
+
+                        sr.WriteLine(replacement);
+                    } else {
+                        sr.WriteLine(s);
+                    }
+                }
             }
         }
 
         /// <summary>
         /// Opens the config file in the default text editor
         /// </summary>
-        public static void OpenConfig() {
+        public void OpenInEditor() {
             if (!Directory.Exists(CfgFolderPath)) {
                 Directory.CreateDirectory(CfgFolderPath);
             }
 
             if (!File.Exists(CfgFilePath)) {
-                SaveConfig();
+                Save();
             }
 
-            System.Diagnostics.Process.Start(CfgFilePath);
+            Misc.OpenPath(CfgFilePath);
         }
-
-        #region Propagators
-
-        /// <summary>
-        /// Setter and validator for account name
-        /// </summary>
-        public static string AccountNameInputPropagate(string input) {
-            if (input.Length < 3) {
-                return "ERROR. Invalid account name passed!";
-            }
-
-            Settings.AccountName = input;
-            SaveConfig();
-
-            return "OK. Account name set.";
-        }
-
-        /// <summary>
-        /// Setter and validator for session id
-        /// </summary>
-        public static string SessIdInputPropagate(string input) {
-            var regex = new Regex(@"^[0-9a-fA-F]{32}$");
-            if (!regex.Match(input).Success) {
-                return "ERROR. Invalid POESESSID passed!";
-            }
-
-            Settings.PoeSessionId = input;
-            SaveConfig();
-
-            return "OK. POESESSID set.";
-        }
-
-        #endregion
     }
 }

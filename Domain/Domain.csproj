@@ -49,6 +49,7 @@
     <Compile Include="LogRegExps.cs" />
     <Compile Include="LogType.cs" />
     <Compile Include="Release.cs" />
+    <Compile Include="Settings.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Properties\" />

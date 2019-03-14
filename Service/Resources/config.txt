@@ -1,0 +1,34 @@
+  ______      _ _          _   _____                                   
+ |  ____|    (_) |        | | |  __ \                                  
+ | |__  __  ___| | ___  __| | | |__) | __ ___  ___  ___ _ __   ___ ___ 
+ |  __| \ \/ / | |/ _ \/ _` | |  ___/ '__/ _ \/ __|/ _ \ '_ \ / __/ _ \
+ | |____ >  <| | |  __/ (_| | | |   | | |  __/\__ \  __/ | | | (_|  __/
+ |______/_/\_\_|_|\___|\__,_| |_|   |_|  \___||___/\___|_| |_|\___\___|
+
+[]---------------------------------------------------------------------[]
+
+This is the config. Change whatever you want. Anything starting with a 
+pound sign (#) is explicitly ignored, be it in front of a line or a 
+config value.
+
+An account name is required to get the character's name, league, 
+ascendancy class, level and xp percentage.
+
+A session id (POESESSID) is required if your profile is private. There's 
+a guide at https://github.com/Stickymaddness/Procurement/wiki/SessionID
+on how to find it.
+
+[]---------------------------[] Settings  []---------------------------[]
+
+account name         = #none
+session id           = #none
+
+show elapsed time    = #none
+show character name  = #none
+show character xp    = #none
+show character level = #none
+
+[]-----------------------[] Don't touch these []-----------------------[]
+
+last update check    = #none
+config version       = #none

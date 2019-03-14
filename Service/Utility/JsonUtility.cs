@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using RestSharp.Serialization.Json;
 using JsonSerializer = Newtonsoft.Json.JsonSerializer;
 
-namespace Utility {
+namespace Service {
     public static class JsonUtility {
         private static readonly JsonSerializer JsonSerializer = new JsonSerializer();
         private static readonly JsonDeserializer JsonDeserializer = new JsonDeserializer();

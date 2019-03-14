@@ -18,5 +18,9 @@
   {
     "name": "Memory Nexus",
     "key": "area_synthesis"
+  },
+  {
+    "name": "Distant Memory",
+    "key": "area_synthesis"
   }
 ]

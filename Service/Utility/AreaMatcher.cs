@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 using Domain;
 using Service.Properties;
 
-namespace Utility {
+namespace Service {
     public static class AreaMatcher {
         private static readonly Regex HideoutRegex = new Regex(@"^(.+) Hideout$");
         private static readonly Regex LabTrialRegex = new Regex("^Trial of [A-Za-z]+ [A-Za-z]+$");
