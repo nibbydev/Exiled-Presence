@@ -98,7 +98,9 @@ namespace Service {
 
             Character character;
             try {
-                character = await Web.GetLastActiveChar(_settings.AccountName, _settings.PoeSessionId);
+                character = await Web.GetLastActiveChar(
+                    _settings.GetValOrDefault<string>(SettingType.AccountName),
+                    _settings.GetValOrDefault<string>(SettingType.PoeSessionId));
             } catch (Exception ex) {
                 Console.WriteLine(ex.Message);
                 return;
@@ -135,7 +137,7 @@ namespace Service {
             AreaMatcher.Match(areaName, out _currentArea);
 
             _presence.Assets.SmallImageKey = _currentArea.Key;
-            _presence.Timestamps = _settings.ShowElapsedTime ? Timestamps.Now : null;
+            _presence.Timestamps = _settings.GetValOrDefault<bool>(SettingType.ShowElapsedTime) ? Timestamps.Now : null;
             _presence.State = null;
             PresenceUpdateSmallImageText();
             _hasUpdate = true;
@@ -152,7 +154,7 @@ namespace Service {
             _presence.Assets.LargeImageText = $"{Settings.ProgramName} {Settings.Version}";
             _presence.State = "Login screen";
             _presence.Details = null;
-            _presence.Timestamps = _settings.ShowElapsedTime ? Timestamps.Now : null;
+            _presence.Timestamps = _settings.GetValOrDefault<bool>(SettingType.ShowElapsedTime) ? Timestamps.Now : null;
             _hasUpdate = true;
         }
 
@@ -168,7 +170,7 @@ namespace Service {
             _presence.Assets.LargeImageText = $"{Settings.ProgramName} {Settings.Version}";
             _presence.State = "Character select";
             _presence.Details = null;
-            _presence.Timestamps = _settings.ShowElapsedTime ? Timestamps.Now : null;
+            _presence.Timestamps = _settings.GetValOrDefault<bool>(SettingType.ShowElapsedTime) ? Timestamps.Now : null;
             _hasUpdate = true;
         }
 
@@ -180,14 +182,14 @@ namespace Service {
             var xpPercent = Misc.GetPercentToNextLevel(_character.Level, _character.Experience);
 
             _presence.Assets.LargeImageKey = largeAssetKey;
-            _presence.Details = _settings.ShowCharName
+            _presence.Details = _settings.GetValOrDefault<bool>(SettingType.ShowCharName)
                 ? $"Playing as {_character.Name}"
                 : $"Playing as a {_character.Class}";
-            
+
             _presence.Assets.LargeImageText =
-                (_settings.ShowCharLevel ? $"Level {_character.Level} " : "") +
+                (_settings.GetValOrDefault<bool>(SettingType.ShowCharLevel) ? $"Level {_character.Level} " : "") +
                 _character.Class +
-                (_settings.ShowCharXp ? $" - {xpPercent}% xp" : "");
+                (_settings.GetValOrDefault<bool>(SettingType.ShowCharXp) ? $" - {xpPercent}% xp" : "");
 
             PresenceUpdateSmallImageText();
 

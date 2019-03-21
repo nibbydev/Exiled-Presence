@@ -121,7 +121,7 @@ namespace Program {
         /// Checks for updates infrequently
         /// </summary>
         private async void CheckUpdates() {
-            if (!_settings.CheckUpdates) {
+            if (!_settings.IsCheckUpdates()) {
                 return;
             }
             
