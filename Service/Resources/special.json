@@ -1,5 +1,8 @@
 [
   {
+    "name": "Abyssal Depths",
+    "key": "area_abyss"
+  },{
     "name": "Azurite Mine",
     "key": "area_delve"
   },
@@ -21,6 +24,10 @@
   },
   {
     "name": "Distant Memory",
+    "key": "area_synthesis"
+  },
+  {
+    "name": "Memory Void",
     "key": "area_synthesis"
   }
 ]
