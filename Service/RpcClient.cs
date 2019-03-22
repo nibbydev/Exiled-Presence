@@ -29,13 +29,14 @@ namespace Service {
         /// <summary>
         /// Sets up the timer
         /// </summary>
-        public void Initialize(int pipe = -1) {
+        public void Initialize() {
             if (_callbackTimer != null || _rpcClient != null || _presence != null) {
                 throw new Exception("Already running! Dispose first");
             }
 
             // Create the RPC client
-            _rpcClient = new DiscordRpcClient(Settings.DiscordAppId, pipe);
+            _rpcClient = new DiscordRpcClient(Settings.DiscordAppId,
+                _settings.GetValOrDefault<int>(SettingType.DiscordPipe));
             _rpcClient.OnReady += OnReady;
             _rpcClient.OnClose += OnClose;
             _rpcClient.OnError += OnError;

@@ -12,7 +12,7 @@ namespace Service {
         private static readonly string AppDataPath =
             Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
 
-        private static readonly string CfgFolderPath = Path.Combine(AppDataPath, Settings.ProgramName);
+        public static readonly string CfgFolderPath = Path.Combine(AppDataPath, Settings.ProgramName);
         private static readonly string CfgFilePath = Path.Combine(CfgFolderPath, ConfigFileName);
         private static readonly Regex CfgRegex = new Regex(@"^(\s*)(.*?)(\s*=\s*)(.*?)(\s*)$");
 
@@ -34,21 +34,18 @@ namespace Service {
             }
 
             if (File.Exists(CfgFilePath)) {
-                _settings.Reset();
-
-                try {
-                    Read();
-                } catch {
-                    Save();
-                    throw;
-                }
-            }
-
-            // Check for missing config fields
-            if (!_settings.VerifyAllSettingsPresent()) {
-                Save();
                 Read();
             }
+
+            _settings.VerifyAllSettingsPresent();
+        }
+
+        /// <summary>
+        /// Recreates the config with default values
+        /// </summary>
+        public void Reset() {
+            _settings.Reset();
+            Save();
         }
 
         /// <summary>
@@ -105,7 +102,7 @@ namespace Service {
                 // Loop though each line, replacing placeholder values
                 foreach (var s in baseConf) {
                     var match = CfgRegex.Match(s);
-                    
+
                     // Was not a setting
                     if (!match.Success) {
                         sr.WriteLine(s);
@@ -119,14 +116,14 @@ namespace Service {
                     } catch (InvalidOperationException) {
                         continue;
                     }
-                        
+
                     // Get current setting value or default
                     var val = _settings.GetValOrDefault<string>(type);
-                    
+
                     // Replace value in the config line
-                    var replacement = CfgRegex.Replace(s, "$1$2$3") + 
+                    var replacement = CfgRegex.Replace(s, "$1$2$3") +
                                       (string.IsNullOrEmpty(val) ? "#none" : val);
-                    
+
                     // Write substituted line
                     sr.WriteLine(replacement);
                 }

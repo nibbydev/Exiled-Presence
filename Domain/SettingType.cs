@@ -22,6 +22,9 @@ namespace Domain {
         private static readonly Regex VersionRegex = new Regex(@"^v\d+(\.\d+)*$");
         private const string ConfTimeFormat = "yyyy-MM-dd HH:mm";
 
+        /// <summary>
+        /// Maps enum setting types to their respective string representations
+        /// </summary>
         private static readonly Dictionary<SettingType, string> KeyMap = new Dictionary<SettingType, string> {
             {SettingType.AccountName, "account name"},
             {SettingType.PoeSessionId, "session id"},
@@ -34,6 +37,9 @@ namespace Domain {
             {SettingType.DiscordPipe, "discord pipe"}
         };
 
+        /// <summary>
+        /// Maps enum setting types to their respective return types
+        /// </summary>
         private static readonly Dictionary<SettingType, Type> TypeMap = new Dictionary<SettingType, Type> {
             {SettingType.AccountName, typeof(string)},
             {SettingType.PoeSessionId, typeof(string)},
@@ -46,77 +52,121 @@ namespace Domain {
             {SettingType.DiscordPipe, typeof(int)}
         };
 
+        /// <summary>
+        /// Get enum representation of string setting type 
+        /// </summary>
         public static SettingType GetType(string s) {
             return KeyMap.First(t => t.Value.Equals(s)).Key;
         }
 
+        /// <summary>
+        /// Get string representation of enum setting type
+        /// </summary>
         public static string GetKey(SettingType s) {
             return KeyMap[s];
         }
 
+        /// <summary>
+        /// Get return type of setting
+        /// </summary>
         public static Type GetValueType(SettingType s) {
             return TypeMap[s];
         }
 
+        /// <summary>
+        /// Compares the setting to preset filters
+        /// </summary>
         public static void Validate(this SettingType type, string val) {
+            if (type.IsMandatoryVal() && string.IsNullOrEmpty(val)) {
+                throw new ArgumentException($"[CONFIG] Parameter '{GetKey(type)}' requires a valid value");
+            }
+
+            bool hasError;
+            string suggestion = null;
+
             switch (type) {
                 case SettingType.AccountName:
-                    if (!string.IsNullOrEmpty(val) && val.Length < 3) {
-                        throw new ArgumentException("Invalid account name");
-                    }
-
+                    hasError = !string.IsNullOrEmpty(val) && val.Length < 3;
                     break;
+
                 case SettingType.PoeSessionId:
-                    if (!string.IsNullOrEmpty(val) && !SessIdRegex.IsMatch(val)) {
-                        throw new ArgumentException("Invalid session ID");
-                    }
-
+                    hasError = !string.IsNullOrEmpty(val) && !SessIdRegex.IsMatch(val);
                     break;
+
                 case SettingType.ConfigVersion:
-                    if (string.IsNullOrEmpty(val) || !VersionRegex.IsMatch(val)) {
-                        throw new ArgumentException("Invalid config version");
-                    }
-
+                    hasError = string.IsNullOrEmpty(val) || !VersionRegex.IsMatch(val);
                     break;
+
                 case SettingType.LastUpdateCheck:
-                    if (!string.IsNullOrEmpty(val) && !DateTime.TryParseExact(val,
-                            ConfTimeFormat, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out _)) {
-                        throw new ArgumentException($"Invalid last update time (expected format {ConfTimeFormat})");
-                    }
-
+                    hasError = !string.IsNullOrEmpty(val) && !DateTime.TryParseExact(val, ConfTimeFormat,
+                                   CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out _);
+                    suggestion = "expected format " + ConfTimeFormat;
                     break;
+
                 case SettingType.ShowElapsedTime:
-                    if (!string.Equals(val, "0") && !string.Equals(val, "1")) {
-                        throw new ArgumentException("Invalid value for show elapsed time (expected 1 or 0)");
-                    }
-
-                    break;
-                case SettingType.ShowCharName:
-                    if (!string.Equals(val, "0") && !string.Equals(val, "1")) {
-                        throw new ArgumentException("Invalid value for show character name (expected 1 or 0)");
-                    }
-
-                    break;
-                case SettingType.ShowCharXp:
-                    if (!string.Equals(val, "0") && !string.Equals(val, "1")) {
-                        throw new ArgumentException("Invalid value for show character xp (expected 1 or 0)");
-                    }
-
-                    break;
                 case SettingType.ShowCharLevel:
-                    if (!string.Equals(val, "0") && !string.Equals(val, "1")) {
-                        throw new ArgumentException("Invalid value for show character level (expected 1 or 0)");
-                    }
-
+                case SettingType.ShowCharXp:
+                case SettingType.ShowCharName:
+                    hasError = !string.Equals(val, "0") && !string.Equals(val, "1");
+                    suggestion = "expected 1 or 0";
                     break;
+
                 case SettingType.DiscordPipe:
-                    if (!int.TryParse(val, out var pipeNr) || pipeNr < -1 || pipeNr > 8) {
-                        throw new ArgumentException("Invalid value for discord pipe (expected -1 or 0 to 8)");
-                    }
-
+                    hasError = !int.TryParse(val, out var pipeNr) || pipeNr < -1 || pipeNr > 8;
+                    suggestion = "expected -1 or 0 to 8";
                     break;
+
                 default:
                     throw new ArgumentOutOfRangeException();
+            }
+
+            if (hasError) {
+                var msg = $"[CONFIG] Invalid value for '{GetKey(type)}'";
+                if (!string.IsNullOrEmpty(suggestion)) msg += $" ({suggestion})";
+
+                throw new ArgumentException(msg);
+            }
+        }
+
+        /// <summary>
+        /// Does the setting have to explicitly have a valid value declared in the config?
+        /// </summary>
+        public static bool IsMandatoryVal(this SettingType type) {
+            switch (type) {
+                case SettingType.ConfigVersion:
+                case SettingType.LastUpdateCheck:
+                case SettingType.ShowElapsedTime:
+                case SettingType.ShowCharName:
+                case SettingType.ShowCharXp:
+                case SettingType.ShowCharLevel:
+                    return true;
+                case SettingType.AccountName:
+                case SettingType.PoeSessionId:
+                case SettingType.DiscordPipe:
+                    return false;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
+            }
+        }
+
+        /// <summary>
+        /// Does the setting have to be present in the config?
+        /// </summary>
+        public static bool IsMandatory(this SettingType type) {
+            switch (type) {
+                case SettingType.AccountName:
+                case SettingType.PoeSessionId:
+                case SettingType.ConfigVersion:
+                case SettingType.LastUpdateCheck:
+                case SettingType.ShowElapsedTime:
+                case SettingType.ShowCharName:
+                case SettingType.ShowCharXp:
+                case SettingType.ShowCharLevel:
+                    return true;
+                case SettingType.DiscordPipe:
+                    return false;
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
         }
     }

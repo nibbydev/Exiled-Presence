@@ -171,15 +171,19 @@ namespace Domain {
         /// <summary>
         /// If user settings has same nr of settings as default settings
         /// </summary>
-        public bool VerifyAllSettingsPresent() {
-            return Enum.GetValues(typeof(SettingType)).Length == _userSettings.Count;
+        public void VerifyAllSettingsPresent() {
+            // Check if all mandatory config values are present
+            foreach (SettingType type in Enum.GetValues(typeof(SettingType))) {
+                if (type.IsMandatory() && !_userSettings.Any(t => t.Type.Equals(type))) {
+                    throw new ArgumentException($"Missing config parameter '{SettingMethods.GetKey(type)}'");
+                }
+            }
         }
 
         /// <summary>
         /// Sets the last update check time to now
         /// </summary>
         public void UpdateLastUpdateTime() {
-            _userSettings.ForEach(t => Console.WriteLine($"1 {t.Type} {t.Val}"));
             var setting = _userSettings.First(t => t.Type.Equals(SettingType.LastUpdateCheck));
             setting.Val = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm");
         }

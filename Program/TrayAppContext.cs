@@ -29,12 +29,12 @@ namespace Program {
             _settings = new Settings();
             _config = new Config(_settings);
             _controller = new Controller(_settings);
-            
+
             CreateContextMenuEntries();
 
             try {
                 _config.Load();
-                CheckUpdates();
+                if (_settings.IsCheckUpdates()) CheckUpdates();
                 _controller.Initialize();
             } catch (Exception e) {
                 // Config has invalid options
@@ -47,7 +47,7 @@ namespace Program {
         /// </summary>
         private void Reload(object sender = null, EventArgs args = null) {
             _controller.Dispose();
-            
+
             try {
                 _config.Load();
                 _controller.Initialize();
@@ -62,11 +62,15 @@ namespace Program {
         /// Constructs the tray menu structure
         /// </summary>
         private void CreateContextMenuEntries() {
-            _trayItem.ContextMenu.MenuItems.Add(
-                new MenuItem("Edit config", delegate { _config.OpenInEditor(); })
-            );
-
-            _trayItem.ContextMenu.MenuItems.Add(new MenuItem("Reload service", Reload));
+            _trayItem.ContextMenu.MenuItems.Add("Config..", new[] {
+                new MenuItem("Reload config", Reload),
+                new MenuItem("Edit config", delegate { _config.OpenInEditor(); }),
+                new MenuItem("Open in explorer", delegate { Misc.OpenPath(Config.CfgFolderPath); }),
+                new MenuItem("Reset config", delegate {
+                    _config.Reset();
+                    TooltipMsg("Config reset");
+                })
+            });
 
             _trayItem.ContextMenu.MenuItems.Add("Startup..", new[] {
                 new MenuItem("Add to startup", delegate {
@@ -81,8 +85,12 @@ namespace Program {
                         TooltipMsg("Deleted startup shortcut", "info");
                     } else TooltipMsg("Startup shortcut did not exist", "error");
                 }),
-                new MenuItem("Open startup folder", delegate { Misc.OpenPath(Settings.StartupFolderPath); })
+                new MenuItem("Open in explorer", delegate { Misc.OpenPath(Settings.StartupFolderPath); })
             });
+
+            _trayItem.ContextMenu.MenuItems.Add(
+                new MenuItem("Check updates", delegate { CheckUpdates(true); })
+            );
 
             _trayItem.ContextMenu.MenuItems.Add(
                 new MenuItem("Exit", delegate {
@@ -120,11 +128,7 @@ namespace Program {
         /// <summary>
         /// Checks for updates infrequently
         /// </summary>
-        private async void CheckUpdates() {
-            if (!_settings.IsCheckUpdates()) {
-                return;
-            }
-            
+        private async void CheckUpdates(bool verbose = false) {
             Console.WriteLine(@"Checking updates...");
 
             var release = await Web.GetLatestRelease();
@@ -139,6 +143,9 @@ namespace Program {
                 _releaseUrl = release.html_url;
                 Console.WriteLine(@"New version is available");
                 TooltipMsg($"{release.tag_name} released. Click here to open in browser");
+            } else {
+                Console.WriteLine(@"No updates available");
+                if (verbose) TooltipMsg("No updates available");
             }
         }
 
