@@ -14,7 +14,8 @@ namespace Domain {
         ShowCharName,
         ShowCharXp,
         ShowCharLevel,
-        DiscordPipe
+        DiscordPipe,
+        PersistentTimer
     }
 
     public static class SettingMethods {
@@ -34,7 +35,8 @@ namespace Domain {
             {SettingType.ShowCharName, "show character name"},
             {SettingType.ShowCharXp, "show character xp"},
             {SettingType.ShowCharLevel, "show character level"},
-            {SettingType.DiscordPipe, "discord pipe"}
+            {SettingType.DiscordPipe, "discord pipe"},
+            {SettingType.PersistentTimer, "persistent timer"}
         };
 
         /// <summary>
@@ -49,7 +51,8 @@ namespace Domain {
             {SettingType.ShowCharName, typeof(bool)},
             {SettingType.ShowCharXp, typeof(bool)},
             {SettingType.ShowCharLevel, typeof(bool)},
-            {SettingType.DiscordPipe, typeof(int)}
+            {SettingType.DiscordPipe, typeof(int)},
+            {SettingType.PersistentTimer, typeof(bool)}
         };
 
         /// <summary>
@@ -107,6 +110,7 @@ namespace Domain {
                 case SettingType.ShowCharLevel:
                 case SettingType.ShowCharXp:
                 case SettingType.ShowCharName:
+                case SettingType.PersistentTimer:
                     hasError = !string.Equals(val, "0") && !string.Equals(val, "1");
                     suggestion = "expected 1 or 0";
                     break;
@@ -139,6 +143,7 @@ namespace Domain {
                 case SettingType.ShowCharName:
                 case SettingType.ShowCharXp:
                 case SettingType.ShowCharLevel:
+                case SettingType.PersistentTimer:
                     return true;
                 case SettingType.AccountName:
                 case SettingType.PoeSessionId:
@@ -162,6 +167,7 @@ namespace Domain {
                 case SettingType.ShowCharName:
                 case SettingType.ShowCharXp:
                 case SettingType.ShowCharLevel:
+                case SettingType.PersistentTimer:
                     return true;
                 case SettingType.DiscordPipe:
                     return false;

@@ -122,6 +122,25 @@ namespace Service {
         #region Presence update methods
 
         /// <summary>
+        /// Updates instance timestamp according to config options
+        /// </summary>
+        private void UpdateTimeStamp() {
+            // If timestamps are disabled
+            if (!_settings.GetValOrDefault<bool>(SettingType.ShowElapsedTime)) {
+                _presence.Timestamps = null;
+                return;
+            }
+            
+            // Id persistent timestamps are enabled don't change the current stamp
+            if (!_settings.GetValOrDefault<bool>(SettingType.PersistentTimer)) {
+                return;
+            }
+
+            // Update current timestamp
+            _presence.Timestamps = Timestamps.Now;
+        }
+
+        /// <summary>
         /// Updates the presence AFK or DND status
         /// </summary>
         public void PresenceUpdateStatus(string mode, bool on, string message) {
@@ -138,8 +157,8 @@ namespace Service {
             AreaMatcher.Match(areaName, out _currentArea);
 
             _presence.Assets.SmallImageKey = _currentArea.Key;
-            _presence.Timestamps = _settings.GetValOrDefault<bool>(SettingType.ShowElapsedTime) ? Timestamps.Now : null;
             _presence.State = null;
+            UpdateTimeStamp();
             PresenceUpdateSmallImageText();
             _hasUpdate = true;
         }
@@ -155,7 +174,7 @@ namespace Service {
             _presence.Assets.LargeImageText = $"{Settings.ProgramName} {Settings.Version}";
             _presence.State = "Login screen";
             _presence.Details = null;
-            _presence.Timestamps = _settings.GetValOrDefault<bool>(SettingType.ShowElapsedTime) ? Timestamps.Now : null;
+            UpdateTimeStamp();
             _hasUpdate = true;
         }
 
@@ -171,7 +190,7 @@ namespace Service {
             _presence.Assets.LargeImageText = $"{Settings.ProgramName} {Settings.Version}";
             _presence.State = "Character select";
             _presence.Details = null;
-            _presence.Timestamps = _settings.GetValOrDefault<bool>(SettingType.ShowElapsedTime) ? Timestamps.Now : null;
+            UpdateTimeStamp();
             _hasUpdate = true;
         }
 
