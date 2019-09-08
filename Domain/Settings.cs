@@ -12,7 +12,7 @@ namespace Domain {
         public const string DiscordAppId = "551089446460850176";
         public const string ProgramName = "Exiled Presence";
         public const string GameWindowTitle = "Path of Exile";
-        public const string Version = "v1.0.3";
+        public const string Version = "v1.0.4";
 
         public const string ReleaseApi = "https://api.github.com/repos/siegrest/Exiled-Presence/releases";
         public const string CharApi = "https://www.pathofexile.com/character-window/get-characters";
