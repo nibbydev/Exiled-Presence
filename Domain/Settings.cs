@@ -14,6 +14,9 @@ namespace Domain {
         public const string GameWindowTitle = "Path of Exile";
         public const string Version = "v1.0.3";
 
+        public const string ReleaseApi = "https://api.github.com/repos/siegrest/Exiled-Presence/releases";
+        public const string CharApi = "https://www.pathofexile.com/character-window/get-characters";
+
         public static readonly string StartupFolderPath = Environment.GetFolderPath(Environment.SpecialFolder.Startup);
         public static readonly string StartupShortcutPath = Path.Combine(StartupFolderPath, $"{ProgramName}.url");
         public static readonly string AppPath = Assembly.GetEntryAssembly().Location;

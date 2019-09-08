@@ -9,18 +9,16 @@ using RestSharp;
 namespace Service {
     public static class Web {
         private static readonly RestClient Client = new RestClient();
-        private const string ReleaseApi = "https://api.github.com/repos/siegrest/Exiled-Presence/releases";
-        private const string PoeApi = "https://www.pathofexile.com/character-window/get-characters";
 
         /// <summary>
         /// Queries all the characters of the user and returns the last active one
         /// </summary>
-        public static async Task<Character> GetLastActiveChar(string accountName, string sessId) {
+        public static async Task<Character> GetLastActiveChar(string url, string accountName, string sessId) {
             if (string.IsNullOrEmpty(accountName)) {
                 throw new ArgumentException("No account name set!");
             }
 
-            var request = new RestRequest(PoeApi, Method.GET);
+            var request = new RestRequest(url, Method.GET);
             request.AddParameter("accountName", accountName);
 
             // Add session Id cookie if present
@@ -47,8 +45,8 @@ namespace Service {
         /// Gets releases from Github
         /// </summary>
         /// <returns>List of ReleaseEntry objects or null on failure</returns>
-        public static async Task<Release> GetLatestRelease() {
-            var request = new RestRequest(ReleaseApi, Method.GET);
+        public static async Task<Release> GetLatestRelease(string url) {
+            var request = new RestRequest(url, Method.GET);
             var cancellationTokenSource = new CancellationTokenSource();
             var response = await Client.ExecuteTaskAsync(request, cancellationTokenSource.Token);
 

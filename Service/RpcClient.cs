@@ -98,7 +98,7 @@ namespace Service {
 
             Character character;
             try {
-                character = await Web.GetLastActiveChar(_settings.AccountName, _settings.PoeSessionId);
+                character = await Web.GetLastActiveChar(Settings.CharApi, _settings.AccountName, _settings.PoeSessionId);
             } catch (Exception ex) {
                 Console.WriteLine(ex.Message);
                 return;
