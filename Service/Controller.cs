@@ -43,9 +43,6 @@ namespace Service {
         public void Initialize() {
             Console.WriteLine(@"Starting controller");
 
-            if (string.IsNullOrEmpty(_settings.PoeSessionId)) Console.WriteLine(@"No POESESSID set");
-            if (string.IsNullOrEmpty(_settings.AccountName)) Console.WriteLine(@"No account name set");
-
             _procMon.Initialize();
         }
 

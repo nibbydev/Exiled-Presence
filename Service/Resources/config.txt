@@ -27,8 +27,10 @@ show elapsed time    = #none
 show character name  = #none
 show character xp    = #none
 show character level = #none
+persistent timer     = #none
 
 []-----------------------[] Don't touch these []-----------------------[]
 
+discord pipe         = #none
 last update check    = #none
 config version       = #none

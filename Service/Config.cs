@@ -10,7 +10,7 @@ namespace Service {
         private const string ConfigFileName = "config.txt";
 
         private static readonly string AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-        private static readonly string CfgFolderPath = Path.Combine(AppDataPath, Settings.ProgramName);
+        public static readonly string CfgFolderPath = Path.Combine(AppDataPath, Settings.ProgramName);
         private static readonly string CfgFilePath = Path.Combine(CfgFolderPath, ConfigFileName);
         private static readonly Regex CfgRegex = new Regex(@"^(\s*)(.*?)(\s*=\s*)(.*?)(\s*)$");
 
@@ -32,25 +32,18 @@ namespace Service {
             }
 
             if (File.Exists(CfgFilePath)) {
-                _settings.Reset();
-                
-                try {
-                    Read();
-                } catch {
-                    Save();
-                    throw;
-                }
+                Read();
             }
 
-            try {
-                _settings.Validate();
-            } catch (ArgumentNullException) {
-                // There were missing config fields. Regenerate it and read it in
-                Save();
-                Read();
-                
-                _settings.Validate();
-            }
+            _settings.VerifyAllSettingsPresent();
+        }
+
+        /// <summary>
+        /// Recreates the config with default values
+        /// </summary>
+        public void Reset() {
+            _settings.Reset();
+            Save();
         }
 
         /// <summary>
@@ -58,17 +51,18 @@ namespace Service {
         /// </summary>
         private void Read() {
             _settings.Reset();
-            
+
             string conf;
             using (var sr = File.OpenText(CfgFilePath)) {
                 conf = sr.ReadToEnd();
             }
 
-            if (string.IsNullOrEmpty(conf.Trim())) {
-                throw new Exception("Config was empty");
+            try {
+                Parse(conf);
+            } catch {
+                _settings.Reset();
+                throw;
             }
-
-            Parse(conf);
         }
 
         /// <summary>
@@ -78,10 +72,14 @@ namespace Service {
             var splitConf = conf.Split(new[] {Environment.NewLine}, StringSplitOptions.None);
 
             foreach (var s in splitConf) {
-                if (string.IsNullOrEmpty(s) || s.Trim().StartsWith("#")) continue;
+                if (string.IsNullOrEmpty(s) || s.Trim().StartsWith("#")) {
+                    continue;
+                }
 
                 var match = CfgRegex.Match(s);
-                if (!match.Success) continue;
+                if (!match.Success) {
+                    continue;
+                }
 
                 var key = match.Groups[2].Value.Trim();
                 var val = match.Groups[4].Value.Trim();
@@ -91,7 +89,7 @@ namespace Service {
         }
 
         /// <summary>
-        /// Overwrite/create config
+        /// Overwrite/create config using base config as a template
         /// </summary>
         public void Save() {
             // Get the base config and split it line by line
@@ -99,18 +97,33 @@ namespace Service {
                 .Split(new[] {Environment.NewLine}, StringSplitOptions.None);
 
             using (var sr = new StreamWriter(CfgFilePath)) {
-                // Loop though each line, replacing values with current settings
+                // Loop though each line, replacing placeholder values
                 foreach (var s in baseConf) {
                     var match = CfgRegex.Match(s);
 
-                    if (match.Success) {
-                        var val = _settings.GetValue(match.Groups[2].Value);
-                        var replacement = CfgRegex.Replace(s, "$1$2$3") + (string.IsNullOrEmpty(val) ? "#none" : val);
-
-                        sr.WriteLine(replacement);
-                    } else {
+                    // Was not a setting
+                    if (!match.Success) {
                         sr.WriteLine(s);
+                        continue;
                     }
+
+                    SettingType type;
+                    // Is the user-provided key valid?
+                    try {
+                        type = SettingMethods.GetType(match.Groups[2].Value);
+                    } catch (InvalidOperationException) {
+                        continue;
+                    }
+
+                    // Get current setting value or default
+                    var val = _settings.GetString(type);
+
+                    // Replace value in the config line
+                    var replacement = CfgRegex.Replace(s, "$1$2$3") +
+                                      (string.IsNullOrEmpty(val) ? "#none" : val);
+
+                    // Write substituted line
+                    sr.WriteLine(replacement);
                 }
             }
         }
