@@ -5,6 +5,9 @@ using System.Reflection;
 using System.Text.RegularExpressions;
 
 namespace Domain {
+    /// <summary>
+    /// Contains application-wide constants and settings
+    /// </summary>
     public class Settings {
         public const string DiscordAppId = "551089446460850176";
         public const string ProgramName = "Exiled Presence";
@@ -38,6 +41,9 @@ namespace Domain {
         public bool ShowCharXp => _showCharXp.Equals("1");
         public bool ShowCharLevel => _showCharLevel.Equals("1");
 
+        /// <summary>
+        /// Function for checking if it's time to check for updates
+        /// </summary>
         public bool CheckUpdates => string.IsNullOrEmpty(_lastUpdateCheck) ||
                                     DateTime.ParseExact(_lastUpdateCheck, ConfTimeFormat, CultureInfo.InvariantCulture,
                                         DateTimeStyles.AssumeUniversal) < DateTime.Now.Subtract(UpdateCheckInterval);
