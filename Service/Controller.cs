@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using Domain;
 
 namespace Service {
+    /// <summary>
+    /// Main controller. Makes log parsing, process monitoring and rich presence displaying work together
+    /// </summary>
     public class Controller : IDisposable {
         private readonly LogParser _logParser;
         private readonly ProcMon _procMon;
