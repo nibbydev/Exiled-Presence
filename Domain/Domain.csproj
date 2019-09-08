@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Settings.cs" />
     <Compile Include="Area.cs" />
     <Compile Include="Character.cs" />
     <Compile Include="LogMatch.cs" />
@@ -49,8 +50,7 @@
     <Compile Include="LogRegExps.cs" />
     <Compile Include="LogType.cs" />
     <Compile Include="Release.cs" />
-    <Compile Include="Setting.cs" />
-    <Compile Include="Settings.cs" />
+    <Compile Include="SettingMethods.cs" />
     <Compile Include="SettingType.cs" />
   </ItemGroup>
   <ItemGroup>

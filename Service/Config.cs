@@ -9,9 +9,7 @@ namespace Service {
     public class Config {
         private const string ConfigFileName = "config.txt";
 
-        private static readonly string AppDataPath =
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-
+        private static readonly string AppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
         public static readonly string CfgFolderPath = Path.Combine(AppDataPath, Settings.ProgramName);
         private static readonly string CfgFilePath = Path.Combine(CfgFolderPath, ConfigFileName);
         private static readonly Regex CfgRegex = new Regex(@"^(\s*)(.*?)(\s*=\s*)(.*?)(\s*)$");
@@ -118,7 +116,7 @@ namespace Service {
                     }
 
                     // Get current setting value or default
-                    var val = _settings.GetValOrDefault<string>(type);
+                    var val = _settings.GetString(type);
 
                     // Replace value in the config line
                     var replacement = CfgRegex.Replace(s, "$1$2$3") +

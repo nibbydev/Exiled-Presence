@@ -31,5 +31,6 @@ persistent timer     = #none
 
 []-----------------------[] Don't touch these []-----------------------[]
 
+discord pipe         = #none
 last update check    = #none
 config version       = #none

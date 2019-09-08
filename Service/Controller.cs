@@ -42,6 +42,7 @@ namespace Service {
         /// </summary>
         public void Initialize() {
             Console.WriteLine(@"Starting controller");
+
             _procMon.Initialize();
         }
 
