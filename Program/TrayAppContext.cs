@@ -132,7 +132,7 @@ namespace Program {
             Console.WriteLine(@"Checking updates...");
 
             // Get latest release info
-            var release = await Web.GetLatestRelease();
+            var release = await Web.GetLatestRelease(Settings.ReleaseApi);
             
             // Save current time
             _settings.UpdateLastUpdateTime();
