@@ -18,7 +18,7 @@ namespace Domain {
         public static readonly Regex VersionRegex = new Regex(@"^v\d+(\.\d+)*$");
 
         public static readonly TimeSpan PresencePollInterval = TimeSpan.FromMilliseconds(500);
-        public static readonly TimeSpan UpdateCheckInterval = TimeSpan.FromHours(24);
+        public static readonly TimeSpan UpdateCheckInterval = TimeSpan.FromMinutes(60);
         public static readonly TimeSpan CharacterUpdateInterval = TimeSpan.FromSeconds(60);
         private const string ConfTimeFormat = "yyyy-MM-dd HH:mm";
 
@@ -40,7 +40,7 @@ namespace Domain {
 
         public bool CheckUpdates => string.IsNullOrEmpty(_lastUpdateCheck) ||
                                     DateTime.ParseExact(_lastUpdateCheck, ConfTimeFormat, CultureInfo.InvariantCulture,
-                                        DateTimeStyles.AssumeUniversal) < DateTime.UtcNow.Subtract(UpdateCheckInterval);
+                                        DateTimeStyles.AssumeUniversal) < DateTime.Now.Subtract(UpdateCheckInterval);
 
         /// <summary>
         /// Loads in settings from another instance
@@ -201,7 +201,7 @@ namespace Domain {
         /// Sets the last update check time to now
         /// </summary>
         public void UpdateLastUpdateTime() {
-            _lastUpdateCheck = DateTime.UtcNow.ToString(ConfTimeFormat);
+            _lastUpdateCheck = DateTime.Now.ToString(ConfTimeFormat);
         }
     }
 }

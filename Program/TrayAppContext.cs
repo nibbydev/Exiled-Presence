@@ -14,6 +14,7 @@ namespace Program {
         private readonly Controller _controller;
         private string _releaseUrl;
 
+        // Icon that will appear in the tray
         private readonly NotifyIcon _trayItem = new NotifyIcon {
             Text = Settings.ProgramName,
             Icon = Resources.ico,
@@ -30,6 +31,7 @@ namespace Program {
             _config = new Config(_settings);
             _controller = new Controller(_settings);
             
+            // Construct a dynamic-ish context menu structure
             CreateContextMenuEntries();
 
             try {
@@ -94,7 +96,7 @@ namespace Program {
             );
 
             // Register event handlers
-            _trayItem.BalloonTipClicked += OnBalloonClick;
+            _trayItem.BalloonTipClicked += BalloonClick;
         }
 
         /// <summary>
@@ -138,18 +140,21 @@ namespace Program {
             if (Misc.IsNewVersion(Settings.Version, release.tag_name)) {
                 _releaseUrl = release.html_url;
                 Console.WriteLine(@"New version is available");
-                TooltipMsg($"{release.tag_name} released. Click here to open in browser");
+                TooltipMsg($"New version ({release.tag_name}) released. Click here to download");
             }
         }
 
         /// <summary>
         /// Callback for when user clicks on popup message
         /// </summary>
-        private void OnBalloonClick(object sender, EventArgs args) {
-            if (!string.IsNullOrEmpty(_releaseUrl)) {
-                Process.Start(new ProcessStartInfo(_releaseUrl));
-                _releaseUrl = null;
+        private void BalloonClick(object sender, EventArgs args) {
+            if (string.IsNullOrEmpty(_releaseUrl)) {
+                return;
             }
+            
+            // Open the releases page in a new browser window
+            Process.Start(new ProcessStartInfo(_releaseUrl));
+            _releaseUrl = null;
         }
     }
 }
