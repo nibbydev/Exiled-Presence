@@ -133,9 +133,9 @@ namespace Service.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] MapsRed {
+        internal static byte[] Maps {
             get {
-                object obj = ResourceManager.GetObject("MapsRed", resourceCulture);
+                object obj = ResourceManager.GetObject("Maps", resourceCulture);
                 return ((byte[])(obj));
             }
         }
@@ -146,26 +146,6 @@ namespace Service.Properties {
         internal static byte[] MapsUnique {
             get {
                 object obj = ResourceManager.GetObject("MapsUnique", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] MapsWhite {
-            get {
-                object obj = ResourceManager.GetObject("MapsWhite", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] MapsYellow {
-            get {
-                object obj = ResourceManager.GetObject("MapsYellow", resourceCulture);
                 return ((byte[])(obj));
             }
         }

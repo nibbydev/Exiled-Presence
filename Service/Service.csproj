@@ -81,9 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Resources\maps_red.json" />
-    <None Include="Resources\maps_white.json" />
-    <None Include="Resources\maps_yellow.json" />
+    <None Include="Resources\maps.json" />
     <None Include="Resources\quests.json" />
     <None Include="Resources\towns.json" />
     <None Include="Resources\vaal.json" />
@@ -92,6 +90,7 @@
     <Content Include="Resources\config.txt" />
     <Content Include="Resources\fragments.json" />
     <Content Include="Resources\lab.json" />
+    <Content Include="Resources\maps.json" />
     <Content Include="Resources\maps_unique.json" />
     <Content Include="Resources\special.json" />
   </ItemGroup>
