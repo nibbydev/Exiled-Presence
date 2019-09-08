@@ -29,14 +29,13 @@ namespace Service {
         /// <summary>
         /// Sets up the timer
         /// </summary>
-        public void Initialize() {
+        public void Initialize(int pipe = -1) {
             if (_callbackTimer != null || _rpcClient != null || _presence != null) {
                 throw new Exception("Already running! Dispose first");
             }
 
             // Create the RPC client
-            _rpcClient = new DiscordRpcClient(Settings.DiscordAppId,
-                _settings.GetValOrDefault<int>(SettingType.DiscordPipe));
+            _rpcClient = new DiscordRpcClient(Settings.DiscordAppId, pipe);
             _rpcClient.OnReady += OnReady;
             _rpcClient.OnClose += OnClose;
             _rpcClient.OnError += OnError;
@@ -99,9 +98,7 @@ namespace Service {
 
             Character character;
             try {
-                character = await Web.GetLastActiveChar(
-                    _settings.GetValOrDefault<string>(SettingType.AccountName),
-                    _settings.GetValOrDefault<string>(SettingType.PoeSessionId));
+                character = await Web.GetLastActiveChar(Settings.CharApi, _settings.AccountName, _settings.PoeSessionId);
             } catch (Exception ex) {
                 Console.WriteLine(ex.Message);
                 return;
@@ -122,25 +119,6 @@ namespace Service {
         #region Presence update methods
 
         /// <summary>
-        /// Updates instance timestamp according to config options
-        /// </summary>
-        private void UpdateTimeStamp() {
-            // If timestamps are disabled
-            if (!_settings.GetValOrDefault<bool>(SettingType.ShowElapsedTime)) {
-                _presence.Timestamps = null;
-                return;
-            }
-            
-            // Id persistent timestamps are enabled don't change the current stamp
-            if (!_settings.GetValOrDefault<bool>(SettingType.PersistentTimer)) {
-                return;
-            }
-
-            // Update current timestamp
-            _presence.Timestamps = Timestamps.Now;
-        }
-
-        /// <summary>
         /// Updates the presence AFK or DND status
         /// </summary>
         public void PresenceUpdateStatus(string mode, bool on, string message) {
@@ -157,8 +135,8 @@ namespace Service {
             AreaMatcher.Match(areaName, out _currentArea);
 
             _presence.Assets.SmallImageKey = _currentArea.Key;
+            _presence.Timestamps = _settings.ShowElapsedTime ? Timestamps.Now : null;
             _presence.State = null;
-            UpdateTimeStamp();
             PresenceUpdateSmallImageText();
             _hasUpdate = true;
         }
@@ -174,7 +152,7 @@ namespace Service {
             _presence.Assets.LargeImageText = $"{Settings.ProgramName} {Settings.Version}";
             _presence.State = "Login screen";
             _presence.Details = null;
-            UpdateTimeStamp();
+            _presence.Timestamps = _settings.ShowElapsedTime ? Timestamps.Now : null;
             _hasUpdate = true;
         }
 
@@ -190,7 +168,7 @@ namespace Service {
             _presence.Assets.LargeImageText = $"{Settings.ProgramName} {Settings.Version}";
             _presence.State = "Character select";
             _presence.Details = null;
-            UpdateTimeStamp();
+            _presence.Timestamps = _settings.ShowElapsedTime ? Timestamps.Now : null;
             _hasUpdate = true;
         }
 
@@ -202,14 +180,14 @@ namespace Service {
             var xpPercent = Misc.GetPercentToNextLevel(_character.Level, _character.Experience);
 
             _presence.Assets.LargeImageKey = largeAssetKey;
-            _presence.Details = _settings.GetValOrDefault<bool>(SettingType.ShowCharName)
+            _presence.Details = _settings.ShowCharName
                 ? $"Playing as {_character.Name}"
                 : $"Playing as a {_character.Class}";
-
+            
             _presence.Assets.LargeImageText =
-                (_settings.GetValOrDefault<bool>(SettingType.ShowCharLevel) ? $"Level {_character.Level} " : "") +
+                (_settings.ShowCharLevel ? $"Level {_character.Level} " : "") +
                 _character.Class +
-                (_settings.GetValOrDefault<bool>(SettingType.ShowCharXp) ? $" - {xpPercent}% xp" : "");
+                (_settings.ShowCharXp ? $" - {xpPercent}% xp" : "");
 
             PresenceUpdateSmallImageText();
 
