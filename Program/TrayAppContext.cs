@@ -9,17 +9,16 @@ using Service;
 
 namespace Program {
     public class TrayAppContext : ApplicationContext {
-        private readonly Domain.Settings _settings;
+        private readonly Settings _settings;
         private readonly Config _config;
         private readonly Controller _controller;
-        private bool _openBrowserOnTooltipClick;
         private string _releaseUrl;
 
         // Icon that will appear in the tray
         private readonly NotifyIcon _trayItem = new NotifyIcon {
-            Text = Domain.Settings.ProgramName,
+            Text = Settings.ProgramName,
             Icon = Resources.ico,
-            BalloonTipTitle = Domain.Settings.ProgramName,
+            BalloonTipTitle = Settings.ProgramName,
             ContextMenu = new ContextMenu(),
             Visible = true
         };
@@ -28,7 +27,7 @@ namespace Program {
         /// Constructor
         /// </summary>
         public TrayAppContext() {
-            _settings = new Domain.Settings();
+            _settings = new Settings();
             _config = new Config(_settings);
             _controller = new Controller(_settings);
             
@@ -37,7 +36,7 @@ namespace Program {
 
             try {
                 _config.Load();
-                if (_settings.IsCheckUpdates()) CheckUpdates();
+                CheckUpdates();
                 _controller.Initialize();
             } catch (Exception e) {
                 // Config has invalid options
@@ -50,7 +49,7 @@ namespace Program {
         /// </summary>
         private void Reload(object sender = null, EventArgs args = null) {
             _controller.Dispose();
-
+            
             try {
                 _config.Load();
                 _controller.Initialize();
@@ -65,35 +64,27 @@ namespace Program {
         /// Constructs the tray menu structure
         /// </summary>
         private void CreateContextMenuEntries() {
-            _trayItem.ContextMenu.MenuItems.Add("Config..", new[] {
-                new MenuItem("Reload config", Reload),
-                new MenuItem("Edit config", delegate { _config.OpenInEditor(); }),
-                new MenuItem("Open in explorer", delegate { Misc.OpenPath(Config.CfgFolderPath); }),
-                new MenuItem("Reset config", delegate {
-                    _config.Reset();
-                    TooltipMsg("Config reset");
-                })
-            });
+            _trayItem.ContextMenu.MenuItems.Add(
+                new MenuItem("Edit config", delegate { _config.OpenInEditor(); })
+            );
+
+            _trayItem.ContextMenu.MenuItems.Add(new MenuItem("Reload service", Reload));
 
             _trayItem.ContextMenu.MenuItems.Add("Startup..", new[] {
                 new MenuItem("Add to startup", delegate {
-                    TooltipMsg(File.Exists(Domain.Settings.StartupShortcutPath)
+                    TooltipMsg(File.Exists(Settings.StartupShortcutPath)
                         ? "Recreated startup shortcut"
                         : "Created startup shortcut", "info");
-                    Win32.CreateShortcut(Domain.Settings.AppPath, Domain.Settings.StartupShortcutPath);
+                    Win32.CreateShortcut(Settings.AppPath, Settings.StartupShortcutPath);
                 }),
                 new MenuItem("Remove from startup", delegate {
-                    if (File.Exists(Domain.Settings.StartupShortcutPath)) {
-                        File.Delete(Domain.Settings.StartupShortcutPath);
+                    if (File.Exists(Settings.StartupShortcutPath)) {
+                        File.Delete(Settings.StartupShortcutPath);
                         TooltipMsg("Deleted startup shortcut", "info");
                     } else TooltipMsg("Startup shortcut did not exist", "error");
                 }),
-                new MenuItem("Open in explorer", delegate { Misc.OpenPath(Domain.Settings.StartupFolderPath); })
+                new MenuItem("Open startup folder", delegate { Misc.OpenPath(Settings.StartupFolderPath); })
             });
-
-            _trayItem.ContextMenu.MenuItems.Add(
-                new MenuItem("Check updates", delegate { CheckUpdates(true); })
-            );
 
             _trayItem.ContextMenu.MenuItems.Add(
                 new MenuItem("Exit", delegate {
@@ -131,29 +122,25 @@ namespace Program {
         /// <summary>
         /// Checks for updates infrequently
         /// </summary>
-        private async void CheckUpdates(bool verbose = false) {
+        private async void CheckUpdates() {
+            if (!_settings.CheckUpdates) {
+                return;
+            }
+            
             Console.WriteLine(@"Checking updates...");
 
-            // Get latest release info
-            var release = await Web.GetLatestRelease(Domain.Settings.ReleaseApi);
-            
-            // Save current time
-            _settings.UpdateLastUpdateTime();
-            _config.Save();
-            
+            var release = await Web.GetLatestRelease();
             if (release == null) {
-                Console.WriteLine(@"No updates available");
                 return;
             }
 
-            if (Misc.IsNewVersion(Domain.Settings.Version, release.tag_name)) {
+            _settings.UpdateLastUpdateTime();
+            _config.Save();
+
+            if (Misc.IsNewVersion(Settings.Version, release.tag_name)) {
                 _releaseUrl = release.html_url;
-                _openBrowserOnTooltipClick = true;
                 Console.WriteLine(@"New version is available");
-                TooltipMsg($"{release.tag_name} released. Click here to open in browser");
-            } else {
-                Console.WriteLine(@"No updates available");
-                if (verbose) TooltipMsg("No updates available");
+                TooltipMsg($"New version ({release.tag_name}) released. Click here to download");
             }
         }
 
@@ -161,13 +148,13 @@ namespace Program {
         /// Callback for when user clicks on popup message
         /// </summary>
         private void BalloonClick(object sender, EventArgs args) {
-            if (!_openBrowserOnTooltipClick) {
+            if (string.IsNullOrEmpty(_releaseUrl)) {
                 return;
             }
             
             // Open the releases page in a new browser window
             Process.Start(new ProcessStartInfo(_releaseUrl));
-            _openBrowserOnTooltipClick = false;
+            _releaseUrl = null;
         }
     }
 }
