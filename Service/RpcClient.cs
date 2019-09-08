@@ -132,7 +132,7 @@ namespace Service {
             }
             
             // Id persistent timestamps are enabled don't change the current stamp
-            if (!_settings.GetBool(SettingType.PersistentTimer)) {
+            if (_settings.GetBool(SettingType.PersistentTimer) && _presence.Timestamps != null) {
                 return;
             }
 
