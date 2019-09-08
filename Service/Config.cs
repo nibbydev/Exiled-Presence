@@ -6,6 +6,9 @@ using Domain;
 using Service.Properties;
 
 namespace Service {
+    /// <summary>
+    /// All-in-one config manager
+    /// </summary>
     public class Config {
         private const string ConfigFileName = "config.txt";
 
