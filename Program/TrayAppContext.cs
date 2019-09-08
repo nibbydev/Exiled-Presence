@@ -12,6 +12,7 @@ namespace Program {
         private readonly Settings _settings;
         private readonly Config _config;
         private readonly Controller _controller;
+        private bool _openBrowserOnTooltipClick;
         private string _releaseUrl;
 
         // Icon that will appear in the tray
@@ -124,21 +125,27 @@ namespace Program {
         /// </summary>
         private async void CheckUpdates() {
             if (!_settings.CheckUpdates) {
+                Console.WriteLine(@"Skipping update check");
                 return;
             }
             
             Console.WriteLine(@"Checking updates...");
 
+            // Get latest release info
             var release = await Web.GetLatestRelease();
+            
+            // Save current time
+            _settings.UpdateLastUpdateTime();
+            _config.Save();
+            
             if (release == null) {
+                Console.WriteLine(@"No updates available");
                 return;
             }
 
-            _settings.UpdateLastUpdateTime();
-            _config.Save();
-
             if (Misc.IsNewVersion(Settings.Version, release.tag_name)) {
                 _releaseUrl = release.html_url;
+                _openBrowserOnTooltipClick = true;
                 Console.WriteLine(@"New version is available");
                 TooltipMsg($"New version ({release.tag_name}) released. Click here to download");
             }
@@ -148,13 +155,13 @@ namespace Program {
         /// Callback for when user clicks on popup message
         /// </summary>
         private void BalloonClick(object sender, EventArgs args) {
-            if (string.IsNullOrEmpty(_releaseUrl)) {
+            if (!_openBrowserOnTooltipClick) {
                 return;
             }
             
             // Open the releases page in a new browser window
             Process.Start(new ProcessStartInfo(_releaseUrl));
-            _releaseUrl = null;
+            _openBrowserOnTooltipClick = false;
         }
     }
 }
