@@ -122,14 +122,8 @@
   <data name="MapsUnique" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\maps_unique.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="MapsRed" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\maps_red.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="MapsWhite" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\maps_white.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="MapsYellow" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\maps_yellow.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="Maps" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\maps.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="AreaQuest" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\quests.json;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
